@@ -82,6 +82,13 @@ up_off=false
             <kind>1</kind>
             <string>///Basic movements, collision, gravité
 
+if(up_off=true &amp;&amp; keyboard_check_released(ord("Z"))){
+    up_off=false
+}
+if(up_off=true &amp;&amp; gamepad_button_check_released(0,gp_face1)){
+    up_off=false
+}
+
 if(nicolnigrav=false){
     if(input_locked=false){
     
@@ -110,8 +117,9 @@ if(nicolnigrav=false){
         
         if (place_meeting(x,y+1,obj_plateforme))
         {  
-            if (key_jump ){
-            vsp = -global.jumpspeed
+            if (!up_off &amp;&amp; key_jump ){
+            vsp = -global.jumpspeed;
+            up_off=true
             }
         }
     }
@@ -264,7 +272,7 @@ if (place_meeting(x+global.playermirrored,y,obj_plateforme)) &amp;&amp; (!place_
     }
 }
 
-if ( accrochage &amp;&amp; (gamepad_button_check_pressed(0,gp_face1)|| keyboard_check(ord("Z")) )){
+if ( !up_off &amp;&amp; accrochage &amp;&amp; (gamepad_button_check_pressed(0,gp_face1)|| keyboard_check(ord("Z")) )){
     if(snap=1){
     y=y_1-1
     x=x_1+sprite_width/2
@@ -275,6 +283,7 @@ if ( accrochage &amp;&amp; (gamepad_button_check_pressed(0,gp_face1)|| keyboard_
     }
     accrochage=false;
     nicolnigrav=false;
+    up_off=true;
     
 }
 
