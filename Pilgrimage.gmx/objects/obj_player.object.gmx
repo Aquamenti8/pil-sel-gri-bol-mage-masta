@@ -33,7 +33,7 @@ gamepad_set_axis_deadzone(0,0.7);
 //Variables globales qui peuvent etre influencer par l'equipement
 global.grav = 0.3;
 global.jumpspeed = 6;
-global.movespeed = 4;
+global.movespeed = 3;
 
 accrochage =false;
 nicolnigrav=false;
