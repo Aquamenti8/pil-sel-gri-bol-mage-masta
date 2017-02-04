@@ -9,6 +9,8 @@
     <sprite>sprites\sp_plateforme</sprite>
     <sprite>sprites\sp_player</sprite>
     <sprite>sprites\sp_chara</sprite>
+    <sprite>sprites\sp_arc</sprite>
+    <sprite>sprites\sp_fleche</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -16,6 +18,8 @@
     <object>objects\obj_player</object>
     <object>objects\obj_plateforme</object>
     <object>objects\obj_inventaire</object>
+    <object>objects\obj_arc</object>
+    <object>objects\obj_fleche</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_level1</room>
