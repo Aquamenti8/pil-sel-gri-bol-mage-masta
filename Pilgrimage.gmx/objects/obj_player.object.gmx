@@ -122,8 +122,14 @@ if(nicolnigrav=false){
             up_off=true
             }
         }
+        
+        if (vsp &lt; 0) &amp;&amp; (!key_jump){
+            vsp = max(vsp,0)
+        }
     }
         
+    
+    
     //Horizontal Collision
     if (place_meeting(x+hsp,y,obj_plateforme))
     {
@@ -325,13 +331,9 @@ for (i=0;i&lt;50;i+=1){
             <string>///debug
 
 draw_self();
+/*
 draw_text(x,y,global.playermirrored);
 
-/*
-if (place_meeting(x+global.playermirrored,y,obj_plateforme)){ draw_text(x,y-20,"Contact");}
-if (!place_meeting(x,y+1,obj_plateforme)){draw_text(x,y-30,"Inair");}
-if (vsp&gt;0){ draw_text(x,y-40,"Falling");}
-if(accrochage=true){ draw_text(x,y-50,"ACCROCHAGE");}
 </string>
           </argument>
         </arguments>
