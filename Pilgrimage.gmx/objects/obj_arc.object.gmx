@@ -8,6 +8,31 @@
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
+    <event eventtype="0" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>press=0
+
+no_more_arrow=false
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
@@ -31,6 +56,16 @@ x=obj_player.x
 y=obj_player.y-32
 
 image_angle = point_direction(x, y, mouse_x, mouse_y)
+
+//gamepad
+var h_point = gamepad_axis_value(0, gp_axisrh);
+var v_point = gamepad_axis_value(0, gp_axisrv);
+if ((h_point != 0) || (v_point != 0))
+{
+var pdir = point_direction(0, 0, h_point, v_point);
+var dif = angle_difference(pdir, image_angle);
+image_angle += median(-180, dif, 180);
+}
 
 
 </string>
@@ -56,23 +91,41 @@ image_angle = point_direction(x, y, mouse_x, mouse_y)
             <string>///shoot
 
 press = mouse_check_button_pressed(mb_left);
+press2 = gamepad_button_check_pressed(0,gp_shoulderr);
 released = mouse_check_button_released(mb_left);
+released2 = gamepad_button_check_released(0,gp_shoulderr);
+delete = mouse_check_button(mb_right);
+delete2 = gamepad_button_check(0,gp_shoulderrb)
 
-if (press ) {
-    arrow_id = instance_create(x,y,obj_fleche);
-    arrow_id.direction = image_angle;
-    arrow_id.image_angle = arrow_id.direction;
-    arrow_id.shooted=false;
+if (!no_more_arrow){
+    if (press || press2) {
+        arrow_id = instance_create(x,y,obj_fleche);
+        arrow_id.direction = image_angle;
+        arrow_id.image_angle = arrow_id.direction;
+        arrow_id.shooted=false;
+    }
+    
+    if(mouse_check_button(mb_left) || gamepad_button_check(0,gp_shoulderr)  ){
+            arrow_id.direction = image_angle;
+            arrow_id.image_angle = arrow_id.direction;
+            arrow_id.x =x
+            arrow_id.y=y
+        
+    };
+    
+    if ((released || released2) &amp;&amp; arrow_id.shooted=false){
+        arrow_id.speed=25
+        arrow_id.shooted=true
+    }
 }
 
-if(mouse_check_button(mb_left)){
-    arrow_id.direction = image_angle;
-    arrow_id.image_angle = arrow_id.direction;
-};
+if(delete||delete2) {
+    with (arrow_id)  instance_destroy()
+    no_more_arrow=true
+}
 
-if (released &amp;&amp; arrow_id.shooted=false){
-    arrow_id.speed=25
-    arrow_id.shooted=true
+if (no_more_arrow=true &amp;&amp; (released || released2)){
+    no_more_arrow=false
 }
 </string>
           </argument>
