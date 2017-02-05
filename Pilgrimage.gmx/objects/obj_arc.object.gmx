@@ -31,6 +31,7 @@ press=0
 
 no_more_arrow=false
 no_more_arrow_spawn=false
+keep=false;
 </string>
           </argument>
         </arguments>
@@ -110,11 +111,12 @@ delete = mouse_check_button(mb_right);
 delete2 = gamepad_button_check(0,gp_shoulderrb)
 
 
-if (press || press2) { //spawn arrow
+if ((press || press2) &amp;&amp; (obj_player.stamina-obj_player.arrow_cost&gt;0)) { //spawn arrow
     arrow_id = instance_create(x,y,obj_fleche);
     arrow_id.direction = image_angle;
     arrow_id.image_angle = arrow_id.direction;
     arrow_id.shooted=false;
+    obj_player.stamina-=obj_player.arrow_cost
 }
 
 
@@ -124,8 +126,10 @@ if( (mouse_check_button(mb_left) || gamepad_button_check(0,gp_shoulderr)) &amp;&
     arrow_id.image_angle = arrow_id.direction;
     arrow_id.x =x
     arrow_id.y=y
+    keep=true;
        
     if(delete||delete2) { //delete arrow
+        keep=false;
         with (arrow_id)  instance_destroy()
         no_more_arrow=true
     }       
@@ -136,12 +140,15 @@ if ((released || released2) &amp;&amp; !no_more_arrow ){
     if(arrow_id.shooted=false){
     arrow_id.speed=25
     arrow_id.shooted=true
+    keep=false;
     }
 }
 
 
-
- 
+if(keep=true){
+    obj_player.stam_regen=false
+}
+ else    obj_player.stam_regen=true
 if (no_more_arrow=true &amp;&amp; (released || released2)){
     no_more_arrow=false
 }

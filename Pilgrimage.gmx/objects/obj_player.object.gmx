@@ -58,6 +58,7 @@ up_off=false
 A_off=false
 QD_off=false
 locked_platform=0;
+stam_regen=true;
 
 //chara = instance_create(x,y,obj_chara);
 //chara.animation = sp_chara;
@@ -95,6 +96,7 @@ dash_spd_bonus=50
 
 dash_cost=50
 sprint_cost=1
+arrow_cost=20
 stamina_recover=1
 </string>
           </argument>
@@ -406,7 +408,7 @@ if(spd_bonus=sprint_spd_bonus){
 if(spd_bonus=dash_spd_bonus){
     stamina-=dash_cost/dash_duration
 }
-if( spd_bonus=0 &amp;&amp; stamina&lt;stamina_max){
+if( spd_bonus=0 &amp;&amp; stamina&lt;stamina_max &amp;&amp; stam_regen){
     stamina+=stamina_recover
 }
 
