@@ -56,6 +56,7 @@ dash_duration=5;
 
 up_off=false
 A_off=false
+QD_off=false
 
 //chara = instance_create(x,y,obj_chara);
 //chara.animation = sp_chara;
@@ -114,7 +115,10 @@ if(nicolnigrav=false){
         
         //React to inputs
         move = key_left + key_right;
+        if(QD_off=false){
         hsp = move*(global.movespeed+spd_bonus);
+        }
+        else hsp=0
         if (vsp &lt; 10) vsp += global.grav;
         
         //Mirroring
@@ -243,6 +247,8 @@ if(dash&gt;dash_duration) {
     input_locked=false;   
 }
 
+
+if(QD_off &amp;&amp; sol) QD_off=false;
 </string>
           </argument>
         </arguments>
@@ -316,6 +322,7 @@ if ( !up_off &amp;&amp; accrochage &amp;&amp; klimb_key ){
     nicolnigrav=false;
     up_off=true;   
 }
+//DECCROCHAGE
 if ( !up_off &amp;&amp; accrochage &amp;&amp; fall_key){
     if(snap=1){
     x-=1
@@ -326,6 +333,7 @@ if ( !up_off &amp;&amp; accrochage &amp;&amp; fall_key){
     accrochage=false;
     nicolnigrav=false;
     A_off=true;  
+    QD_off=true
 }
 
 
