@@ -60,6 +60,9 @@ QD_off=false
 locked_platform=0;
 stam_regen=true;
 
+y_depart=-1
+y_diff=0
+
 //chara = instance_create(x,y,obj_chara);
 //chara.animation = sp_chara;
 
@@ -417,6 +420,46 @@ else if (hsp=0 &amp;&amp; stam_regen &amp;&amp; stamina&lt;stamina_max){
 }
 
 if(stamina&lt;0) stamina=0
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// degats de chute
+
+if (y_depart =-1 &amp;&amp; !place_meeting(x,y+1,obj_plateforme)){
+    y_depart=y
+}
+
+if (y_depart!=-1 &amp;&amp; place_meeting(x,y+1,obj_plateforme)){
+    y_diff = y-y_depart
+    y_depart=-1
+}
+
+if(y_diff &gt; 100) {
+    HP-=1
+    y_diff=0
+}
+else    y_diff=0
+
+if (HP&lt;=0){
+    room_restart()
+}
 </string>
           </argument>
         </arguments>
