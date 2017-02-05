@@ -65,6 +65,7 @@
     <instance objName="obj_plateforme" x="544" y="256" name="inst_DEFAD1FF" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_plateforme" x="256" y="160" name="inst_2D7381CC" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_arc" x="64" y="96" name="inst_4AF4EEE2" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_input" x="0" y="0" name="inst_26177845" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>
