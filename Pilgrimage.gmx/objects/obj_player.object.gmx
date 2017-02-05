@@ -40,6 +40,7 @@ nicolnigrav=false;
 snap=0;
 
 spd_bonus=0;
+jump_bonus=0;
 
 //image_alpha = 0.0005;
     global.playermirrored = 1
@@ -118,7 +119,7 @@ if(nicolnigrav=false){
         if (place_meeting(x,y+1,obj_plateforme))
         {  
             if (!up_off &amp;&amp; key_jump ){
-            vsp = -global.jumpspeed;
+            vsp = -(global.jumpspeed+jump_bonus);
             up_off=true
             }
         }
@@ -193,9 +194,9 @@ if(input_locked=false){
     if (key_A!=0 || gamepad_button_check_pressed(0,gp_face2) )key_A+=1;
     if (key_A_p) key_A=1;
     
-    if (key_A!=0 &amp;&amp; sol){spd_bonus=4}
-    if (key_A!=0 &amp;&amp; !sol){spd_bonus=0}
-    if (key_A=0){spd_bonus=0}
+    if (key_A!=0 &amp;&amp; sol){spd_bonus=4;jump_bonus=4}
+    if (key_A!=0 &amp;&amp; !sol){spd_bonus=0;jump_bonus=4}
+    if (key_A=0){spd_bonus=0;jump_bonus=0}
     
     //si on relache A:
     if(keyboard_check_released(ord("A")) || (gamepad_button_check_released(0,gp_face2))){
