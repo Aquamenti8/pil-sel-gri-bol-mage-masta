@@ -59,7 +59,7 @@ gamepad_set_axis_deadzone(0, 0.05)
 x=obj_player.x
 y=obj_player.y-32
 
-//image_angle = point_direction(x, y, mouse_x, mouse_y)
+image_angle = point_direction(x, y, mouse_x, mouse_y)
 
 //gamepad
 var h_point = gamepad_axis_value(0, gp_axisrh);
