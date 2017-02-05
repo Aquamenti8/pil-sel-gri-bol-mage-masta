@@ -32,6 +32,7 @@ press=0
 no_more_arrow=false
 no_more_arrow_spawn=false
 keep=false;
+costed=false;
 </string>
           </argument>
         </arguments>
@@ -110,40 +111,45 @@ released2 = gamepad_button_check_released(0,gp_shoulderr);
 delete = mouse_check_button(mb_right);
 delete2 = gamepad_button_check(0,gp_shoulderrb)
 
-
-if ((press || press2) &amp;&amp; (obj_player.stamina-obj_player.arrow_cost&gt;0)) { //spawn arrow
-    arrow_id = instance_create(x,y,obj_fleche);
-    arrow_id.direction = image_angle;
-    arrow_id.image_angle = arrow_id.direction;
-    arrow_id.shooted=false;
-    obj_player.stamina-=obj_player.arrow_cost
-}
-
-
-//rotate arrow    
-if( (mouse_check_button(mb_left) || gamepad_button_check(0,gp_shoulderr)) &amp;&amp; !no_more_arrow  ){
-    arrow_id.direction = image_angle;
-    arrow_id.image_angle = arrow_id.direction;
-    arrow_id.x =x
-    arrow_id.y=y
-    keep=true;
-       
-    if(delete||delete2) { //delete arrow
-        keep=false;
-        with (arrow_id)  instance_destroy()
-        no_more_arrow=true
-    }       
-};
-
-    //shoot arrow  
-if ((released || released2) &amp;&amp; !no_more_arrow ){
-    if(arrow_id.shooted=false){
-    arrow_id.speed=25
-    arrow_id.shooted=true
-    keep=false;
+if (obj_player.stamina-obj_player.arrow_cost&gt;0){
+    if (press || press2 ) { //spawn arrow
+        arrow_id = instance_create(x,y,obj_fleche);
+        arrow_id.direction = image_angle;
+        arrow_id.image_angle = arrow_id.direction;
+        arrow_id.shooted=false;
+        obj_player.stamina-=obj_player.arrow_cost
+        costed=true
     }
 }
 
+
+//rotate arrow   
+if (costed){ 
+    if( (mouse_check_button(mb_left) || gamepad_button_check(0,gp_shoulderr)) &amp;&amp; !no_more_arrow  ){
+        arrow_id.direction = image_angle;
+        arrow_id.image_angle = arrow_id.direction;
+        arrow_id.x =x
+        arrow_id.y=y
+        keep=true;
+           
+        if(delete||delete2) { //delete arrow
+            keep=false;
+            with (arrow_id)  instance_destroy()
+            no_more_arrow=true
+            costed=false;
+        }       
+    };
+    
+        //shoot arrow  
+    if ((released || released2) &amp;&amp; !no_more_arrow ){
+        if(arrow_id.shooted=false){
+        arrow_id.speed=25
+        arrow_id.shooted=true
+        keep=false;
+        costed=false;
+        }
+    }
+}
 
 if(keep=true){
     obj_player.stam_regen=false

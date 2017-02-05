@@ -402,13 +402,17 @@ if ( !up_off &amp;&amp; accrochage &amp;&amp; fall_key){
             <kind>1</kind>
             <string>///Stamina control
 
-if(spd_bonus=sprint_spd_bonus){
+if(spd_bonus=sprint_spd_bonus  &amp;&amp; hsp!=0){
     stamina-=sprint_cost
 }
 if(spd_bonus=dash_spd_bonus){
     stamina-=dash_cost/dash_duration
 }
+
 if( spd_bonus=0 &amp;&amp; stamina&lt;stamina_max &amp;&amp; stam_regen){
+    stamina+=stamina_recover
+}
+else if (hsp=0 &amp;&amp; stam_regen &amp;&amp; stamina&lt;stamina_max){
     stamina+=stamina_recover
 }
 
