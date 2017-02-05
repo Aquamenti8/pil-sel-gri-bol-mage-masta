@@ -197,11 +197,13 @@ if(input_locked=false){
 
     //Si A enfoncé et si player sur sol, augmente la vitesse de deplacement
 //    if (gamepad_button_check_pressed(0,gp_face2)) key_A_p =true;
+if (!obj_input.gamepad){
     key_A_p = keyboard_check_pressed(ord("A"));
-    
+}
+else key_A_p = gamepad_button_check_pressed(0,gp_face2);
     //key_A est a la fois un checker et un compteur, !=0 -&gt; bonusvitesse 
-    if (key_A!=0 || gamepad_button_check_pressed(0,gp_face2) )key_A+=1;
-    if (key_A_p) key_A=1;
+    if (key_A!=0 /*|| gamepad_button_check_pressed(0,gp_face2)*/ )key_A+=1;
+    if (key_A_p &amp;&amp; sol ) key_A=1;
     if (A_off) key_A=0;
     
     if (key_A!=0 &amp;&amp; sol){spd_bonus=4;jump_bonus=4}
