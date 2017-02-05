@@ -95,13 +95,21 @@ if(nicolnigrav=false){
     if(input_locked=false){
     
         //Get the player's input
-        key_right = keyboard_check(ord("D"));
-    if(gamepad_axis_value(0,gp_axislh)&gt;0) key_right =1;
-        key_left = -keyboard_check(ord("Q"));
-    if(gamepad_axis_value(0,gp_axislh)&lt;0) key_left =-1;
+    if (obj_input.gamepad=false)key_right = keyboard_check(ord("D"));
+    else {if(gamepad_axis_value(0,gp_axislh)&gt;0) key_right =1;
+        else key_right=0
+        }
+    
+    if (obj_input.gamepad=false)key_left = -keyboard_check(ord("Q"));
+    else {if(gamepad_axis_value(0,gp_axislh)&lt;0) key_left =-1;
+        else key_left=0
+        }
         key_down = keyboard_check(ord("S"));
-        key_jump = keyboard_check(ord("Z"));
-        if gamepad_button_check(0,gp_face1)key_jump=1; 
+        
+    if (obj_input.gamepad=false) key_jump = keyboard_check(ord("Z"));
+    else {if gamepad_button_check(0,gp_face1)key_jump=1; 
+        else key_jump=0
+        }
         
         
         //React to inputs
@@ -284,7 +292,16 @@ if (place_meeting(x+global.playermirrored,y,obj_plateforme)) &amp;&amp; (!place_
     }
 }
 
-if ( !up_off &amp;&amp; accrochage &amp;&amp; (gamepad_button_check_pressed(0,gp_face1)|| keyboard_check(ord("Z")) )){
+if (!obj_input.gamepad){
+    klimb_key = keyboard_check(ord("Z"))
+    fall_key = keyboard_check(ord("A"))
+}
+else{
+    klimb_key = gamepad_button_check_pressed(0,gp_face1)
+    fall_key = gamepad_button_check_pressed(0,gp_face2)
+}
+
+if ( !up_off &amp;&amp; accrochage &amp;&amp; klimb_key ){
     if(snap=1){
     y=y_1-1
     x=x_1+sprite_width/2
@@ -297,7 +314,7 @@ if ( !up_off &amp;&amp; accrochage &amp;&amp; (gamepad_button_check_pressed(0,gp
     nicolnigrav=false;
     up_off=true;   
 }
-if ( !up_off &amp;&amp; accrochage &amp;&amp; (gamepad_button_check_pressed(0,gp_face2)|| keyboard_check(ord("A")) )){
+if ( !up_off &amp;&amp; accrochage &amp;&amp; fall_key){
     if(snap=1){
     x-=1
     }
