@@ -136,7 +136,7 @@ if(gamepad){ //gamepad entries
     
     if (move!=0)
     {
-        global.mpos += move;
+        mpos += move;
         if (mpos&lt;0) mpos = array_length_1d(pause_menu) - 1;
         if (mpos&gt;array_length_1d(pause_menu) - 1)mpos = 0;
     }
