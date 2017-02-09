@@ -130,18 +130,18 @@ if (keyboard_check_pressed(vk_escape) || gamepad_button_check_pressed(0,gp_start
 }
 
 if(gamepad){ //gamepad entries
-    var move = 0;
+    var move = 0; // Mouvement
     move -= gamepad_button_check_pressed(0,gp_padu)
     move += gamepad_button_check_pressed(0,gp_padd)
     
     if (move!=0)
     {
-        global.mpos += move;
+        mpos += move;
         if (mpos&lt;0) mpos = array_length_1d(pause_menu) - 1;
         if (mpos&gt;array_length_1d(pause_menu) - 1)mpos = 0;
     }
     
-    var push;
+    var push; // OK
     push = gamepad_button_check_pressed(0,gp_face1)
     if (push == 1) scr_menu_pause();
 }
