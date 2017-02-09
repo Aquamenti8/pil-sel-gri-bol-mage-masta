@@ -161,7 +161,7 @@ if (!obj_input.pause){
     
     //Spawn arrow
     if (cooldown_arrow&gt;0){
-        if(!mouse_check_button(mb_left)){ 
+        if(!mouse_check_button(mb_left)&amp;&amp;!gamepad_button_check(0,gp_shoulderr)){ 
         cooldown_arrow=0}
         if (cooldown_arrow &gt;= 0.5*room_speed){
             arrow_id = instance_create(x,y,obj_fleche);
