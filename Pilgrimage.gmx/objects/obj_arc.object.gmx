@@ -33,6 +33,8 @@ no_more_arrow=false
 no_more_arrow_spawn=false
 keep=false;
 costed=false;
+
+cooldown_arrow=0
 </string>
           </argument>
         </arguments>
@@ -114,12 +116,9 @@ if (!obj_input.pause){
     
     if (obj_player.stamina-obj_player.arrow_cost&gt;0){
         if (press || press2 ) { //spawn arrow
-            arrow_id = instance_create(x,y,obj_fleche);
-            arrow_id.direction = image_angle;
-            arrow_id.image_angle = arrow_id.direction;
-            arrow_id.shooted=false;
-            obj_player.stamina-=obj_player.arrow_cost
-            costed=true
+            //attend le cooldown puis spawn l'arrow
+            cooldown_arrow=1
+
         }
     }
     
@@ -158,6 +157,23 @@ if (!obj_input.pause){
      else    obj_player.stam_regen=true
     if (no_more_arrow=true &amp;&amp; (released || released2)){
         no_more_arrow=false
+    }
+    
+    //Spawn arrow
+    if (cooldown_arrow&gt;0){
+        if(!mouse_check_button(mb_left)){ 
+        cooldown_arrow=0}
+        if (cooldown_arrow &gt;= 0.5*room_speed){
+            arrow_id = instance_create(x,y,obj_fleche);
+            arrow_id.direction = image_angle;
+            arrow_id.image_angle = arrow_id.direction;
+            arrow_id.shooted=false;
+            obj_player.stamina-=obj_player.arrow_cost
+            costed=true
+            
+            cooldown_arrow=0
+        }
+        else cooldown_arrow+=1;
     }
     /*
     if (no_more_arrow_spawn=true &amp;&amp; (released || released2)){
