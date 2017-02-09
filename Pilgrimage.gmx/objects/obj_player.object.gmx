@@ -125,85 +125,87 @@ stamina_recover=1
             <kind>1</kind>
             <string>///Basic movements, collision, gravité
 
-if(up_off=true &amp;&amp; keyboard_check_released(ord("Z"))){
-    up_off=false
-}
-if(up_off=true &amp;&amp; gamepad_button_check_released(0,gp_face1)){
-    up_off=false
-}
+if (!obj_input.pause){
 
-if(nicolnigrav=false){
-    if(input_locked=false){
+    if(up_off=true &amp;&amp; keyboard_check_released(ord("Z"))){
+        up_off=false
+    }
+    if(up_off=true &amp;&amp; gamepad_button_check_released(0,gp_face1)){
+        up_off=false
+    }
     
-        //Get the player's input
-    if (obj_input.gamepad=false)key_right = keyboard_check(ord("D"));
-    else {if(gamepad_axis_value(0,gp_axislh)&gt;0) key_right =1;
-        else key_right=0
-        }
-    
-    if (obj_input.gamepad=false)key_left = -keyboard_check(ord("Q"));
-    else {if(gamepad_axis_value(0,gp_axislh)&lt;0) key_left =-1;
-        else key_left=0
-        }
-        key_down = keyboard_check(ord("S"));
+    if(nicolnigrav=false){
+        if(input_locked=false){
         
-    if (obj_input.gamepad=false) key_jump = keyboard_check(ord("Z"));
-    else {if gamepad_button_check(0,gp_face1)key_jump=1; 
-        else key_jump=0
-        }
+            //Get the player's input
+        if (obj_input.gamepad=false)key_right = keyboard_check(ord("D"));
+        else {if(gamepad_axis_value(0,gp_axislh)&gt;0) key_right =1;
+            else key_right=0
+            }
         
-        
-        //React to inputs
-        move = key_left + key_right;
-        if(QD_off=false){
-        hsp = move*(global.movespeed+spd_bonus);
-        }
-        else hsp=0
-        if (vsp &lt; 10) vsp += global.grav;
-        
-        //Mirroring
-        if (move&lt;0) {
-            global.playermirrored = -1
-         }
-        if (move&gt;0) {
-            global.playermirrored = 1
-        }
-        
-        if (place_meeting(x,y+1,obj_plateforme))
-        {  
-            if (!up_off &amp;&amp; key_jump ){
-            vsp = -(global.jumpspeed+jump_bonus);
-            up_off=true
+        if (obj_input.gamepad=false)key_left = -keyboard_check(ord("Q"));
+        else {if(gamepad_axis_value(0,gp_axislh)&lt;0) key_left =-1;
+            else key_left=0
+            }
+            key_down = keyboard_check(ord("S"));
+            
+        if (obj_input.gamepad=false) key_jump = keyboard_check(ord("Z"));
+        else {if gamepad_button_check(0,gp_face1)key_jump=1; 
+            else key_jump=0
+            }
+            
+            
+            //React to inputs
+            move = key_left + key_right;
+            if(QD_off=false){
+            hsp = move*(global.movespeed+spd_bonus);
+            }
+            else hsp=0
+            if (vsp &lt; 10) vsp += global.grav;
+            
+            //Mirroring
+            if (move&lt;0) {
+                global.playermirrored = -1
+             }
+            if (move&gt;0) {
+                global.playermirrored = 1
+            }
+            
+            if (place_meeting(x,y+1,obj_plateforme))
+            {  
+                if (!up_off &amp;&amp; key_jump ){
+                vsp = -(global.jumpspeed+jump_bonus);
+                up_off=true
+                }
+            }
+            
+            if (vsp &lt; 0) &amp;&amp; (!key_jump){
+                vsp = max(vsp,0)
             }
         }
+            
         
-        if (vsp &lt; 0) &amp;&amp; (!key_jump){
-            vsp = max(vsp,0)
-        }
-    }
         
-    
-    
-    //Horizontal Collision
-    if (place_meeting(x+hsp,y,obj_plateforme))
-    {
-        while(!place_meeting(x+sign(hsp),y,obj_plateforme)){
-            x += sign(hsp);
+        //Horizontal Collision
+        if (place_meeting(x+hsp,y,obj_plateforme))
+        {
+            while(!place_meeting(x+sign(hsp),y,obj_plateforme)){
+                x += sign(hsp);
+            }
+            hsp = 0;
         }
-        hsp = 0;
-    }
-    x += hsp;  
-    //Vertical Collision
-    if (place_meeting(x,y+vsp,obj_plateforme))
-    {
-        while(!place_meeting(x,y+sign(vsp),obj_plateforme)){
-            y += sign(vsp);
+        x += hsp;  
+        //Vertical Collision
+        if (place_meeting(x,y+vsp,obj_plateforme))
+        {
+            while(!place_meeting(x,y+sign(vsp),obj_plateforme)){
+                y += sign(vsp);
+            }
+            vsp = 0;
         }
-        vsp = 0;
+        y += vsp;
     }
-    y += vsp;
 }
-
 //Animate
 /*
 if (place_meeting(x,y+1,obj_plateforme)){
@@ -235,63 +237,67 @@ if (vsp &lt; 0) chara.sprite_index = sp_chara_jump ; else chara.sprite_index = s
           <argument>
             <kind>1</kind>
             <string>///Sprint/Dash
-sol = place_meeting(x,y+1,obj_plateforme)
 
-if(input_locked=false){
-
-    //Si A enfoncé et si player sur sol, augmente la vitesse de deplacement
-//    if (gamepad_button_check_pressed(0,gp_face2)) key_A_p =true;
-if (!obj_input.gamepad){
-    key_A_p = keyboard_check_pressed(ord("A"));
-}
-else key_A_p = gamepad_button_check_pressed(0,gp_face2);
-    //key_A est a la fois un checker et un compteur, !=0 -&gt; bonusvitesse 
-    if (key_A!=0 /*|| gamepad_button_check_pressed(0,gp_face2)*/ )key_A+=1;
-    if (key_A_p &amp;&amp; sol ) key_A=1;
-    if (A_off) key_A=0;
+if (!obj_input.pause){
+    sol = place_meeting(x,y+1,obj_plateforme)
     
-    if (stamina-sprint_cost&lt;0) key_A =0
+    if(input_locked=false){
     
-    if (key_A&gt;10 &amp;&amp; sol){spd_bonus=sprint_spd_bonus;jump_bonus=sprint_spd_bonus}
-    if (key_A&gt;10 &amp;&amp; !sol){spd_bonus=sprint_spd_bonus;jump_bonus=sprint_spd_bonus}
-    if (key_A=0){spd_bonus=0;jump_bonus=0}
-    
-    //si on relache A:
-    if(keyboard_check_released(ord("A")) || (gamepad_button_check_released(0,gp_face2))){
-        if(key_A&lt;10 &amp;&amp; key_A!=0 &amp;&amp; (stamina-dash_cost&gt;0)){ //Dash
-        dash=1
-        key_A =0;
+        //Si A enfoncé et si player sur sol, augmente la vitesse de deplacement
+    //    if (gamepad_button_check_pressed(0,gp_face2)) key_A_p =true;
+    if (!obj_input.gamepad){
+        key_A_p = keyboard_check_pressed(ord("A"));
+    }
+    else key_A_p = gamepad_button_check_pressed(0,gp_face2);
+        //key_A est a la fois un checker et un compteur, !=0 -&gt; bonusvitesse 
+        if (key_A!=0 /*|| gamepad_button_check_pressed(0,gp_face2)*/ )key_A+=1;
+        if (key_A_p &amp;&amp; sol ) key_A=1;
+        if (A_off) key_A=0;
+        
+        if (stamina-sprint_cost&lt;0) key_A =0
+        
+        if (key_A&gt;10 &amp;&amp; sol){spd_bonus=sprint_spd_bonus;jump_bonus=sprint_spd_bonus}
+        if (key_A&gt;10 &amp;&amp; !sol){spd_bonus=sprint_spd_bonus;jump_bonus=sprint_spd_bonus}
+        if (key_A=0){spd_bonus=0;jump_bonus=0}
+        
+        //si on relache A:
+        if(keyboard_check_released(ord("A")) || (gamepad_button_check_released(0,gp_face2))){
+            if(key_A&lt;10 &amp;&amp; key_A!=0 &amp;&amp; (stamina-dash_cost&gt;0)){ //Dash
+            dash=1
+            key_A =0;
+            }
+            else {
+            key_A =0;
+            }
+            A_off=false;
         }
-        else {
-        key_A =0;
+    
+    }
+    
+    //dash
+    
+    if(dash&gt;0){
+        spd_bonus=dash_spd_bonus;
+        input_locked=true;
+        dash+=1
+        if(global.playermirrored=1){
+        hsp = global.movespeed+spd_bonus
         }
-        A_off=false;
+        if(global.playermirrored=-1){
+        hsp = -(global.movespeed+spd_bonus)
+        }
     }
+    if(dash&gt;dash_duration) {
+        dash=0; 
+        spd_bonus=0;
+        input_locked=false;   
+    }
+    
+    
+    if(QD_off &amp;&amp; sol) QD_off=false;
+    if(locked_platform!=0 &amp;&amp; sol) locked_platform=0;
 
 }
-
-//dash
-
-if(dash&gt;0){
-    spd_bonus=dash_spd_bonus;
-    input_locked=true;
-    dash+=1
-    if(global.playermirrored=1){
-    hsp = global.movespeed+spd_bonus
-    }
-    if(global.playermirrored=-1){
-    hsp = -(global.movespeed+spd_bonus)
-    }
-}
-if(dash&gt;dash_duration) {
-    dash=0; 
-    spd_bonus=0;
-    input_locked=false;   
-}
-
-
-if(QD_off &amp;&amp; sol) QD_off=false;
-if(locked_platform!=0 &amp;&amp; sol) locked_platform=0;
 </string>
           </argument>
         </arguments>
@@ -314,75 +320,75 @@ if(locked_platform!=0 &amp;&amp; sol) locked_platform=0;
             <kind>1</kind>
             <string>///Accrochage
 
-
-//si en l'air et au contact
-if (place_meeting(x+global.playermirrored,y,obj_plateforme)) &amp;&amp; (!place_meeting(x,y+vsp,obj_plateforme)){
-    //recupere l'id de l'obj
-    id_p = instance_place(x+global.playermirrored , y, obj_plateforme);
-    if(locked_platform!=id_p){
-        //recupere la position de l'obj
-        id_x= id_p.x
-        //calcule la position des points d'accroche
-        x_1 = id_p.x ;
-        y_1 = id_p.y;
-        x_2 = id_p.x+id_p.sprite_width;
-        y_2 = id_p.y;
-        //verifie la proximité des points d'accroche
-        if( abs( (x+sprite_width/2)-x_1)&lt;10 &amp;&amp; abs((y-sprite_height)-y_1) &lt;40 ) { //si on est proche du point 1
-            nicolnigrav=true
-            x=x_1-sprite_width/2;
-            y=y_1+sprite_height;
-            accrochage=true;
-            snap=1;
+if (!obj_input.pause){
+    //si en l'air et au contact
+    if (place_meeting(x+global.playermirrored,y,obj_plateforme)) &amp;&amp; (!place_meeting(x,y+vsp,obj_plateforme)){
+        //recupere l'id de l'obj
+        id_p = instance_place(x+global.playermirrored , y, obj_plateforme);
+        if(locked_platform!=id_p){
+            //recupere la position de l'obj
+            id_x= id_p.x
+            //calcule la position des points d'accroche
+            x_1 = id_p.x ;
+            y_1 = id_p.y;
+            x_2 = id_p.x+id_p.sprite_width;
+            y_2 = id_p.y;
+            //verifie la proximité des points d'accroche
+            if( abs( (x+sprite_width/2)-x_1)&lt;10 &amp;&amp; abs((y-sprite_height)-y_1) &lt;40 ) { //si on est proche du point 1
+                nicolnigrav=true
+                x=x_1-sprite_width/2;
+                y=y_1+sprite_height;
+                accrochage=true;
+                snap=1;
+            }
+            else if( abs((x-sprite_width/2)-x_2)&lt;10 &amp;&amp; abs((y-sprite_height)-y_2) &lt;40 ){ //si proche point 2
+                nicolnigrav=true
+                x=x_2+sprite_width/2;
+                y=y_2+sprite_height;
+                accrochage=true;
+                snap=2
+            }
         }
-        else if( abs((x-sprite_width/2)-x_2)&lt;10 &amp;&amp; abs((y-sprite_height)-y_2) &lt;40 ){ //si proche point 2
-            nicolnigrav=true
-            x=x_2+sprite_width/2;
-            y=y_2+sprite_height;
-            accrochage=true;
-            snap=2
+    }
+    
+    if (!obj_input.gamepad){
+        klimb_key = keyboard_check(ord("Z"))
+        fall_key = keyboard_check(ord("A"))
+    }
+    else{
+        klimb_key = gamepad_button_check_pressed(0,gp_face1)
+        fall_key = gamepad_button_check_pressed(0,gp_face2)
+    }
+    
+    if ( !up_off &amp;&amp; accrochage &amp;&amp; klimb_key ){
+        if(snap=1){
+        y=y_1-1
+        x=x_1+sprite_width/2
         }
+        if(snap=2){
+        y=y_2-1
+        x=x_2-sprite_width/2
+        }
+        accrochage=false;
+        nicolnigrav=false;
+        up_off=true;   
     }
-}
+    //DECCROCHAGE
+    if ( !up_off &amp;&amp; accrochage &amp;&amp; fall_key){
+        if(snap=1){
+        x-=1
+        }
+        if(snap=2){
+        x+=1
+        }
+        accrochage=false;
+        nicolnigrav=false;
+        A_off=true;  
+        locked_platform = id_p;
+     //   QD_off=true
+    }
 
-if (!obj_input.gamepad){
-    klimb_key = keyboard_check(ord("Z"))
-    fall_key = keyboard_check(ord("A"))
 }
-else{
-    klimb_key = gamepad_button_check_pressed(0,gp_face1)
-    fall_key = gamepad_button_check_pressed(0,gp_face2)
-}
-
-if ( !up_off &amp;&amp; accrochage &amp;&amp; klimb_key ){
-    if(snap=1){
-    y=y_1-1
-    x=x_1+sprite_width/2
-    }
-    if(snap=2){
-    y=y_2-1
-    x=x_2-sprite_width/2
-    }
-    accrochage=false;
-    nicolnigrav=false;
-    up_off=true;   
-}
-//DECCROCHAGE
-if ( !up_off &amp;&amp; accrochage &amp;&amp; fall_key){
-    if(snap=1){
-    x-=1
-    }
-    if(snap=2){
-    x+=1
-    }
-    accrochage=false;
-    nicolnigrav=false;
-    A_off=true;  
-    locked_platform = id_p;
- //   QD_off=true
-}
-
-
 </string>
           </argument>
         </arguments>
@@ -404,22 +410,23 @@ if ( !up_off &amp;&amp; accrochage &amp;&amp; fall_key){
           <argument>
             <kind>1</kind>
             <string>///Stamina control
-
-if(spd_bonus=sprint_spd_bonus  &amp;&amp; hsp!=0){
-    stamina-=sprint_cost
+if (!obj_input.pause){
+    if(spd_bonus=sprint_spd_bonus  &amp;&amp; hsp!=0){
+        stamina-=sprint_cost
+    }
+    if(spd_bonus=dash_spd_bonus){
+        stamina-=dash_cost/dash_duration
+    }
+    
+    if( spd_bonus=0 &amp;&amp; stamina&lt;stamina_max &amp;&amp; stam_regen){
+        stamina+=stamina_recover
+    }
+    else if (hsp=0 &amp;&amp; stam_regen &amp;&amp; stamina&lt;stamina_max){
+        stamina+=stamina_recover
+    }
+    
+    if(stamina&lt;0) stamina=0
 }
-if(spd_bonus=dash_spd_bonus){
-    stamina-=dash_cost/dash_duration
-}
-
-if( spd_bonus=0 &amp;&amp; stamina&lt;stamina_max &amp;&amp; stam_regen){
-    stamina+=stamina_recover
-}
-else if (hsp=0 &amp;&amp; stam_regen &amp;&amp; stamina&lt;stamina_max){
-    stamina+=stamina_recover
-}
-
-if(stamina&lt;0) stamina=0
 </string>
           </argument>
         </arguments>
@@ -441,24 +448,25 @@ if(stamina&lt;0) stamina=0
           <argument>
             <kind>1</kind>
             <string>/// degats de chute
-
-if (y_depart =-1 &amp;&amp; !place_meeting(x,y+1,obj_plateforme)){
-    y_depart=y
-}
-
-if (y_depart!=-1 &amp;&amp; place_meeting(x,y+1,obj_plateforme)){
-    y_diff = y-y_depart
-    y_depart=-1
-}
-
-if(y_diff &gt; 100) {
-    HP-=1
-    y_diff=0
-}
-else    y_diff=0
-
-if (HP&lt;=0){
-    room_restart()
+if (!obj_input.pause){
+    if (y_depart =-1 &amp;&amp; !place_meeting(x,y+1,obj_plateforme)){
+        y_depart=y
+    }
+    
+    if (y_depart!=-1 &amp;&amp; place_meeting(x,y+1,obj_plateforme)){
+        y_diff = y-y_depart
+        y_depart=-1
+    }
+    
+    if(y_diff &gt; 100) {
+        HP-=1
+        y_diff=0
+    }
+    else    y_diff=0
+    
+    if (HP&lt;=0){
+        room_restart()
+    }
 }
 </string>
           </argument>

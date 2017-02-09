@@ -33,6 +33,8 @@ no_more_arrow=false
 no_more_arrow_spawn=false
 keep=false;
 costed=false;
+
+cooldown_arrow=0
 </string>
           </argument>
         </arguments>
@@ -57,31 +59,32 @@ costed=false;
             <kind>1</kind>
             <string>///position et angle
 
-gamepad_set_axis_deadzone(0, 0.05)
-x=obj_player.x
-y=obj_player.y-32
-
-//Keyboard
-if(!obj_input.gamepad){
-    image_angle = point_direction(x, y, mouse_x, mouse_y)
-}
-
-//gamepad
-else {
-    var h_point = gamepad_axis_value(0, gp_axisrh);
-    var v_point = gamepad_axis_value(0, gp_axisrv);
-    var pdir = point_direction(0, 0, h_point, v_point);
+if (!obj_input.pause){
+    gamepad_set_axis_deadzone(0, 0.05)
+    x=obj_player.x
+    y=obj_player.y-32
     
-    gamepad_set_axis_deadzone(0, 0.2)
-    var h_point = gamepad_axis_value(0, gp_axisrh);
-    var v_point = gamepad_axis_value(0, gp_axisrv);
+    //Keyboard
+    if(!obj_input.gamepad){
+        image_angle = point_direction(x, y, mouse_x, mouse_y)
+    }
     
-    if (( h_point !=0) || (v_point !=0)) //si le stick est hors position de base
-    {
-        image_angle = pdir
+    //gamepad
+    else {
+        var h_point = gamepad_axis_value(0, gp_axisrh);
+        var v_point = gamepad_axis_value(0, gp_axisrv);
+        var pdir = point_direction(0, 0, h_point, v_point);
+        
+        gamepad_set_axis_deadzone(0, 0.2)
+        var h_point = gamepad_axis_value(0, gp_axisrh);
+        var v_point = gamepad_axis_value(0, gp_axisrv);
+        
+        if (( h_point !=0) || (v_point !=0)) //si le stick est hors position de base
+        {
+            image_angle = pdir
+        }
     }
 }
-
 </string>
           </argument>
         </arguments>
@@ -103,64 +106,79 @@ else {
           <argument>
             <kind>1</kind>
             <string>///shoot
-
-press = mouse_check_button_pressed(mb_left);
-press2 = gamepad_button_check_pressed(0,gp_shoulderr);
-released = mouse_check_button_released(mb_left);
-released2 = gamepad_button_check_released(0,gp_shoulderr);
-delete = mouse_check_button(mb_right);
-delete2 = gamepad_button_check(0,gp_shoulderrb)
-
-if (obj_player.stamina-obj_player.arrow_cost&gt;0){
-    if (press || press2 ) { //spawn arrow
-        arrow_id = instance_create(x,y,obj_fleche);
-        arrow_id.direction = image_angle;
-        arrow_id.image_angle = arrow_id.direction;
-        arrow_id.shooted=false;
-        obj_player.stamina-=obj_player.arrow_cost
-        costed=true
-    }
-}
-
-
-//rotate arrow   
-if (costed){ 
-    if( (mouse_check_button(mb_left) || gamepad_button_check(0,gp_shoulderr)) &amp;&amp; !no_more_arrow  ){
-        arrow_id.direction = image_angle;
-        arrow_id.image_angle = arrow_id.direction;
-        arrow_id.x =x
-        arrow_id.y=y
-        keep=true;
-           
-        if(delete||delete2) { //delete arrow
-            keep=false;
-            with (arrow_id)  instance_destroy()
-            no_more_arrow=true
-            costed=false;
-        }       
-    };
+if (!obj_input.pause){
+    press = mouse_check_button_pressed(mb_left);
+    press2 = gamepad_button_check_pressed(0,gp_shoulderr);
+    released = mouse_check_button_released(mb_left);
+    released2 = gamepad_button_check_released(0,gp_shoulderr);
+    delete = mouse_check_button(mb_right);
+    delete2 = gamepad_button_check(0,gp_shoulderrb)
     
-        //shoot arrow  
-    if ((released || released2) &amp;&amp; !no_more_arrow ){
-        if(arrow_id.shooted=false){
-        arrow_id.speed=25
-        arrow_id.shooted=true
-        keep=false;
-        costed=false;
+    if (obj_player.stamina-obj_player.arrow_cost&gt;0){
+        if (press || press2 ) { //spawn arrow
+            //attend le cooldown puis spawn l'arrow
+            cooldown_arrow=1
+
         }
     }
-}
-
-if(keep=true){
-    obj_player.stam_regen=false
-}
- else    obj_player.stam_regen=true
-if (no_more_arrow=true &amp;&amp; (released || released2)){
-    no_more_arrow=false
-}
-/*
-if (no_more_arrow_spawn=true &amp;&amp; (released || released2)){
-    no_more_arrow_spawn=false
+    
+    
+    //rotate arrow   
+    if (costed){ 
+        if( (mouse_check_button(mb_left) || gamepad_button_check(0,gp_shoulderr)) &amp;&amp; !no_more_arrow  ){
+            arrow_id.direction = image_angle;
+            arrow_id.image_angle = arrow_id.direction;
+            arrow_id.x =x
+            arrow_id.y=y
+            keep=true;
+               
+            if(delete||delete2) { //delete arrow
+                keep=false;
+                with (arrow_id)  instance_destroy()
+                no_more_arrow=true
+                costed=false;
+            }       
+        };
+        
+            //shoot arrow  
+        if ((released || released2) &amp;&amp; !no_more_arrow ){
+            if(arrow_id.shooted=false){
+            arrow_id.speed=25
+            arrow_id.shooted=true
+            keep=false;
+            costed=false;
+            }
+        }
+    }
+    
+    if(keep=true){
+        obj_player.stam_regen=false
+    }
+     else    obj_player.stam_regen=true
+    if (no_more_arrow=true &amp;&amp; (released || released2)){
+        no_more_arrow=false
+    }
+    
+    //Spawn arrow
+    if (cooldown_arrow&gt;0){
+        if(!mouse_check_button(mb_left)){ 
+        cooldown_arrow=0}
+        if (cooldown_arrow &gt;= 0.5*room_speed){
+            arrow_id = instance_create(x,y,obj_fleche);
+            arrow_id.direction = image_angle;
+            arrow_id.image_angle = arrow_id.direction;
+            arrow_id.shooted=false;
+            obj_player.stamina-=obj_player.arrow_cost
+            costed=true
+            
+            cooldown_arrow=0
+        }
+        else cooldown_arrow+=1;
+    }
+    /*
+    if (no_more_arrow_spawn=true &amp;&amp; (released || released2)){
+        no_more_arrow_spawn=false
+    }*/
 }
 </string>
           </argument>
