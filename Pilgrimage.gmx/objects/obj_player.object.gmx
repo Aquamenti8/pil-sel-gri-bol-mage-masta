@@ -340,6 +340,7 @@ if (!obj_input.pause){
                 y=y_1+sprite_height;
                 accrochage=true;
                 snap=1;
+                y_depart=y
             }
             else if( abs((x-sprite_width/2)-x_2)&lt;10 &amp;&amp; abs((y-sprite_height)-y_2) &lt;40 ){ //si proche point 2
                 nicolnigrav=true
@@ -347,6 +348,7 @@ if (!obj_input.pause){
                 y=y_2+sprite_height;
                 accrochage=true;
                 snap=2
+                y_depart=y
             }
         }
     }
