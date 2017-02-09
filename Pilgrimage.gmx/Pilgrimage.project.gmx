@@ -21,6 +21,7 @@
     <object>objects\obj_arc</object>
     <object>objects\obj_fleche</object>
     <object>objects\obj_input</object>
+    <object>objects\obj_timer</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_level1</room>

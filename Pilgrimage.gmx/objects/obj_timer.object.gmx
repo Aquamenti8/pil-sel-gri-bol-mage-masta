@@ -4,7 +4,7 @@
   <solid>0</solid>
   <visible>-1</visible>
   <depth>0</depth>
-  <persistent>-1</persistent>
+  <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
@@ -25,8 +25,9 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>gamepad=false;
-pause=false;
+            <string>///Ini var
+
+duration=10
 </string>
           </argument>
         </arguments>
@@ -49,65 +50,7 @@ pause=false;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Keyboard or gamepad
-
-if (keyboard_check_pressed(vk_enter)){
-    if (!gamepad) gamepad=true;
-    else gamepad=false; 
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Pause
-
-if (keyboard_check_pressed(vk_escape)){
-    if (!pause) pause=true;
-    else pause=false; 
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="8" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>if (gamepad) draw_text(x,y,"Gamepad")
-else draw_text(x,y,"Keyboard")
-
-if (pause) draw_text(x,y+20,"Pause")
-else draw_text(x,y+20,"Play")
+            <string>duration += 1
 </string>
           </argument>
         </arguments>
