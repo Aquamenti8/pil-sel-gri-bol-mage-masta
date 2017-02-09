@@ -163,7 +163,7 @@ if (!obj_input.pause){
     if (cooldown_arrow&gt;0){
         if(!mouse_check_button(mb_left)&amp;&amp;!gamepad_button_check(0,gp_shoulderr)){ 
         cooldown_arrow=0}
-        if (cooldown_arrow &gt;= 0.25*room_speed){
+        if (cooldown_arrow &gt;= 0.15*room_speed){
             arrow_id = instance_create(x,y,obj_fleche);
             arrow_id.direction = image_angle;
             arrow_id.image_angle = arrow_id.direction;

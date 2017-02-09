@@ -14,6 +14,9 @@
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
+  <scripts name="scripts">
+    <script>scripts\scr_menu_pause.gml</script>
+  </scripts>
   <objects name="objects">
     <object>objects\obj_player</object>
     <object>objects\obj_plateforme</object>
@@ -22,6 +25,9 @@
     <object>objects\obj_fleche</object>
     <object>objects\obj_input</object>
     <object>objects\obj_timer</object>
+    <objects name="Menu">
+      <object>objects\obj_menu_button</object>
+    </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_level1</room>

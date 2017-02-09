@@ -3,8 +3,8 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>-10</depth>
-  <persistent>-1</persistent>
+  <depth>0</depth>
+  <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
@@ -25,42 +25,18 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Inivariable
+            <string>///Set array
 
-gamepad=false;
-pause=false;
-button_create=false;
-pause_x=100;
-pause_y=200;
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Menu array
-
-pause_menu[0] = "Reprendre"
-pause_menu[1] = "Quitter"
+pause_menu[0] = Reprendre
+pause_menu[1] = Quitter
 
 space = 64;
 mpos=0;
 
-
+button_0 = instance_create(x+space,y,obj_menu_button);
+button_0.index= 0;
+button_1 = instance_create(x+space,y+space,obj_menu_button);
+button_1.index = 1;
 </string>
           </argument>
         </arguments>
@@ -83,51 +59,20 @@ mpos=0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Keyboard or gamepad
+            <string>var move = 0;
+move -= max(keyboard_check_pressed(vk_up),keyboard_check_pressed(ord("W")),0);
+move += max(keyboard_check_pressed(vk_down),keyboard_check_pressed(ord("S")),0);
 
-if (keyboard_check_pressed(vk_enter)){
-    if (!gamepad) gamepad=true;
-    else gamepad=false; 
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Pause menu
-
-if(pause &amp;&amp; button_create=true){
-    button_0 = instance_create(pause_x+space,pause_y,obj_menu_button);
-    button_0.index= 0;
-    button_1 = instance_create(pause_x+space,pause_y+space,obj_menu_button);
-    button_1.index = 1;
-    button_create=false;
+if (move!=0)
+{
+    global.mpos += move;
+    if (global.mpos&lt;0) global.mpos = array_length_1d(menu) - 1;
+    if (global.mpos&gt;array_length_1d(menu) - 1) global.mpos = 0;
 }
 
-if (keyboard_check_pressed(vk_escape)){
-    if (!pause){
-     pause=true;
-     button_create =true;
-     }
-    else{
-        pause=false;
-    }
-}
+var push;
+push = max(keyboard_check_released(vk_enter),mouse_check_button_released(mb_left),0);
+if (push == 1) scr_menu_pause();
 </string>
           </argument>
         </arguments>
@@ -150,27 +95,18 @@ if (keyboard_check_pressed(vk_escape)){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Draw gamepad, pause menu
+            <string>draw_set_halign(fa_left);
+draw_set_valign(fa_middle);
+//draw_set_font(fnt);
+draw_set_color(c_white);
 
-if (gamepad) draw_text(x,y,"Gamepad")
-else draw_text(x,y,"Keyboard")
+var m;
+for (m = 0; m &lt; array_length_1d(pause_menu); m += 1)
+{
+    draw_text(x+space,y+(m*space), string(pause_menu[m]))
+}
 
-if (pause){
-     draw_text(x,y+20,"Pause")
-     draw_set_alpha(0.9)
-     draw_rectangle(view_xview,view_yview,view_xview+view_wview,view_yview+view_hview,false)
-     draw_set_alpha(1)
-    draw_set_colour(c_white);
-    var m;
-    for (m = 0; m &lt; array_length_1d(pause_menu); m += 1)
-    {
-        draw_text(pause_x+space,pause_y+(m*space), string(pause_menu[m]))
-    }
-    draw_sprite(sp_fleche,0,pause_x+16,pause_y+mpos * space);
-    draw_set_colour(c_black);
-    
-    }
-else draw_text(x,y+20,"Play")
+draw_sprite(sp_fleche,0,x+16,y+mpos * space);
 </string>
           </argument>
         </arguments>
