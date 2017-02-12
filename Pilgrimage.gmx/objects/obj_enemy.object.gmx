@@ -26,13 +26,18 @@
           <argument>
             <kind>1</kind>
             <string>///Initialisation vartiables
-mode=0
+
+mode=0 // Mode de l'IA, initial: ronde
+
+ // HP de l'enemy
 HP = 3
 HP_max=3
 
-hsp = 0;
-vsp = 0;
-movespeed=1;
+
+hsp = 0; //deplacement horizontal par frame (actuel)
+vsp = 0; //deplacement vertical par frame (actuel)
+
+movespeed=2; //vitesse de deplacement de l'enemy
 </string>
           </argument>
         </arguments>
@@ -57,7 +62,7 @@ movespeed=1;
             <kind>1</kind>
             <string>///Death
 
-if(HP&lt;=0)  instance_destroy()
+if(HP&lt;=0)  instance_destroy() // si mort =&gt; mort
 </string>
           </argument>
         </arguments>
@@ -80,16 +85,18 @@ if(HP&lt;=0)  instance_destroy()
             <kind>1</kind>
             <string>/// IA condition &amp; priority
 
+//A faire:
 //mode1: fait une ronde de 200px, pathfinder(x) puis pathfinder(x+200), condition: default
 //mode2: va vers le joueur, pathfinder(joueur), condition: joueur a moins de 300px de enemy
 //mode3: attaque le joueur, attack ,  condition: joueur a moins de 10px de enemy
 
 // teste les condition et choisit le mode en fonction d'une liste de priorités
 
+//Verifie la proximité du joueur
 if( collision_rectangle( x-300-sprite_width/2 , y+sprite_height/2 , x+300+sprite_width/2, y-sprite_height/2, obj_player, true, true )){
-    mode=1
+    mode=1 // =&gt; l'enemy poursuit le joueur
 }
-else mode=0
+else mode=0 // =&gt; rien de special
 </string>
           </argument>
         </arguments>
@@ -118,8 +125,8 @@ else mode=0
 
 //Reagit au mode qui a eté choisit
 
-if(mode=1)  {  scr_pathfinder(obj_player.x , id);}
-if(mode=0) {hsp=0}
+if(mode=1)  {  scr_pathfinder(obj_player.x , id);} //&gt;enemy poursuit joueur
+if(mode=0) {hsp=0}  //enemy s'arrete
 
 </string>
           </argument>
@@ -154,6 +161,7 @@ if (!obj_input.pause){
         hsp = 0;
     }
     x += hsp;  
+    
     //Vertical Collision
     if (place_meeting(x,y+vsp,obj_plateforme))
     {
