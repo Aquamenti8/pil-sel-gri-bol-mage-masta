@@ -27,6 +27,8 @@
             <kind>1</kind>
             <string>///Liste des objets arretant la fleche
 
+stopped_by=0 //pour enlever les fleches a la mort de l'ennemi OU systeme de recuperation des fleches a la mort de l'ennemi
+
 stop_arrow_obj[0]=obj_plateforme;
 stop_arrow_obj[1]=obj_enemy;
 </string>
