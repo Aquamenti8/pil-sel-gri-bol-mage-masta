@@ -26,13 +26,15 @@
           <argument>
             <kind>1</kind>
             <string>///Initialisation vartiables
-mode=0
+
+mode=0 // Mode initial: ronde
+
 HP = 3
 HP_max=3
 
 hsp = 0;
 vsp = 0;
-movespeed=1;
+movespeed=2;
 </string>
           </argument>
         </arguments>
@@ -80,6 +82,7 @@ if(HP&lt;=0)  instance_destroy()
             <kind>1</kind>
             <string>/// IA condition &amp; priority
 
+//A faire:
 //mode1: fait une ronde de 200px, pathfinder(x) puis pathfinder(x+200), condition: default
 //mode2: va vers le joueur, pathfinder(joueur), condition: joueur a moins de 300px de enemy
 //mode3: attaque le joueur, attack ,  condition: joueur a moins de 10px de enemy

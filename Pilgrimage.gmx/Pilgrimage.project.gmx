@@ -29,6 +29,7 @@
     <object>objects\obj_timer</object>
     <objects name="Menu">
       <object>objects\obj_menu_button</object>
+      <object>objects\obj_menu</object>
     </objects>
     <object>objects\obj_enemy</object>
   </objects>
