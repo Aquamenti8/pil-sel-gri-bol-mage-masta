@@ -17,6 +17,7 @@
   <paths name="paths"/>
   <scripts name="scripts">
     <script>scripts\scr_menu_pause.gml</script>
+    <script>scripts\scr_pathfinder.gml</script>
   </scripts>
   <objects name="objects">
     <object>objects\obj_player</object>

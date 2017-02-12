@@ -26,12 +26,13 @@
           <argument>
             <kind>1</kind>
             <string>///Initialisation vartiables
-
+mode=0
 HP = 3
 HP_max=3
 
 hsp = 0;
 vsp = 0;
+movespeed=1;
 </string>
           </argument>
         </arguments>
@@ -77,13 +78,18 @@ if(HP&lt;=0)  instance_destroy()
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// IA priority
+            <string>/// IA condition &amp; priority
 
-//mode1: fait une ronde de 200px, condition: default
-//mode2: va vers le joueur, condition: joueur a moins de 300px de enemy
-//mode3: attaque le joueur, condition: joueur a moins de 10px de enemy
+//mode1: fait une ronde de 200px, pathfinder(x) puis pathfinder(x+200), condition: default
+//mode2: va vers le joueur, pathfinder(joueur), condition: joueur a moins de 300px de enemy
+//mode3: attaque le joueur, attack ,  condition: joueur a moins de 10px de enemy
 
 // teste les condition et choisit le mode en fonction d'une liste de priorités
+
+if( collision_rectangle( x-300-sprite_width/2 , y+sprite_height/2 , x+300+sprite_width/2, y-sprite_height/2, obj_player, true, true )){
+    mode=1
+}
+else mode=0
 </string>
           </argument>
         </arguments>
@@ -112,7 +118,8 @@ if(HP&lt;=0)  instance_destroy()
 
 //Reagit au mode qui a eté choisit
 
-
+if(mode=1)  {  scr_pathfinder(obj_player.x , id);}
+if(mode=0) {hsp=0}
 
 </string>
           </argument>
