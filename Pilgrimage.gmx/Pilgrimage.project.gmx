@@ -18,6 +18,7 @@
   <scripts name="scripts">
     <script>scripts\scr_menu_pause.gml</script>
     <script>scripts\scr_pathfinder.gml</script>
+    <script>scripts\scr_create_menu_button.gml</script>
   </scripts>
   <objects name="objects">
     <object>objects\obj_player</object>
