@@ -11,11 +11,13 @@
     <sprite>sprites\sp_chara</sprite>
     <sprite>sprites\sp_arc</sprite>
     <sprite>sprites\sp_fleche</sprite>
+    <sprite>sprites\sp_enemy</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
     <script>scripts\scr_menu_pause.gml</script>
+    <script>scripts\scr_pathfinder.gml</script>
   </scripts>
   <objects name="objects">
     <object>objects\obj_player</object>
@@ -28,6 +30,7 @@
     <objects name="Menu">
       <object>objects\obj_menu_button</object>
     </objects>
+    <object>objects\obj_enemy</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_level1</room>
