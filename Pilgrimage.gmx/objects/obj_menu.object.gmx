@@ -28,6 +28,7 @@
             <string>///Initialise variables
 
 current_page=-1
+inventory_type="inventory_weapon"
 </string>
           </argument>
         </arguments>
@@ -75,7 +76,7 @@ inventory[0]="WEAPONS";
 inventory[1]="ARMORS &amp; COLTHS";
 inventory[2]="ACCESSORIES";
 inventory[3]="KEY OBJECTS";
-invenyory[4]="ITEM";
+inventory[4]="ITEM";
 
 //inventory_weapon 0=name, 1=number, 2=type, 3=sprite
 inventory_weapon[0,0]="Wood Bow";
@@ -108,7 +109,6 @@ equipment[5]="None";
 equipment[6]="None";
 equipment[7]="None";
 equipment[8]="None";
-
 </string>
           </argument>
         </arguments>
@@ -193,7 +193,7 @@ status[1,2]=obj_player.stamina_max
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>
+            <string>///Menu, onglets et autres
 
 //draw le reste du menu en fonction de current page
 
@@ -202,7 +202,7 @@ if(current_page!=-1){
     draw_set_colour(c_gray)
     draw_rectangle(view_xview,view_yview,view_xview+view_wview,view_yview+view_hview,false)
     //Statut
-    statu_x=view_xview+view_wview*3/5
+    statu_x=view_xview+view_wview*3.6/5
     statu_y= view_yview+view_hview/5
     margin=10
     draw_set_colour(c_orange);
@@ -230,7 +230,7 @@ if(current_page!=-1){
         //INVENTORY
     if(current_page="Inventory"){
         //Boites pour les types d'objet
-        for (i = 0; i &lt; array_length_1d(inventory); i += 1){
+        for (i = 0; i &lt;array_length_1d(inventory); i += 1){
             inventory_x=view_xview+20+120*i
             inventory_y=view_yview+view_hview*1/5
             inventory_width=100
@@ -239,12 +239,39 @@ if(current_page!=-1){
             draw_set_colour(c_orange);
             draw_rectangle(inventory_x,inventory_y,inventory_x+inventory_width,inventory_y+inventory_height,false);
             draw_set_colour(c_black);
-            draw_text(inventory_x+margin,inventory_y+margin+40,string(inventory[i]))
+            draw_text(inventory_x+margin,inventory_y+margin+40,inventory[i])
+            if(create_butt=true)scr_create_menu_button(inventory_x,inventory_y,inventory_width,inventory_height,i,"type");
+        }
+        
+        //Liste des objets possédés en fonction du type d'objet
+        inventory_x=view_xview+view_wview/6
+        inventory_y=view_yview+view_hview/4+20*i
+        if(inventory_type=0){
+        //dessine chacun des items
+            for (i = 0; i &lt; array_height_2d(inventory_weapon); i += 1){
+            draw_text(inventory_x+margin,inventory_y+margin+40,inventory_weapon[i,0])
+            }
+        }
+        if(inventory_type=1){
+            for (i = 0; i &lt; array_height_2d(inventory_armor); i += 1){
+            draw_text(inventory_x+margin,inventory_y+margin+40,inventory_armor[i,0])
+            }
+        }
+        if(inventory_type=3){
+            for (i = 0; i &lt; array_height_2d(inventory_keyobj); i += 1){
+            draw_text(inventory_x+margin,inventory_y+margin+40,inventory_keyobj[i,0])
+            }
+        }
+        if(inventory_type=4){
+            for (i = 0; i &lt; array_height_2d(inventory_item); i += 1){
+            draw_text(inventory_x+margin,inventory_y+margin+40,inventory_item[i,0])
+            }
         }
     }
 }
 create_butt=false;
 draw_text(view_xview+10,view_yview+10,current_page)
+draw_text(view_xview+10,view_yview+10+20,inventory_type)
 </string>
           </argument>
         </arguments>

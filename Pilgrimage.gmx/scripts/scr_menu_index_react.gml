@@ -23,3 +23,18 @@ if(menu="pause"){
         default: break;
     }
 }
+if(menu="type"){
+    obj_menu.inventory_type=index
+/*  switch (index)
+    {
+        case 0:{
+        obj_menu.inventory_type=0
+        break;
+    }
+        case 1:obj_menu.inventory_type=0;break;
+        case 2:obj_menu.inventory_type=0;break;
+        case 3:obj_menu.inventory_type=0;break;
+        case 4:obj_menu.inventory_type=0;break;
+        default: break; //inventory
+    }  */
+}
