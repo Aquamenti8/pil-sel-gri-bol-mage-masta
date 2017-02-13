@@ -451,17 +451,20 @@ if (!obj_input.pause){
             <kind>1</kind>
             <string>/// degats de chute
 if (!obj_input.pause){
+    //Sauvegarde la hauteur a laquelle on quitte le sol
     if (y_depart =-1 &amp;&amp; !place_meeting(x,y+1,obj_plateforme)){
         y_depart=y
     }
     
+    //Sauvegarde la hauteur sur laquelle on atterit, fait la difference
     if (y_depart!=-1 &amp;&amp; place_meeting(x,y+1,obj_plateforme)){
         y_diff = y-y_depart
         y_depart=-1
     }
     
+    //Retire des points de vie celon la distance parcourue
     if(y_diff &gt; 100) {
-        HP-=1
+        HP-=1+((y_diff-100) div 50)
         y_diff=0
     }
     else    y_diff=0
