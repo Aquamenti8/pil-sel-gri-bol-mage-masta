@@ -60,6 +60,11 @@ height=16
         if (click)
         {
             scr_menu_index_react(menu,index);
+                with (obj_menu_button)
+                {
+                instance_destroy();
+                }
+            obj_menu.create_butt=true
     
         }
         draw_set_alpha(1)
