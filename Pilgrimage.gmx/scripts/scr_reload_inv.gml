@@ -13,7 +13,7 @@ for(i=0; i<array_height_2d(inventory_item); i+=1){
     inventory_item[i,0]=0 
 }
 for(i=0; i<array_length_1d(equipment); i+=1){
-    inventory_equipement[i]=0 
+    equipment[i]=0 
 }
     n=0
     m=0

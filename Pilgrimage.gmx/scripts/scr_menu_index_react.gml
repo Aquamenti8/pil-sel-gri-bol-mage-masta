@@ -56,3 +56,14 @@ if(menu="item"){
     }
     if (obj_menu.inventory_type=4) {} //consommer un objet
 }
+
+if(menu="equip"){
+    name = obj_menu.equipment[index]
+    for (i=0; i<array_height_2d(obj_menu.inv_all); i+=1){
+        if (obj_menu.inv_all[i,0]=name){
+            if (obj_menu.inv_all[i,5]) obj_menu.inv_all[i,5]=false;
+            else obj_menu.inv_all[i,5]=true;         // toggle equiped
+            scr_reload_inv()
+        } 
+    }
+}
