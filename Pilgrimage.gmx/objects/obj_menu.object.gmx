@@ -31,6 +31,7 @@ current_page=-1
 inventory_type=0
 maxItem=100
 mpos=0;
+menu_on=false
 </string>
           </argument>
         </arguments>
@@ -243,15 +244,17 @@ scr_reload_inv()
             <kind>1</kind>
             <string>///input
 
-if (keyboard_check_pressed(ord("I"))){
+if (keyboard_check_pressed(ord("I")) || gamepad_button_check_pressed(0,gp_start)){
     if(current_page=-1){
     obj_input.pause=true;
     current_page="Inventory";
     create_butt=true
+    menu_on=true
     }
     else if(current_page!=-1){
     obj_input.pause=false;
-    current_page=-1;
+    current_page=-1
+    menu_on=false;
     }
 }
 </string>
@@ -519,7 +522,7 @@ for (i=0; i&lt;array_height_2d(inv_all);i+=1){
 
 //draw le reste du menu en fonction de current page
 
-if(current_page!=-1){
+if(current_page!=-1 &amp;&amp; menu_on){
             //ALL
     draw_set_colour(c_gray)
     draw_rectangle(view_xview,view_yview,view_xview+view_wview,view_yview+view_hview,false)
@@ -573,7 +576,7 @@ if(current_page!=-1){
           <argument>
             <kind>1</kind>
             <string>///INVENTORY
-if(current_page!=-1){
+if(current_page!=-1&amp;&amp; menu_on){
                 //INVENTORY
     if(current_page="Inventory"){
         //Boites pour les types d'objet
@@ -597,7 +600,7 @@ if(current_page!=-1){
         inventory_width=100
         inventory_height=20
         //Dessine une fleche ou le gamepad est
-        if (mpos!= -1 &amp;&amp; obj_input.gamepad)draw_sprite(sp_fleche,0,inventory_x,inventory_y+margin+mpos *40);
+        if (mpos!= -1 &amp;&amp; obj_input.gamepad)draw_sprite(sp_fleche,0,inventory_x-50,inventory_y+margin*2+mpos *40);
         if(inventory_type=0){
         //dessine chacun des items
             for (i = 0; i &lt; array_height_2d(inventory_weapon); i += 1){
@@ -669,7 +672,7 @@ if(current_page!=-1){
             <kind>1</kind>
             <string>///EQUIPMENT
 
-if(current_page!=-1){
+if(current_page!=-1&amp;&amp; menu_on){
     if(current_page="Equipment"){
         
         //draw l'array equipment
@@ -677,7 +680,7 @@ if(current_page!=-1){
         equip_y=view_yview+view_hview/6+20*i
         equip_width=100
         equip_height=20
-        if ( obj_input.gamepad)draw_sprite(sp_fleche,0,equip_x,equip_y+margin+mpos *40);
+        if ( obj_input.gamepad)draw_sprite(sp_fleche,0,equip_x-50,equip_y+margin*2+mpos *40);
         for (i = 0; i &lt; array_length_1d(equipment); i += 1){
             if equipment[i]!=0{     // Ecris le nom des objets equipés
                 if equipment[i]=true draw_set_colour(c_red);
@@ -723,10 +726,11 @@ if(current_page!=-1){
           <argument>
             <kind>1</kind>
             <string>///Fin de code
-
+if( menu_on){
 create_butt=false;
 draw_text(view_xview+10,view_yview+10,current_page)
 draw_text(view_xview+10,view_yview+10+20,inventory_type)
+}
 </string>
           </argument>
         </arguments>
