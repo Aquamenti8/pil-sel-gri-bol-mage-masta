@@ -28,7 +28,79 @@
             <string>///Initialise variables
 
 current_page=-1
-inventory_type="inventory_weapon"
+inventory_type=0
+maxItem=100
+mpos=0;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Array, tous les objets qui existent
+
+item_all[0,0]="Wood Bow";
+item_all[0,1]="WEAPONS"
+item_all[0,2]="weapon1";
+item_all[0,3]=1;
+item_all[0,4]=sp_arc;
+item_all[0,5]=false;
+
+item_all[1,0]="Pilgrim robe";
+item_all[1,1]="ARMORS &amp; CLOTHS"
+item_all[1,2]="top";
+item_all[1,3]=1;
+item_all[1,4]=sp_arc;
+item_all[1,5]=false;
+
+item_all[2,0]="Blade";
+item_all[2,1]="WEAPONS"
+item_all[2,2]="weapon2";
+item_all[2,3]=1;
+item_all[2,4]=sp_arc;
+item_all[2,5]=false;
+
+item_all[3,0]="Travel boots";
+item_all[3,1]="ARMORS &amp; CLOTHS"
+item_all[3,2]="boots";
+item_all[3,3]=1;
+item_all[3,4]=sp_arc;
+item_all[3,5]=false;
+
+item_all[4,0]="Travel gloves";
+item_all[4,1]="ARMORS &amp; CLOTHS"
+item_all[4,2]="gloves";
+item_all[4,3]=1;
+item_all[4,4]=sp_arc;
+item_all[4,5]=false;
+
+item_all[5,0]="Soft panty";
+item_all[5,1]="ARMORS &amp; CLOTHS"
+item_all[5,2]="pants";
+item_all[5,3]=1;
+item_all[5,4]=sp_arc;
+item_all[5,5]=false;
+
+item_all[6,0]="Tek Bow";
+item_all[6,1]="WEAPONS"
+item_all[6,2]="weapon1";
+item_all[6,3]=1;
+item_all[6,4]=sp_arc;
+item_all[6,5]=false;
 </string>
           </argument>
         </arguments>
@@ -71,26 +143,18 @@ status[1,1]=obj_player.stamina
 status[1,2]=obj_player.stamina_max
 
 //  0 name 1class 2type 3number 4sprite 5equipped
+for (i=0; i&lt;maxItem ; i+=1){
+    for(j=0; j&lt;6;j+=1){
+        inv_all[i,j]=0
+    }
+}
 inv_all[0,0]="Wood Bow";
 inv_all[0,1]="WEAPONS"
-inv_all[0,2]="bow";
+inv_all[0,2]="weapon1";
 inv_all[0,3]=1;
 inv_all[0,4]=sp_arc;
 inv_all[0,5]=false;
 
-inv_all[1,0]="Pilgrim robe";
-inv_all[1,1]="ARMORS &amp; CLOTHS"
-inv_all[1,2]="up";
-inv_all[1,3]=1;
-inv_all[1,4]=sp_arc;
-inv_all[1,5]=false;
-
-inv_all[2,0]="Blade";
-inv_all[2,1]="WEAPONS"
-inv_all[2,2]="sword";
-inv_all[2,3]=1;
-inv_all[2,4]=sp_arc;
-inv_all[2,5]=false;
 
         //INVENTORY
 //inventory [i,0] type d'objets
@@ -120,9 +184,19 @@ inventory_item[0,2]="food";
 //
 inventory_acc[0]=""
         //EQUIPEMENT
-//equipment 0:tete 1:leftH 2:rightH 3:haut 4:bas 5:bottes 6:gant 7:acc1 8acc2
-equipment[0]="None";
+//equipment 0:tete 1:leftH 2:rightH 3:haut 4:bas 5:bottes 6:gant 7:acc1
+equipment[0]=0 //helmet
+equipment[1]=0 //weapon1
+equipment[2]=0 //weapon2
+equipment[3]=0 //top
+equipment[4]=0 //pants
+equipment[5]=0 //boots
+equipment[6]=0 //gloves
+equipment[7]=0 //acc
 
+
+scr_pickitem(2);
+scr_pickitem(5);
 </string>
           </argument>
         </arguments>
@@ -207,6 +281,144 @@ status[0,2]=obj_player.HP_max
     status[1,0]="Stamina"
 status[1,1]=obj_player.stamina
 status[1,2]=obj_player.stamina_max
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///gamepad
+if(obj_input.gamepad){
+        //TYPE
+    R=gamepad_button_check_pressed(0,gp_padr)
+    L=gamepad_button_check_pressed(0,gp_padl)
+        //ITEM(?) / EQUIPMENT
+    U=gamepad_button_check_pressed(0,gp_padu)
+    D=gamepad_button_check_pressed(0,gp_padd)
+        //Tab
+    R1=gamepad_button_check_pressed(0,gp_shoulderr)
+    L1=gamepad_button_check_pressed(0,gp_shoulderl)
+        //ENTER
+    X=gamepad_button_check_pressed(0,gp_face1)
+    
+    
+    
+        //TYPE
+    if (current_page="Inventory" &amp;&amp; (R||L)){
+        if(R){ //+1 au inventory_type
+            if(inventory_type&lt;4){
+                inventory_type+=1
+            }
+            else inventory_type=0
+        }
+        if(L){ //-1 au inventory_type
+            if(inventory_type&gt;0){
+                inventory_type-=1
+            }
+            else inventory_type=4
+        }
+        mpos=0
+        scr_reload_inv()
+    }
+            //TAB
+    if (R1 || L1){
+        nb_pg=0
+        //get current page number
+        for(i=0;i&lt;array_length_1d(tab);i+=1){
+            if (tab[i]=current_page) nb_pg=i
+        }
+        if (R1){
+            //remplace current page par son +1 si on est pa qu bout
+            if(nb_pg+1 &lt; array_length_1d(tab)) {
+            current_page=tab[nb_pg+1]
+            }
+            //sinon revien au debut
+            else current_page=tab[0]
+        }
+        else if (L1){
+            //remplace current page par son +1 si on est pa qu bout
+            if(nb_pg-1 &gt;= 0) {
+            current_page=tab[nb_pg-1]
+            }
+            //sinon revien au debut
+            else current_page=tab[array_length_1d(tab)-1]
+        }
+        scr_reload_inv()
+        mpos=0
+    }
+    
+    
+        //ITEM
+    if (current_page="Inventory" &amp;&amp; (U||D)){
+        var move = 0;
+        move -= U
+        move += D
+        
+        if (move!=0)
+        {
+            mpos += move;
+            if(inventory_type=0){
+                if (mpos&lt;0) mpos = array_height_2d(inventory_weapon) - 1;
+                if (mpos&gt;array_height_2d(inventory_weapon) - 1)mpos = 0;
+                if (inventory_weapon[0,0]=0) mpos=-1
+            }
+            if(inventory_type=1){
+                if (mpos&lt;0) mpos = array_height_2d(inventory_armor) - 1;
+                if (mpos&gt;array_height_2d(inventory_armor) - 1)mpos = 0;
+                if (inventory_armor[0,0]=0) mpos=-1
+            }
+            if(inventory_type=3){
+                if (mpos&lt;0) mpos = array_height_2d(inventory_keyobj) - 1;
+                if (mpos&gt;array_height_2d(inventory_keyobj) - 1)mpos = 0;
+                if (inventory_keyobj[0,0]=0) mpos=-1
+            }
+            if(inventory_type=4){
+                if (mpos&lt;0) mpos = array_height_2d(inventory_item) - 1;
+                if (mpos&gt;array_height_2d(inventory_item) - 1)mpos = 0;
+                if (inventory_item[0,0]=0) mpos=-1
+            }
+        }
+        scr_reload_inv()
+    }
+    if (X == 1 &amp;&amp; current_page="Inventory" &amp;&amp; mpos!= -1){
+         scr_menu_index_react("item",mpos);
+         scr_reload_inv()
+    }
+
+        //EQUIPMENT
+    if (current_page="Equipment" &amp;&amp; (U||D)){
+        var move = 0;
+        move -= U
+        move += D
+        
+        if (move!=0)
+        {
+            mpos += move;
+                if (mpos&lt;0) mpos = array_length_1d(equipment) - 1;
+                if (mpos&gt;array_length_1d(equipment) - 1)mpos = 0;
+
+        }
+        scr_reload_inv()
+    }
+    if (X == 1 &amp;&amp; current_page="Equipment"){
+         scr_menu_index_react("equip",mpos);
+         scr_reload_inv()
+    }
+}
 </string>
           </argument>
         </arguments>
@@ -330,7 +542,8 @@ if(current_page!=-1){
         tab_width=100
         tab_height=25
         margin=10
-        draw_set_colour(c_orange);              //boites et texte
+        if (current_page=tab[i])draw_set_colour(c_red); 
+        else draw_set_colour(c_orange);              //boites et texte
         draw_rectangle(tab_x,tab_y,tab_x+tab_width,tab_y+tab_height,false)
         draw_set_colour(c_black);
         draw_text(tab_x+margin,tab_y+margin,string(tab[i]))
@@ -370,7 +583,8 @@ if(current_page!=-1){
             inventory_width=100
             inventory_height=100
             margin=10
-            draw_set_colour(c_orange);
+            if(inventory_type=i)draw_set_colour(c_red);
+            else draw_set_colour(c_orange);
             draw_rectangle(inventory_x,inventory_y,inventory_x+inventory_width,inventory_y+inventory_height,false);
             draw_set_colour(c_black);
             draw_text(inventory_x+margin,inventory_y+margin+40,inventory[i])
@@ -382,14 +596,20 @@ if(current_page!=-1){
         inventory_y=view_yview+view_hview/4+20*i
         inventory_width=100
         inventory_height=20
+        //Dessine une fleche ou le gamepad est
+        if (mpos!= -1 &amp;&amp; obj_input.gamepad)draw_sprite(sp_fleche,0,inventory_x,inventory_y+margin+mpos *40);
         if(inventory_type=0){
         //dessine chacun des items
             for (i = 0; i &lt; array_height_2d(inventory_weapon); i += 1){
                 if inventory_weapon[i,0]!=0{
+                    //Ecrit le nom de l'objet
                     if inventory_weapon[i,5]=true draw_set_colour(c_red);
                     else draw_set_colour(c_black);
                     draw_text(inventory_x+margin,inventory_y+margin+40*i,inventory_weapon[i,0])
+                    //Cree un bouton pour l'objet
                     if(create_butt=true)scr_create_menu_button(inventory_x,inventory_y+40*i,inventory_width,inventory_height,i,"item");
+                    //Ecrit le nombre d'objet posseder, [i,3]
+                    draw_text(inventory_x+margin+200,inventory_y+margin+40*i,"x"+string(inventory_weapon[i,3]))
                 }
             }
         }
@@ -400,6 +620,8 @@ if(current_page!=-1){
                     else draw_set_colour(c_black);
                     draw_text(inventory_x+margin,inventory_y+margin+40*i,inventory_armor[i,0])
                     if(create_butt=true)scr_create_menu_button(inventory_x,inventory_y+40*i,inventory_width,inventory_height,i,"item");
+                                        //Ecrit le nombre d'objet posseder, [i,3]
+                    draw_text(inventory_x+margin+200,inventory_y+margin+40*i,"x"+string(inventory_armor[i,3]))
                 }
             }
         }
@@ -408,6 +630,8 @@ if(current_page!=-1){
                 if inventory_keyobj[i,0]!=0{
                     draw_text(inventory_x+margin,inventory_y+margin+40*i,inventory_keyobj[i,0])
                     if(create_butt=true)scr_create_menu_button(inventory_x,inventory_y+40*i,inventory_width,inventory_height,i,"item");
+                                        //Ecrit le nombre d'objet posseder, [i,3]
+                    draw_text(inventory_x+margin+200,inventory_y+margin+40*i,"x"+string(inventory_keyobj[i,3]))
                 }
             }
         }
@@ -416,6 +640,8 @@ if(current_page!=-1){
                 if inventory_item[i,0]!=0{
                     draw_text(inventory_x+margin,inventory_y+margin+40*i,inventory_item[i,0])
                     if(create_butt=true)scr_create_menu_button(inventory_x,inventory_y+40*i,inventory_width,inventory_height,i,"item");
+                                        //Ecrit le nombre d'objet posseder, [i,3]
+                    draw_text(inventory_x+margin+200,inventory_y+margin+40*i,"x"+string(inventory_item[i,3]))
                 }
             }
         }
@@ -445,24 +671,34 @@ if(current_page!=-1){
 
 if(current_page!=-1){
     if(current_page="Equipment"){
-        //Crée des boites pour faire des slot d'equipment
-        for (i = 0; i &lt; 5; i += 1){
-            button[i] = scr_create_menu_button(400,200+50*i,50,50,i,"Equipment")
-        }
         
         //draw l'array equipment
-        equip_x=view_xview+view_wview/6
-        equip_y=view_yview+view_hview/4+20*i
+        equip_x=view_xview+view_wview/6+20
+        equip_y=view_yview+view_hview/6+20*i
         equip_width=100
         equip_height=20
+        if ( obj_input.gamepad)draw_sprite(sp_fleche,0,equip_x,equip_y+margin+mpos *40);
         for (i = 0; i &lt; array_length_1d(equipment); i += 1){
-                if equipment[i]!=0{
-                    if equipment[i]=true draw_set_colour(c_red);
-                    else draw_set_colour(c_black);
-                    draw_text(equip_x+margin,equip_y+margin+40*i,equipment[i])
-                    if(create_butt=true)scr_create_menu_button(equip_x,equip_y+40*i,equip_width,equip_height,i,"equip");
-                }
+            if equipment[i]!=0{     // Ecris le nom des objets equipés
+                if equipment[i]=true draw_set_colour(c_red);
+                else draw_set_colour(c_black);
+                draw_text(equip_x+margin,equip_y+margin+40*i,equipment[i])
+                if(create_butt=true)scr_create_menu_button(equip_x,equip_y+40*i,equip_width,equip_height,i,"equip");
             }
+            //Ecris le nom du slot
+            text=""
+            switch (i){
+            case 0: text="Helmet :";break;
+            case 1: text="Weapon :";break;
+            case 2: text="2nd weapon :";break;
+            case 3: text="Top :";break;
+            case 4: text="Pants :";break;
+            case 5: text="Boots :";break;
+            case 6: text="Gloves :";break;
+            case 7: text="Accessory :";break;
+            }
+            draw_text(equip_x-120,equip_y+margin+40*i,text)
+        }
     }
 
 }

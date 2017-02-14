@@ -21,6 +21,9 @@
     <script>scripts\scr_pathfinder.gml</script>
     <script>scripts\scr_create_menu_button.gml</script>
     <script>scripts\scr_reload_inv.gml</script>
+    <script>scripts\scr_apply_equip.gml</script>
+    <script>scripts\scr_pickitem.gml</script>
+    <script>scripts\scr_itemdrop.gml</script>
   </scripts>
   <objects name="objects">
     <object>objects\obj_player</object>
