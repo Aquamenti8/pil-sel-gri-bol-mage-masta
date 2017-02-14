@@ -464,7 +464,7 @@ if (!obj_input.pause){
     
     //Retire des points de vie celon la distance parcourue
     if(y_diff &gt; 100) {
-        HP-=1+((y_diff-100) div 50)
+        HP-=1+((y_diff-100) div 100)
         y_diff=0
     }
     else    y_diff=0
