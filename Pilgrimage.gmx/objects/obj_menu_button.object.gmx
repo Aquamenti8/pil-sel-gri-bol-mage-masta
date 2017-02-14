@@ -3,35 +3,11 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>-102</depth>
+  <depth>0</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
-    <event eventtype="0" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>width=200
-height=16
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
     <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
@@ -51,20 +27,16 @@ height=16
             <kind>1</kind>
             <string>if (!obj_input.gamepad){
     var click = mouse_check_button_pressed(mb_left);
-   
-    if (x&lt;mouse_x and mouse_x&lt; x+width) &amp;&amp; (y&lt;mouse_y and mouse_y&lt;y+height)
+    
+    
+    if (abs(mouse_x - x) &lt; 200) &amp;&amp; (abs(mouse_y - y) &lt; 16)
     {   
         obj_input.mpos = index;
-        draw_set_alpha(0.3)
-        draw_rectangle(x,y,x+width,y+height,false);
+        draw_set_alpha(0.2)
+        draw_rectangle(x-16,y-16,x+200,y+16,0);
         if (click)
         {
-            scr_menu_index_react(menu,index);
-                with (obj_menu_button)
-                {
-                instance_destroy();
-                }
-            obj_menu.create_butt=true
+            scr_menu_pause();
     
         }
         draw_set_alpha(1)
@@ -72,7 +44,6 @@ height=16
     
     if (!obj_input.pause) instance_destroy()
 }
-
 </string>
           </argument>
         </arguments>

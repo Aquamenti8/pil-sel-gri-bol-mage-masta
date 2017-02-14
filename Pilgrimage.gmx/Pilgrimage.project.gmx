@@ -17,10 +17,7 @@
   <paths name="paths"/>
   <scripts name="scripts">
     <script>scripts\scr_menu_pause.gml</script>
-    <script>scripts\scr_menu_index_react.gml</script>
     <script>scripts\scr_pathfinder.gml</script>
-    <script>scripts\scr_create_menu_button.gml</script>
-    <script>scripts\scr_reload_inv.gml</script>
   </scripts>
   <objects name="objects">
     <object>objects\obj_player</object>
@@ -32,7 +29,6 @@
     <object>objects\obj_timer</object>
     <objects name="Menu">
       <object>objects\obj_menu_button</object>
-      <object>objects\obj_menu</object>
     </objects>
     <object>objects\obj_enemy</object>
   </objects>

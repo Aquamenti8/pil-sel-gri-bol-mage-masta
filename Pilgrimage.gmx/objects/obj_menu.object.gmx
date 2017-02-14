@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>-101</depth>
+  <depth>0</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -25,126 +25,18 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Initialise variables
+            <string>///Set array
 
-current_page=-1
-inventory_type="inventory_weapon"
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Menu arrays
+pause_menu[0] = Reprendre
+pause_menu[1] = Quitter
 
-//les caractéristiques des objets sont listés ailleur
+space = 64;
+mpos=0;
 
-        //ALL
-//tab
-tab[0]="Status"
-tab[1]="Equipment"
-tab[2]="Inventory"
-tab[3]="Diary"
-tab[4]="Map"
-tab[5]="Options"
-
-//Status 0=name, 1=value, 2=maxvalue(if needed)
-    status[0,0]="HP"
-status[0,1]=obj_player.HP
-status[0,2]=obj_player.HP_max
-    status[1,0]="Stamina"
-status[1,1]=obj_player.stamina
-status[1,2]=obj_player.stamina_max
-
-//  0 name 1class 2type 3number 4sprite 5equipped
-inv_all[0,0]="Wood Bow";
-inv_all[0,1]="WEAPONS"
-inv_all[0,2]="bow";
-inv_all[0,3]=1;
-inv_all[0,4]=sp_arc;
-inv_all[0,5]=false;
-
-inv_all[1,0]="Pilgrim robe";
-inv_all[1,1]="ARMORS &amp; CLOTHS"
-inv_all[1,2]="up";
-inv_all[1,3]=1;
-inv_all[1,4]=sp_arc;
-inv_all[1,5]=false;
-
-inv_all[2,0]="Blade";
-inv_all[2,1]="WEAPONS"
-inv_all[2,2]="sword";
-inv_all[2,3]=1;
-inv_all[2,4]=sp_arc;
-inv_all[2,5]=false;
-
-        //INVENTORY
-//inventory [i,0] type d'objets
-inventory[0]="WEAPONS";
-inventory[1]="ARMORS &amp; CLOTHS";
-inventory[2]="ACCESSORIES";
-inventory[3]="KEY OBJECTS";
-inventory[4]="ITEM";
-
-//inventory_weapon 0=name, 1=number, 2=type, 3=sprite
-inventory_weapon[0,0]="Wood Boz";
-
-//inventory_armor 0=name, 1=number, 2=type, 3=sprite
-inventory_armor[0,0]="Pilgrim robez";
-inventory_armor[0,1]=1;
-inventory_armor[0,2]="up";
-inventory_armor[0,3]= -1;
-
-//inventory_keyobj 0=name, 1=sprite
-inventory_keyobj[0,0]="Soul Drinking Lamp";
-
-//inventory_item 0=name, 1=number, 2=type, 3=sprite
-inventory_item[0,0]="Bread";
-inventory_item[0,1]=3;
-inventory_item[0,2]="food";
-
-//
-inventory_acc[0]=""
-        //EQUIPEMENT
-//equipment 0:tete 1:leftH 2:rightH 3:haut 4:bas 5:bottes 6:gant 7:acc1 8acc2
-equipment[0]="None";
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Reload inventory
-scr_reload_inv()
+button_0 = instance_create(x+space,y,obj_menu_button);
+button_0.index= 0;
+button_1 = instance_create(x+space,y+space,obj_menu_button);
+button_1.index = 1;
 </string>
           </argument>
         </arguments>
@@ -167,120 +59,20 @@ scr_reload_inv()
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///input
+            <string>var move = 0;
+move -= max(keyboard_check_pressed(vk_up),keyboard_check_pressed(ord("W")),0);
+move += max(keyboard_check_pressed(vk_down),keyboard_check_pressed(ord("S")),0);
 
-if (keyboard_check_pressed(ord("I"))){
-    if(current_page=-1){
-    obj_input.pause=true;
-    current_page="Inventory";
-    create_butt=true
-    }
-    else if(current_page!=-1){
-    obj_input.pause=false;
-    current_page=-1;
-    }
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Statut update
-    status[0,0]="HP"
-status[0,1]=obj_player.HP
-status[0,2]=obj_player.HP_max
-    status[1,0]="Stamina"
-status[1,1]=obj_player.stamina
-status[1,2]=obj_player.stamina_max
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="6" enumb="53">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Reload inventory
-
-for(i=0; i&lt;array_height_2d(inventory_weapon); i+=1){
-    inventory_weapon[i,0]=0 
-}
-for(i=0; i&lt;array_height_2d(inventory_armor); i+=1){
-    inventory_armor[i,0]=0 
-}
-for(i=0; i&lt;array_height_2d(inventory_keyobj); i+=1){
-    inventory_keyobj[i,0]=0
-}
-for(i=0; i&lt;array_height_2d(inventory_item); i+=1){
-    inventory_item[i,0]=0 
-}
-    n=0
-    m=0
-    o=0
-    p=0
-    q=0
-for (i=0; i&lt;array_height_2d(inv_all);i+=1){
-    if(inv_all[i,1]="WEAPONS"){ //si la class de l'objet est weapons
-        for(j=0; j&lt;array_length_2d(inv_all,i);j+=1){ //on parcours l'index de l'objet et on copi tout dans inv_weapon
-        inventory_weapon[n,j]= inv_all[i,j]         
-        }  
-        n+=1    
-    }
-    if(inv_all[i,1]="ARMORS &amp; CLOTHS"){ //si la class de l'objet est weapons
-        for(j=0; j&lt;array_length_2d(inv_all,i);j+=1){ //on parcours l'index de l'objet et on copi tout dans inv_weapon
-        inventory_armor[m,j]= inv_all[i,j]          
-        }
-        m+=1
-    }
-    if(inv_all[i,1]="KEY OBJECTS"){ //si la class de l'objet est weapons
-        for(j=0; j&lt;array_length_2d(inv_all,i);j+=1){ //on parcours l'index de l'objet et on copi tout dans inv_weapon
-        inventory_keyobj[o,j]= inv_all[i,j]          
-        }
-        o+=1
-    }
-    if(inv_all[i,1]="ITEM"){ //si la class de l'objet est weapons
-        for(j=0; j&lt;array_length_2d(inv_all,i);j+=1){ //on parcours l'index de l'objet et on copi tout dans inv_weapon
-        inventory_item[p,j]= inv_all[i,j]          
-        }
-        p+=1
-    }
-    if(inv_all[i,1]="ACCESSORIES"){ //si la class de l'objet est weapons
-        for(j=0; j&lt;array_length_2d(inv_all,i);j+=1){ //on parcours l'index de l'objet et on copi tout dans inv_weapon
-        inventory_acc[q,j]= inv_all[i,j]          
-        }
-        q+=1
-    }
+if (move!=0)
+{
+    global.mpos += move;
+    if (global.mpos&lt;0) global.mpos = array_length_1d(menu) - 1;
+    if (global.mpos&gt;array_length_1d(menu) - 1) global.mpos = 0;
 }
 
+var push;
+push = max(keyboard_check_released(vk_enter),mouse_check_button_released(mb_left),0);
+if (push == 1) scr_menu_pause();
 </string>
           </argument>
         </arguments>
@@ -303,194 +95,18 @@ for (i=0; i&lt;array_height_2d(inv_all);i+=1){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///MENU BASE
+            <string>draw_set_halign(fa_left);
+draw_set_valign(fa_middle);
+//draw_set_font(fnt);
+draw_set_color(c_white);
 
-//draw le reste du menu en fonction de current page
-
-if(current_page!=-1){
-            //ALL
-    draw_set_colour(c_gray)
-    draw_rectangle(view_xview,view_yview,view_xview+view_wview,view_yview+view_hview,false)
-    //Statut
-    statu_x=view_xview+view_wview*3.6/5
-    statu_y= view_yview+view_hview/5
-    margin=10
-    draw_set_colour(c_orange);
-    draw_rectangle(statu_x,statu_y,statu_x+200,statu_y+300,false);
-    draw_set_colour(c_black);
-    draw_text(statu_x+60,statu_y+10, "STATUS")
-    draw_text(statu_x+margin,statu_y+30, string(status[0,0]))
-    draw_text(statu_x+margin+100,statu_y+30, string(status[0,1]) + "/" + string(status[0,2]))
-    draw_text(statu_x+margin,statu_y+50, string(status[1,0]))
-    draw_text(statu_x+margin+100,statu_y+50, string(status[1,1]) + "/" + string(status[1,2]))
-    //Tab (onglets sous le menu)
-    for (i = 0; i &lt; array_length_1d(tab); i += 1){
-        tab_x=view_xview+view_wview*i/6+50         //variables
-        tab_y=view_yview+view_hview*5/6
-        tab_width=100
-        tab_height=25
-        margin=10
-        draw_set_colour(c_orange);              //boites et texte
-        draw_rectangle(tab_x,tab_y,tab_x+tab_width,tab_y+tab_height,false)
-        draw_set_colour(c_black);
-        draw_text(tab_x+margin,tab_y+margin,string(tab[i]))
-        if(create_butt=true)scr_create_menu_button(tab_x,tab_y,tab_width,tab_height,i,"tab")
-        
-    }
+var m;
+for (m = 0; m &lt; array_length_1d(pause_menu); m += 1)
+{
+    draw_text(x+space,y+(m*space), string(pause_menu[m]))
 }
 
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///INVENTORY
-if(current_page!=-1){
-                //INVENTORY
-    if(current_page="Inventory"){
-        //Boites pour les types d'objet
-        for (i = 0; i &lt;array_length_1d(inventory); i += 1){
-            inventory_x=view_xview+20+120*i
-            inventory_y=view_yview+view_hview*1/5
-            inventory_width=100
-            inventory_height=100
-            margin=10
-            draw_set_colour(c_orange);
-            draw_rectangle(inventory_x,inventory_y,inventory_x+inventory_width,inventory_y+inventory_height,false);
-            draw_set_colour(c_black);
-            draw_text(inventory_x+margin,inventory_y+margin+40,inventory[i])
-            if(create_butt=true)scr_create_menu_button(inventory_x,inventory_y,inventory_width,inventory_height,i,"type");
-        }
-        
-        //Liste des objets possédés en fonction du type d'objet
-        inventory_x=view_xview+view_wview/6
-        inventory_y=view_yview+view_hview/4+20*i
-        inventory_width=100
-        inventory_height=20
-        if(inventory_type=0){
-        //dessine chacun des items
-            for (i = 0; i &lt; array_height_2d(inventory_weapon); i += 1){
-                if inventory_weapon[i,0]!=0{
-                    if inventory_weapon[i,5]=true draw_set_colour(c_red);
-                    else draw_set_colour(c_black);
-                    draw_text(inventory_x+margin,inventory_y+margin+40*i,inventory_weapon[i,0])
-                    if(create_butt=true)scr_create_menu_button(inventory_x,inventory_y+40*i,inventory_width,inventory_height,i,"item");
-                }
-            }
-        }
-        if(inventory_type=1){
-            for (i = 0; i &lt; array_height_2d(inventory_armor); i += 1){
-                if inventory_armor[i,0]!=0{
-                    if inventory_armor[i,5]=true draw_set_colour(c_red);
-                    else draw_set_colour(c_black);
-                    draw_text(inventory_x+margin,inventory_y+margin+40*i,inventory_armor[i,0])
-                    if(create_butt=true)scr_create_menu_button(inventory_x,inventory_y+40*i,inventory_width,inventory_height,i,"item");
-                }
-            }
-        }
-        if(inventory_type=3){
-            for (i = 0; i &lt; array_height_2d(inventory_keyobj); i += 1){
-                if inventory_keyobj[i,0]!=0{
-                    draw_text(inventory_x+margin,inventory_y+margin+40*i,inventory_keyobj[i,0])
-                    if(create_butt=true)scr_create_menu_button(inventory_x,inventory_y+40*i,inventory_width,inventory_height,i,"item");
-                }
-            }
-        }
-        if(inventory_type=4){
-            for (i = 0; i &lt; array_height_2d(inventory_item); i += 1){
-                if inventory_item[i,0]!=0{
-                    draw_text(inventory_x+margin,inventory_y+margin+40*i,inventory_item[i,0])
-                    if(create_butt=true)scr_create_menu_button(inventory_x,inventory_y+40*i,inventory_width,inventory_height,i,"item");
-                }
-            }
-        }
-    }
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///EQUIPMENT
-
-if(current_page!=-1){
-    if(current_page="Equipment"){
-        //Crée des boites pour faire des slot d'equipment
-        for (i = 0; i &lt; 5; i += 1){
-            button[i] = scr_create_menu_button(400,200+50*i,50,50,i,"Equipment")
-        }
-        
-        //draw l'array equipment
-        equip_x=view_xview+view_wview/6
-        equip_y=view_yview+view_hview/4+20*i
-        equip_width=100
-        equip_height=20
-        for (i = 0; i &lt; array_length_1d(equipment); i += 1){
-                if equipment[i]!=0{
-                    if equipment[i]=true draw_set_colour(c_red);
-                    else draw_set_colour(c_black);
-                    draw_text(equip_x+margin,equip_y+margin+40*i,equipment[i])
-                    if(create_butt=true)scr_create_menu_button(equip_x,equip_y+40*i,equip_width,equip_height,i,"equip");
-                }
-            }
-    }
-
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Fin de code
-
-create_butt=false;
-draw_text(view_xview+10,view_yview+10,current_page)
-draw_text(view_xview+10,view_yview+10+20,inventory_type)
+draw_sprite(sp_fleche,0,x+16,y+mpos * space);
 </string>
           </argument>
         </arguments>

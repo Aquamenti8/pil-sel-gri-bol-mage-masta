@@ -26,18 +26,19 @@
           <argument>
             <kind>1</kind>
             <string>///Initialisation vartiables
-
-mode=0 // Mode de l'IA, initial: ronde
-
- // HP de l'enemy
+mode=0
 HP = 3
 HP_max=3
+mirored = false // Si l'objet est retourné ou pas
+
+// définition des champs de vues
+// idle = x-400 - sprite_width/2, y-200 - sprite_height/2, x+100 - sprite_width/2, y+100 - sprite_height/2
+// aware = x-600 - sprite_width/2, y-350 - sprite_height/2, x+180 - sprite_width/2, y+180 - sprite_height/2
 
 
-hsp = 0; //deplacement horizontal par frame (actuel)
-vsp = 0; //deplacement vertical par frame (actuel)
-
-movespeed=2; //vitesse de deplacement de l'enemy
+hsp = 0;    // Vitesse horizontale
+vsp = 0;    // Vitesse verticale
+movespeed=2;
 </string>
           </argument>
         </arguments>
@@ -62,7 +63,7 @@ movespeed=2; //vitesse de deplacement de l'enemy
             <kind>1</kind>
             <string>///Death
 
-if(HP&lt;=0)  instance_destroy() // si mort =&gt; mort
+if(HP&lt;=0)  instance_destroy()
 </string>
           </argument>
         </arguments>
@@ -85,18 +86,22 @@ if(HP&lt;=0)  instance_destroy() // si mort =&gt; mort
             <kind>1</kind>
             <string>/// IA condition &amp; priority
 
-//A faire:
-//mode1: fait une ronde de 200px, pathfinder(x) puis pathfinder(x+200), condition: default
-//mode2: va vers le joueur, pathfinder(joueur), condition: joueur a moins de 300px de enemy
-//mode3: attaque le joueur, attack ,  condition: joueur a moins de 10px de enemy
+//mode0: fait une ronde de 200px, pathfinder(x) puis pathfinder(x+200), condition: default
+//mode1: va vers le joueur, pathfinder(joueur), condition: joueur a moins de 500px de enemy
+//mode2: attaque le joueur, ,  condition: joueur a moins de 10px de enemy
 
 // teste les condition et choisit le mode en fonction d'une liste de priorités
 
-//Verifie la proximité du joueur
-if( collision_rectangle( x-300-sprite_width/2 , y+sprite_height/2 , x+300+sprite_width/2, y-sprite_height/2, obj_player, true, true )){
-    mode=1 // =&gt; l'enemy poursuit le joueur
-}
-else mode=0 // =&gt; rien de special
+if true {
+    if (mirored = true){
+        if ( collision_ellipse( x-400 - sprite_width/2 , y-200 - sprite_height/2 , x+100 - sprite_width/2, y+100 - sprite_height/2, obj_player, true, true )){
+                        mode = 1
+}}
+    if (mirored = false){
+        if ( collision_ellipse( x+400 - sprite_width/2, y-200 - sprite_height/2, x-100 - sprite_width/2 , y+100 - sprite_height/2, obj_player, true, true )){
+                        mode = 1
+}}}
+else mode=0
 </string>
           </argument>
         </arguments>
@@ -125,8 +130,19 @@ else mode=0 // =&gt; rien de special
 
 //Reagit au mode qui a eté choisit
 
-if(mode=1)  {  scr_pathfinder(obj_player.x , id);} //&gt;enemy poursuit joueur
-if(mode=0) {hsp=0}  //enemy s'arrete
+if(mode=1)  
+{  
+    if (x - obj_player.x &gt;= 0) { mirored = true; } // Regarde si le joueur est à gauche ou à droite de l'entité
+    else { mirored = false; } // Si il est à droite, le sprite de l'entité se retournera et vis versa 
+    
+    if (mirored == true) { image_xscale = -1; }
+    if (mirored == false) { image_xscale = 1; }
+scr_pathfinder(obj_player.x , id);}
+
+if(mode=0) {hsp=0}
+
+
+
 
 </string>
           </argument>
@@ -161,7 +177,6 @@ if (!obj_input.pause){
         hsp = 0;
     }
     x += hsp;  
-    
     //Vertical Collision
     if (place_meeting(x,y+vsp,obj_plateforme))
     {
@@ -202,6 +217,32 @@ if(HP!=HP_max){
     draw_rectangle(x-16,y-35,x-16+40,y-35-10,true)
     draw_rectangle(x-16,y-35,x-16+HP/HP_max*40,y-35-10,false)
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>// Draw sightfield
+
+if (mirored = true){
+    draw_ellipse( x-400 - sprite_width/2, y-200 - sprite_height/2, x+100 - sprite_width/2, y+100 - sprite_height/2, 3 )}
+if (mirored = false){
+    draw_ellipse( x+400 - sprite_width/2, y-200 - sprite_height/2, x-100 - sprite_width/2, y+100 - sprite_height/2, 3 )}
 </string>
           </argument>
         </arguments>
