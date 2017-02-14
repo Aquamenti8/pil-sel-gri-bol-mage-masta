@@ -88,8 +88,12 @@ y_diff=0
             <kind>1</kind>
             <string>/// Charactéristiques personnage
 
-HP = 10
-HP_max =15
+HP_base=10
+HP_base_max=15
+HP_equip=0
+
+HP = HP_base + HP_equip
+HP_max =HP_base_max +HP_equip
 
 stamina =100
 stamina_max=150
@@ -101,6 +105,8 @@ dash_cost=50
 sprint_cost=1
 arrow_cost=20
 stamina_recover=1
+
+
 </string>
           </argument>
         </arguments>
@@ -464,7 +470,7 @@ if (!obj_input.pause){
     
     //Retire des points de vie celon la distance parcourue
     if(y_diff &gt; 100) {
-        HP-=1+((y_diff-100) div 100)
+        HP_base-=1+((y_diff-100) div 100)
         y_diff=0
     }
     else    y_diff=0
@@ -473,6 +479,32 @@ if (!obj_input.pause){
         room_restart()
     }
 }
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Update charactéristiques
+
+HP = HP_base + HP_equip
+HP_max =HP_base_max +HP_equip
 </string>
           </argument>
         </arguments>

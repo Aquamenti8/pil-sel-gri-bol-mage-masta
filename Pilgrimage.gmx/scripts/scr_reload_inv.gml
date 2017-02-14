@@ -54,14 +54,30 @@ for (i=0; i<array_height_2d(inv_all);i+=1){
 }
 
 
-//parcours inv_all a la recherche d'objets equipés
-e =0
-for (i=0; i<array_height_2d(inv_all);i+=1){
+// MET A JOUR LES EQUIPEMENTS
+for (i=0; i<array_height_2d(inv_all);i+=1){ 
     if(inv_all[i,5]){
+        switch (inv_all[i,2]){
+        case "helmet" : e=0;break;
+        case "weapon1" :e=1;break;
+        case "weapon2" :e=2;break;
+        case "top" :e=3;break;
+        case "pants":e=4;break;
+        case "boots" :e=5;break;
+        case "gloves" :e=6;break;
+        case "acc" :e=7;break;
+        }
         equipment[e]=inv_all[i,0] //store le nom de l'objet equipé
-        e+=1
     }
 }
+
+//MET A JOUR LES CARACTERISTIQUES DU PERSO
+obj_player.HP_equip=0
+for (i=0; i<array_length_1d(equipment);i+=1){ 
+    scr_apply_equip(equipment[i])
+}
+
+
 
 with (obj_menu_button)
                 {
