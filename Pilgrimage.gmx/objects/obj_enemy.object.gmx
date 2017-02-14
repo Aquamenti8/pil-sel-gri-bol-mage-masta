@@ -86,22 +86,29 @@ if(HP&lt;=0)  instance_destroy()
             <kind>1</kind>
             <string>/// IA condition &amp; priority
 
-//mode0: fait une ronde de 200px, pathfinder(x) puis pathfinder(x+200), condition: default
-//mode1: va vers le joueur, pathfinder(joueur), condition: joueur a moins de 500px de enemy
-//mode2: attaque le joueur, ,  condition: joueur a moins de 10px de enemy
+//mode0: IDLE, si joueur non détecté
+//mode1: Aware, pathfinder(joueur), si joueur détecté
+//mode2: Aggressive, si joueur à portée
 
 // teste les condition et choisit le mode en fonction d'une liste de priorités
 
-if true {
-    if (mirored = true){
-        if ( collision_ellipse( x-400 - sprite_width/2 , y-200 - sprite_height/2 , x+100 - sprite_width/2, y+100 - sprite_height/2, obj_player, true, true )){
-                        mode = 1
-}}
-    if (mirored = false){
-        if ( collision_ellipse( x+400 - sprite_width/2, y-200 - sprite_height/2, x-100 - sprite_width/2 , y+100 - sprite_height/2, obj_player, true, true )){
-                        mode = 1
-}}}
-else mode=0
+
+// Retourne l'entité suivant si elle est à gauche ou à droite du joueur
+if (mirored = true){
+idlx1 = x-400 - sprite_width/2 
+idlx2 = x+100 - sprite_width/2}
+else {
+idlx1 = x+400 - sprite_width/2 
+idlx2 = x-100 - sprite_width/2}
+
+// Choix du mode 0,1,2
+if (collision_ellipse( idlx1, y-200 - sprite_height/2, idlx2, y+100 - sprite_height/2, obj_player, true, true ) and obj_player.x -x &gt;= -10 and obj_player.x -x &lt;= 10)
+    {mode = 2}
+if (collision_ellipse( idlx1, y-200 - sprite_height/2, idlx2, y+100 - sprite_height/2, obj_player, true, true ) and not obj_player.x -x &gt;= -10 and not obj_player.x -x &lt;= 10)
+    {mode = 1}
+if (not collision_ellipse( idlx1, y-200 - sprite_height/2, idlx2, y+100 - sprite_height/2, obj_player, true, true ))
+    {mode = 0}
+
 </string>
           </argument>
         </arguments>
@@ -124,9 +131,9 @@ else mode=0
             <kind>1</kind>
             <string>/// IA modes
 
-//mode1: fait une ronde de 200px, condition: default
-//mode2: va vers le joueur, condition: joueur a moins de 300px de enemy
-//mode3: attaque le joueur, condition: joueur a moins de 10px de enemy
+//mode0: fait une ronde de 200px, condition: default
+//mode1: va vers le joueur, condition: joueur a moins de 300px de enemy
+//mode2: attaque le joueur, condition: joueur a moins de 10px de enemy
 
 //Reagit au mode qui a eté choisit
 
@@ -137,13 +144,13 @@ if(mode=1)
     
     if (mirored == true) { image_xscale = -1; }
     if (mirored == false) { image_xscale = 1; }
-scr_pathfinder(obj_player.x , id);}
 
-if(mode=0) {hsp=0}
+scr_pathfinder(obj_player.x , id);
+}
 
+if(mode=0){hsp=0}
 
-
-
+if(mode=2){hsp=1}
 </string>
           </argument>
         </arguments>
@@ -217,6 +224,7 @@ if(HP!=HP_max){
     draw_rectangle(x-16,y-35,x-16+40,y-35-10,true)
     draw_rectangle(x-16,y-35,x-16+HP/HP_max*40,y-35-10,false)
 }
+
 </string>
           </argument>
         </arguments>
@@ -243,6 +251,9 @@ if (mirored = true){
     draw_ellipse( x-400 - sprite_width/2, y-200 - sprite_height/2, x+100 - sprite_width/2, y+100 - sprite_height/2, 3 )}
 if (mirored = false){
     draw_ellipse( x+400 - sprite_width/2, y-200 - sprite_height/2, x-100 - sprite_width/2, y+100 - sprite_height/2, 3 )}
+    
+// Draw IA mode    
+draw_text(x-5, y-50, mode)
 </string>
           </argument>
         </arguments>
