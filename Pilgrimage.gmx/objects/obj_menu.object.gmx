@@ -458,10 +458,14 @@ if(current_page!=-1){
         //dessine chacun des items
             for (i = 0; i &lt; array_height_2d(inventory_weapon); i += 1){
                 if inventory_weapon[i,0]!=0{
+                    //Ecrit le nom de l'objet
                     if inventory_weapon[i,5]=true draw_set_colour(c_red);
                     else draw_set_colour(c_black);
                     draw_text(inventory_x+margin,inventory_y+margin+40*i,inventory_weapon[i,0])
+                    //Cree un bouton pour l'objet
                     if(create_butt=true)scr_create_menu_button(inventory_x,inventory_y+40*i,inventory_width,inventory_height,i,"item");
+                    //Ecrit le nombre d'objet posseder, [i,3]
+                    draw_text(inventory_x+margin+200,inventory_y+margin+40*i,"x"+string(inventory_weapon[i,3]))
                 }
             }
         }
@@ -472,6 +476,8 @@ if(current_page!=-1){
                     else draw_set_colour(c_black);
                     draw_text(inventory_x+margin,inventory_y+margin+40*i,inventory_armor[i,0])
                     if(create_butt=true)scr_create_menu_button(inventory_x,inventory_y+40*i,inventory_width,inventory_height,i,"item");
+                                        //Ecrit le nombre d'objet posseder, [i,3]
+                    draw_text(inventory_x+margin+200,inventory_y+margin+40*i,"x"+string(inventory_armor[i,3]))
                 }
             }
         }
@@ -480,6 +486,8 @@ if(current_page!=-1){
                 if inventory_keyobj[i,0]!=0{
                     draw_text(inventory_x+margin,inventory_y+margin+40*i,inventory_keyobj[i,0])
                     if(create_butt=true)scr_create_menu_button(inventory_x,inventory_y+40*i,inventory_width,inventory_height,i,"item");
+                                        //Ecrit le nombre d'objet posseder, [i,3]
+                    draw_text(inventory_x+margin+200,inventory_y+margin+40*i,"x"+string(inventory_keyobj[i,3]))
                 }
             }
         }
@@ -488,6 +496,8 @@ if(current_page!=-1){
                 if inventory_item[i,0]!=0{
                     draw_text(inventory_x+margin,inventory_y+margin+40*i,inventory_item[i,0])
                     if(create_butt=true)scr_create_menu_button(inventory_x,inventory_y+40*i,inventory_width,inventory_height,i,"item");
+                                        //Ecrit le nombre d'objet posseder, [i,3]
+                    draw_text(inventory_x+margin+200,inventory_y+margin+40*i,"x"+string(inventory_item[i,3]))
                 }
             }
         }
