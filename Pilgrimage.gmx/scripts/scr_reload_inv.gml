@@ -27,7 +27,7 @@ for (i=0; i<array_height_2d(inv_all);i+=1){
         }  
         n+=1    
     }
-    if(inv_all[i,1]="ARMORS & CLOTHS"){ //si la class de l'objet est weapons
+    if(inv_all[i,1]="ARMORS & CLOTHS"){ //si la class de l'objet est armor
         for(j=0; j<array_length_2d(inv_all,i);j+=1){ //on parcours l'index de l'objet et on copi tout dans inv_weapon
         inventory_armor[m,j]= inv_all[i,j]          
         }

@@ -29,6 +29,77 @@
 
 current_page=-1
 inventory_type="inventory_weapon"
+maxItem=100
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Array, tous les objets qui existent
+
+item_all[0,0]="Wood Bow";
+item_all[0,1]="WEAPONS"
+item_all[0,2]="weapon1";
+item_all[0,3]=1;
+item_all[0,4]=sp_arc;
+item_all[0,5]=false;
+
+item_all[1,0]="Pilgrim robe";
+item_all[1,1]="ARMORS &amp; CLOTHS"
+item_all[1,2]="top";
+item_all[1,3]=1;
+item_all[1,4]=sp_arc;
+item_all[1,5]=false;
+
+item_all[2,0]="Blade";
+item_all[2,1]="WEAPONS"
+item_all[2,2]="weapon2";
+item_all[2,3]=1;
+item_all[2,4]=sp_arc;
+item_all[2,5]=false;
+
+item_all[3,0]="Travel boots";
+item_all[3,1]="ARMORS &amp; CLOTHS"
+item_all[3,2]="boots";
+item_all[3,3]=1;
+item_all[3,4]=sp_arc;
+item_all[3,5]=false;
+
+item_all[4,0]="Travel gloves";
+item_all[4,1]="ARMORS &amp; CLOTHS"
+item_all[4,2]="gloves";
+item_all[4,3]=1;
+item_all[4,4]=sp_arc;
+item_all[4,5]=false;
+
+item_all[5,0]="Soft panty";
+item_all[5,1]="ARMORS &amp; CLOTHS"
+item_all[5,2]="pants";
+item_all[5,3]=1;
+item_all[5,4]=sp_arc;
+item_all[5,5]=false;
+
+item_all[6,0]="Tek Bow";
+item_all[6,1]="WEAPONS"
+item_all[6,2]="weapon1";
+item_all[6,3]=1;
+item_all[6,4]=sp_arc;
+item_all[6,5]=false;
 </string>
           </argument>
         </arguments>
@@ -71,6 +142,11 @@ status[1,1]=obj_player.stamina
 status[1,2]=obj_player.stamina_max
 
 //  0 name 1class 2type 3number 4sprite 5equipped
+for (i=0; i&lt;maxItem ; i+=1){
+    for(j=0; j&lt;6;j+=1){
+        inv_all[i,j]=0
+    }
+}
 inv_all[0,0]="Wood Bow";
 inv_all[0,1]="WEAPONS"
 inv_all[0,2]="weapon1";
@@ -78,47 +154,6 @@ inv_all[0,3]=1;
 inv_all[0,4]=sp_arc;
 inv_all[0,5]=false;
 
-inv_all[1,0]="Pilgrim robe";
-inv_all[1,1]="ARMORS &amp; CLOTHS"
-inv_all[1,2]="top";
-inv_all[1,3]=1;
-inv_all[1,4]=sp_arc;
-inv_all[1,5]=false;
-
-inv_all[2,0]="Blade";
-inv_all[2,1]="WEAPONS"
-inv_all[2,2]="weapon2";
-inv_all[2,3]=1;
-inv_all[2,4]=sp_arc;
-inv_all[2,5]=false;
-
-inv_all[3,0]="Travel boots";
-inv_all[3,1]="ARMORS &amp; CLOTHS"
-inv_all[3,2]="boots";
-inv_all[3,3]=1;
-inv_all[3,4]=sp_arc;
-inv_all[3,5]=false;
-
-inv_all[4,0]="Travel gloves";
-inv_all[4,1]="ARMORS &amp; CLOTHS"
-inv_all[4,2]="gloves";
-inv_all[4,3]=1;
-inv_all[4,4]=sp_arc;
-inv_all[4,5]=false;
-
-inv_all[5,0]="Soft panty";
-inv_all[5,1]="ARMORS &amp; CLOTHS"
-inv_all[5,2]="pants";
-inv_all[5,3]=1;
-inv_all[5,4]=sp_arc;
-inv_all[5,5]=false;
-
-inv_all[6,0]="Tek Bow";
-inv_all[6,1]="WEAPONS"
-inv_all[6,2]="weapon1";
-inv_all[6,3]=1;
-inv_all[6,4]=sp_arc;
-inv_all[6,5]=false;
 
         //INVENTORY
 //inventory [i,0] type d'objets
@@ -158,6 +193,8 @@ equipment[5]=0 //boots
 equipment[6]=0 //gloves
 equipment[7]=0 //acc
 
+
+scr_pickitem(2);
 </string>
           </argument>
         </arguments>
@@ -480,24 +517,33 @@ if(current_page!=-1){
 
 if(current_page!=-1){
     if(current_page="Equipment"){
-        //Crée des boites pour faire des slot d'equipment
-        for (i = 0; i &lt; 5; i += 1){
-            button[i] = scr_create_menu_button(400,200+50*i,50,50,i,"Equipment")
-        }
         
         //draw l'array equipment
-        equip_x=view_xview+view_wview/6
-        equip_y=view_yview+view_hview/4+20*i
+        equip_x=view_xview+view_wview/6+20
+        equip_y=view_yview+view_hview/6+20*i
         equip_width=100
         equip_height=20
         for (i = 0; i &lt; array_length_1d(equipment); i += 1){
-                if equipment[i]!=0{
-                    if equipment[i]=true draw_set_colour(c_red);
-                    else draw_set_colour(c_black);
-                    draw_text(equip_x+margin,equip_y+margin+40*i,equipment[i])
-                    if(create_butt=true)scr_create_menu_button(equip_x,equip_y+40*i,equip_width,equip_height,i,"equip");
-                }
+            if equipment[i]!=0{     // Ecris le nom des objets equipés
+                if equipment[i]=true draw_set_colour(c_red);
+                else draw_set_colour(c_black);
+                draw_text(equip_x+margin,equip_y+margin+40*i,equipment[i])
+                if(create_butt=true)scr_create_menu_button(equip_x,equip_y+40*i,equip_width,equip_height,i,"equip");
             }
+            //Ecris le nom du slot
+            text=""
+            switch (i){
+            case 0: text="Helmet :";break;
+            case 1: text="Weapon :";break;
+            case 2: text="2nd weapon :";break;
+            case 3: text="Top :";break;
+            case 4: text="Pants :";break;
+            case 5: text="Boots :";break;
+            case 6: text="Gloves :";break;
+            case 7: text="Accessory :";break;
+            }
+            draw_text(equip_x-120,equip_y+margin+40*i,text)
+        }
     }
 
 }
