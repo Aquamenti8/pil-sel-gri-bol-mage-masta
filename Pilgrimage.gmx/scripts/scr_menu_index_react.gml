@@ -59,7 +59,7 @@ if(menu="item"){
 
 if(menu="equip"){
     name = obj_menu.equipment[index]
-    
+    if name!=0{
     for (i=0; i<array_height_2d(obj_menu.inv_all); i+=1){ //parcours inv_all a la recherche d'un objet du meme nom que celui clické
     
         if (obj_menu.inv_all[i,0]=name){    //lorsqu'il le trouve
@@ -68,5 +68,6 @@ if(menu="equip"){
             else obj_menu.inv_all[i,5]=true;         
             scr_reload_inv()
          }        
+    }
     }
 }
