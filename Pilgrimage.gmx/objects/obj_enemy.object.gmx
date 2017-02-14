@@ -102,12 +102,12 @@ idlx1 = x+400 - sprite_width/2
 idlx2 = x-100 - sprite_width/2}
 
 // Choix du mode 0,1,2
-if (collision_ellipse( idlx1, y-200 - sprite_height/2, idlx2, y+100 - sprite_height/2, obj_player, true, true ) and obj_player.x -x &gt;= -10 and obj_player.x -x &lt;= 10)
-    {mode = 2}
-if (collision_ellipse( idlx1, y-200 - sprite_height/2, idlx2, y+100 - sprite_height/2, obj_player, true, true ) and not obj_player.x -x &gt;= -10 and not obj_player.x -x &lt;= 10)
+mode =0
+if (collision_ellipse( idlx1, y-200 - sprite_height/2, idlx2, y+100 - sprite_height/2, obj_player, true, true ))
     {mode = 1}
-if (not collision_ellipse( idlx1, y-200 - sprite_height/2, idlx2, y+100 - sprite_height/2, obj_player, true, true ))
-    {mode = 0}
+if (mode=1 &amp;&amp; (place_meeting(x+10,y,obj_player) || place_meeting(x-10,y,obj_player)))
+    {mode = 2}
+
 
 </string>
           </argument>
