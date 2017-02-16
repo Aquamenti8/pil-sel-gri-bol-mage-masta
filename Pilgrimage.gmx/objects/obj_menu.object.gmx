@@ -34,7 +34,19 @@ mpos=0;
 mpos_saved=0;
 inventory_type_saved=0
 HP_equip_saved=obj_player.HP_equip
-equip_preview_color=c_black
+ATQ_equip_saved=obj_player.ATQ_equip
+DEF_equip_saved=obj_player.DEF_equip
+ATQ_M_equip_saved=obj_player.ATQ_M_equip
+DEF_M_equip_saved=obj_player.DEF_M_equip
+SPD_equip_saved=obj_player.SPD_equip
+
+equip_c_HP=c_black
+equip_c_ATQ=c_black
+equip_c_DEF=c_black
+equip_c_ATQ_M=c_black
+equip_c_DEF_M=c_black
+equip_c_SPD=c_black
+
 menu_on=false
 
 </string>
@@ -457,6 +469,18 @@ if(obj_input.gamepad){
 
 //si mpos a changé depuis la deniere frame
 if(mpos_saved != mpos || inventory_type_saved != inventory_type){  
+    HP_equip_saved=obj_player.HP_equip
+    ATQ_equip_saved=obj_player.ATQ_equip
+    DEF_equip_saved=obj_player.DEF_equip
+    ATQ_M_equip_saved=obj_player.ATQ_M_equip
+    DEF_M_equip_saved=obj_player.DEF_M_equip
+    SPD_equip_saved=obj_player.SPD_equip
+    obj_player.HP_equip=0
+    obj_player.ATQ_equip=0
+    obj_player.DEF_equip=0
+    obj_player.ATQ_M_equip=0
+    obj_player.DEF_M_equip=0
+    obj_player.SPD_equip=0
     //copie equipment[]
     for (i=0; i&lt;array_length_1d(equipment); i+=1){
         equipment_preview[i]=equipment[i]
@@ -487,8 +511,6 @@ if(mpos_saved != mpos || inventory_type_saved != inventory_type){
     }
     
     //applique les "faux" equipment sur les caractéristiques du perso
-    HP_equip_saved=obj_player.HP_equip
-    obj_player.HP_equip=0
     for (i=0; i&lt;array_length_1d(equipment_preview);i+=1){ 
         scr_apply_equip(equipment_preview[i])
     }
@@ -496,15 +518,29 @@ if(mpos_saved != mpos || inventory_type_saved != inventory_type){
     mpos_saved = mpos
     inventory_type_saved = inventory_type
     
-    if(obj_player.HP_equip &lt; HP_equip_saved){
-        equip_preview_color=c_red;
-    }
-    else if(obj_player.HP_equip &gt; HP_equip_saved){
-        equip_preview_color=c_green;
-    }
-    else if (obj_player.HP_equip = HP_equip_saved){
-        equip_preview_color=c_black;
-    }
+    if(obj_player.HP_equip &lt; HP_equip_saved){equip_c_HP=c_red;}
+    else if(obj_player.HP_equip &gt; HP_equip_saved){equip_c_HP=c_green;}
+    else if (obj_player.HP_equip = HP_equip_saved){equip_c_HP=c_black;}
+    
+    if(obj_player.ATQ_equip &lt; ATQ_equip_saved){equip_c_ATQ=c_red;}
+    else if(obj_player.ATQ_equip &gt; ATQ_equip_saved){equip_c_ATQ=c_green;}
+    else if (obj_player.ATQ_equip = ATQ_equip_saved){equip_c_ATQ=c_black;}
+    
+    if(obj_player.DEF_equip &lt; DEF_equip_saved){equip_c_DEF=c_red;}
+    else if(obj_player.DEF_equip &gt; DEF_equip_saved){equip_c_DEF=c_green;}
+    else if (obj_player.DEF_equip = DEF_equip_saved){equip_c_DEF=c_black;}
+    
+    if(obj_player.ATQ_M_equip &lt; ATQ_M_equip_saved){equip_c_ATQ_M=c_red;}
+    else if(obj_player.ATQ_M_equip &gt; ATQ_M_equip_saved){equip_c_ATQ_M=c_green;}
+    else if (obj_player.ATQ_M_equip = ATQ_M_equip_saved){equip_c_ATQ_M=c_black;}
+    
+    if(obj_player.DEF_M_equip &lt; DEF_M_equip_saved){equip_c_DEF_M=c_red;}
+    else if(obj_player.DEF_M_equip &gt; DEF_M_equip_saved){equip_c_DEF_M=c_green;}
+    else if (obj_player.DEF_M_equip = DEF_M_equip_saved){equip_c_DEF_M=c_black;}
+    
+    if(obj_player.SPD_equip &lt; SPD_equip_saved){equip_c_SPD=c_red;}
+    else if(obj_player.SPD_equip &gt; SPD_equip_saved){equip_c_SPD=c_green;}
+    else if (obj_player.SPD_equip = SPD_equip_saved){equip_c_SPD=c_black;}
 }
 
 
@@ -612,6 +648,7 @@ if(current_page!=-1 &amp;&amp; menu_on){
             //ALL
     draw_set_colour(c_gray)
     draw_rectangle(view_xview,view_yview,view_xview+view_wview,view_yview+view_hview,false)
+    
     //Statut
     statu_x=view_xview+view_wview*3.6/5
     statu_y= view_yview+view_hview/5
@@ -620,15 +657,45 @@ if(current_page!=-1 &amp;&amp; menu_on){
     draw_rectangle(statu_x,statu_y,statu_x+300,statu_y+300,false);
     draw_set_colour(c_black);
     draw_text(statu_x+60,statu_y+10, "STATUS")
+    //HP
     draw_text(statu_x+margin,statu_y+30, string(status[0,0]))
     draw_text(statu_x+margin+100,statu_y+30, string(status[0,1]) + " + ")
-    draw_set_colour(equip_preview_color)
+    draw_set_colour(equip_c_HP)
     draw_text(statu_x+margin+140,statu_y+30, string(status[0,2]))
     draw_set_colour(c_black)
     draw_text(statu_x+margin+150,statu_y+30, " : " + string(status[0,3]))
-    
+    //stamina
     draw_text(statu_x+margin,statu_y+50, string(status[1,0]))
     draw_text(statu_x+margin+100,statu_y+50, string(status[1,1]) + "/" + string(status[1,2]))
+    //atq
+    draw_text(statu_x+margin,statu_y+70, "ATQ ")
+    draw_text(statu_x+margin+100,statu_y+70, string(obj_player.ATQ_base) + " + ")
+    draw_set_colour(equip_c_ATQ)
+    draw_text(statu_x+margin+140,statu_y+70, string(obj_player.ATQ_equip))
+    draw_set_colour(c_black)
+    draw_text(statu_x+margin+150,statu_y+70, " : " + string(obj_player.ATQ))
+    //def
+    draw_text(statu_x+margin,statu_y+90, "DEF ")
+    draw_text(statu_x+margin+100,statu_y+90, string(obj_player.DEF_base) + " + ")
+    draw_set_colour(equip_c_DEF)
+    draw_text(statu_x+margin+140,statu_y+90, string(obj_player.DEF_equip))
+    draw_set_colour(c_black)
+    draw_text(statu_x+margin+150,statu_y+90, " : " + string(obj_player.DEF))
+    //ATQ_M
+    draw_text(statu_x+margin,statu_y+110, "ATQ_M ")
+    draw_text(statu_x+margin+100,statu_y+110, string(obj_player.ATQ_M_base) + " + ")
+    draw_set_colour(equip_c_ATQ_M)
+    draw_text(statu_x+margin+140,statu_y+110, string(obj_player.ATQ_M_equip))
+    draw_set_colour(c_black)
+    draw_text(statu_x+margin+150,statu_y+110, " : " + string(obj_player.ATQ_M))
+    //defM
+    draw_text(statu_x+margin,statu_y+130, "DEF_M ")
+    draw_text(statu_x+margin+100,statu_y+130, string(obj_player.DEF_M_base) + " + ")
+    draw_set_colour(equip_c_DEF_M)
+    draw_text(statu_x+margin+140,statu_y+130, string(obj_player.DEF_M_equip))
+    draw_set_colour(c_black)
+    draw_text(statu_x+margin+150,statu_y+130, " : " + string(obj_player.DEF_M))
+    
     //Tab (onglets sous le menu)
     for (i = 0; i &lt; array_length_1d(tab); i += 1){
         tab_x=view_xview+view_wview*i/6+50         //variables

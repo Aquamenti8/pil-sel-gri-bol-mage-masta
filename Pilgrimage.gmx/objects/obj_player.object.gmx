@@ -92,8 +92,28 @@ HP_base=10
 HP_base_max=15
 HP_equip=0
 
+ATQ_base=2
+ATQ_equip=0
+
+DEF_base=2
+DEF_equip=0
+
+ATQ_M_base=1
+ATQ_M_equip=0
+
+DEF_M_base=1
+DEF_M_equip=0
+
+SPD_base=3
+SPD_equip=0
+
 HP = HP_base + HP_equip
 HP_max =HP_base_max +HP_equip
+ATQ= ATQ_base + ATQ_equip
+DEF= DEF_base + DEF_equip
+ATQ_M= ATQ_M_base + ATQ_M_equip
+DEF_M= DEF_M_base + DEF_M_equip
+SPD=SPD_base + SPD_equip
 
 stamina =100
 stamina_max=150
@@ -505,6 +525,12 @@ if (!obj_input.pause){
 
 HP = HP_base + HP_equip
 HP_max =HP_base_max +HP_equip
+
+ATQ= ATQ_base + ATQ_equip
+DEF= DEF_base + DEF_equip
+ATQ_M= ATQ_M_base + ATQ_M_equip
+DEF_M= DEF_M_base + DEF_M_equip
+SPD=SPD_base + SPD_equip
 </string>
           </argument>
         </arguments>

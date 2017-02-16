@@ -129,7 +129,7 @@ else{
                         speed=0
                         // Si la fleche se plante sur un ennemi il aura mal
                         if(stop_arrow_obj[i]= obj_enemy &amp;&amp; damage_done=false &amp;&amp; shooted) {
-                            obj_id.HP -= 1
+                            obj_id.HP -= obj_player.ATQ
                             damage_done=true
                             stopped_by=obj_id
                         }                
@@ -142,7 +142,7 @@ else{
                         speed=0
                         // Si la fleche se plante sur un ennemi il aura mal
                         if(stop_arrow_obj[i]= obj_enemy &amp;&amp; damage_done=false &amp;&amp; shooted) {
-                            obj_id.HP -= 1
+                            obj_id.HP -= obj_player.ATQ
                             damage_done=true
                             stopped_by=obj_id
                         }   
@@ -155,7 +155,7 @@ else{
                     speed=0 
                                         // Si la fleche se plante sur un ennemi il aura mal
                         if(stop_arrow_obj[i]= obj_enemy &amp;&amp; damage_done=false &amp;&amp; shooted) {
-                            obj_id.HP -= 1
+                            obj_id.HP -= obj_player.ATQ
                             damage_done=true
                             stopped_by=obj_id
                         }   
@@ -167,7 +167,7 @@ else{
                     speed=0
                                         // Si la fleche se plante sur un ennemi il aura mal
                         if(stop_arrow_obj[i]= obj_enemy &amp;&amp; damage_done=false &amp;&amp; shooted) {
-                            obj_id.HP -= 1
+                            obj_id.HP -= obj_player.ATQ
                             damage_done=true
                             stopped_by=obj_id
                         }   
