@@ -27,6 +27,9 @@
             <kind>1</kind>
             <string>width=200
 height=16
+
+image_xscale=width/sprite_width
+image_yscale=height/sprite_height
 </string>
           </argument>
         </arguments>
@@ -55,8 +58,11 @@ height=16
     if (x&lt;mouse_x and mouse_x&lt; x+width) &amp;&amp; (y&lt;mouse_y and mouse_y&lt;y+height)
     {   
         obj_input.mpos = index;
+        if (menu = "item" )obj_menu.mpos= index;
+        if (menu = "type" )obj_menu.mpos= 0;
         draw_set_alpha(0.3)
-        draw_rectangle(x,y,x+width,y+height,false);
+        draw_rectangle(x,y,x+width,y+height,false)
+
         if (click)
         {
             scr_menu_index_react(menu,index);
