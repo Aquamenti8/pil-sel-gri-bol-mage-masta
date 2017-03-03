@@ -12,6 +12,7 @@
     <sprite>sprites\sp_arc</sprite>
     <sprite>sprites\sp_fleche</sprite>
     <sprite>sprites\sp_enemy</sprite>
+    <sprite>sprites\sp_bread</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -24,6 +25,7 @@
     <script>scripts\scr_apply_equip.gml</script>
     <script>scripts\scr_pickitem.gml</script>
     <script>scripts\scr_itemdrop.gml</script>
+    <script>scripts\scr_item_use.gml</script>
   </scripts>
   <objects name="objects">
     <object>objects\obj_player</object>

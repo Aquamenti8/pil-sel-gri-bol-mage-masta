@@ -175,10 +175,6 @@ if (!obj_input.pause){
         }
         else cooldown_arrow+=1;
     }
-    /*
-    if (no_more_arrow_spawn=true &amp;&amp; (released || released2)){
-        no_more_arrow_spawn=false
-    }*/
 }
 </string>
           </argument>

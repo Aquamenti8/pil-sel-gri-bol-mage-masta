@@ -64,7 +64,13 @@ menu_on=false
           <argument>
             <kind>1</kind>
             <string>/// Array, tous les objets qui existent
-
+for (i=0; i&lt;399 ; i+=1){
+    for(j=0 ; j&lt;5; j+=1){
+        item_all[i,j] = 0
+    }
+}
+        // WEAPONS 0-&gt;99
+    //weapon1 0-&gt;49
 item_all[0,0]="Wood Bow";
 item_all[0,1]="WEAPONS"
 item_all[0,2]="weapon1";
@@ -72,47 +78,71 @@ item_all[0,3]=1;
 item_all[0,4]=sp_arc;
 item_all[0,5]=false;
 
-item_all[1,0]="Pilgrim robe";
-item_all[1,1]="ARMORS &amp; CLOTHS"
-item_all[1,2]="top";
+item_all[1,0]="Tek Bow";
+item_all[1,1]="WEAPONS"
+item_all[1,2]="weapon1";
 item_all[1,3]=1;
 item_all[1,4]=sp_arc;
 item_all[1,5]=false;
 
-item_all[2,0]="Blade";
-item_all[2,1]="WEAPONS"
-item_all[2,2]="weapon2";
-item_all[2,3]=1;
-item_all[2,4]=sp_arc;
-item_all[2,5]=false;
+    //weapon2 50-&gt;99
+item_all[50,0]="Blade";
+item_all[50,1]="WEAPONS"
+item_all[50,2]="weapon2";
+item_all[50,3]=1;
+item_all[50,4]=sp_arc;
+item_all[50,5]=false;
 
-item_all[3,0]="Travel boots";
-item_all[3,1]="ARMORS &amp; CLOTHS"
-item_all[3,2]="boots";
-item_all[3,3]=1;
-item_all[3,4]=sp_arc;
-item_all[3,5]=false;
+        // ARMOR AND CLOTH 100-&gt;349
+    //helmet 100-&gt;149
+    
+    //top 150-&gt;199
+item_all[150,0]="Pilgrim robe";
+item_all[150,1]="ARMORS &amp; CLOTHS"
+item_all[150,2]="top";
+item_all[150,3]=1;
+item_all[150,4]=sp_arc;
+item_all[150,5]=false;
 
-item_all[4,0]="Travel gloves";
-item_all[4,1]="ARMORS &amp; CLOTHS"
-item_all[4,2]="gloves";
-item_all[4,3]=1;
-item_all[4,4]=sp_arc;
-item_all[4,5]=false;
+    //pants 200-&gt;249
+item_all[200,0]="Soft panty";
+item_all[200,1]="ARMORS &amp; CLOTHS"
+item_all[200,2]="pants";
+item_all[200,3]=1;
+item_all[200,4]=sp_arc;
+item_all[200,5]=false;
 
-item_all[5,0]="Soft panty";
-item_all[5,1]="ARMORS &amp; CLOTHS"
-item_all[5,2]="pants";
-item_all[5,3]=1;
-item_all[5,4]=sp_arc;
-item_all[5,5]=false;
+    //boots 250-&gt;299
+item_all[250,0]="Travel boots";
+item_all[250,1]="ARMORS &amp; CLOTHS"
+item_all[250,2]="boots";
+item_all[250,3]=1;
+item_all[250,4]=sp_arc;
+item_all[250,5]=false;
 
-item_all[6,0]="Tek Bow";
-item_all[6,1]="WEAPONS"
-item_all[6,2]="weapon1";
-item_all[6,3]=1;
-item_all[6,4]=sp_arc;
-item_all[6,5]=false;
+    //gloves 300-&gt;349
+item_all[300,0]="Travel gloves";
+item_all[300,1]="ARMORS &amp; CLOTHS"
+item_all[300,2]="gloves";
+item_all[300,3]=1;
+item_all[300,4]=sp_arc;
+item_all[300,5]=false;
+
+        //ITEM 350-&gt;399
+    //food ??
+item_all[350,0]="Bread";
+item_all[350,1]="ITEM";
+item_all[350,2]="food";
+item_all[350,3]=1;
+item_all[350,4]=sp_bread;
+item_all[350,5]=false;
+
+item_all[351,0]="Donut";
+item_all[351,1]="ITEM";
+item_all[351,2]="food";
+item_all[351,3]=1;
+item_all[351,4]=sp_bread;
+item_all[351,5]=false;
 </string>
           </argument>
         </arguments>
@@ -201,9 +231,20 @@ equipment[7]=0 //acc
 
 equipment_preview[0]=0
 
+// slots d'equipement d'objet
+eq_item[0]=0;
+eq_item[1]=0;
+eq_item[2]=0;
+eq_item[3]=0;
 
-scr_pickitem(2);
-scr_pickitem(5);
+
+scr_pickitem(0);
+scr_pickitem(1);
+scr_pickitem(50);
+scr_pickitem(150);
+scr_pickitem(200);
+scr_pickitem(250);
+scr_pickitem(300);
 </string>
           </argument>
         </arguments>
@@ -831,6 +872,8 @@ if(current_page!=-1&amp;&amp; menu_on){
         if(inventory_type=4){
             for (i = 0; i &lt; array_height_2d(inventory_item); i += 1){
                 if inventory_item[i,0]!=0{
+                    if inventory_item[i,5]=true draw_set_colour(c_red);
+                    else draw_set_colour(c_black);
                     draw_text(inventory_x+margin,inventory_y+margin+40*i,inventory_item[i,0])
                     if(create_butt=true)scr_create_menu_button(inventory_x,inventory_y+40*i,inventory_width,inventory_height,i,"item");
                                         //Ecrit le nombre d'objet posseder, [i,3]
@@ -889,6 +932,29 @@ if(current_page!=-1&amp;&amp; menu_on){
             case 5: text="Boots :";break;
             case 6: text="Gloves :";break;
             case 7: text="Accessory :";break;
+            }
+            draw_text(equip_x-120,equip_y+margin+40*i,text)
+        }
+        
+        // DRAW ITEM EQUIPMENT
+        equip_x=view_xview+view_wview/2+20
+        equip_y=view_yview+view_hview/6+20*i
+        equip_width=100
+        equip_height=20
+        for (i = 0; i &lt; array_length_1d(eq_item); i += 1){
+            if eq_item[i]!=0{     // Ecris le nom des objets equipés
+                if eq_item[i]=true draw_set_colour(c_red);
+                else draw_set_colour(c_black);
+                draw_text(equip_x+margin,equip_y+margin+40*i,eq_item[i])
+                if(create_butt=true)scr_create_menu_button(equip_x,equip_y+40*i,equip_width,equip_height,i,"equip_item");
+            }
+            //Ecris le nom du slot
+            text=""
+            switch (i){
+            case 0: text="Item 1 :";break;
+            case 1: text="Item 2 :";break;
+            case 2: text="Item 3 :";break;
+            case 3: text="Item 4 :";break;
             }
             draw_text(equip_x-120,equip_y+margin+40*i,text)
         }
