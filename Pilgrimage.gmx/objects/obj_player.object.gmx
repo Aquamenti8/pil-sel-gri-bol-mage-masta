@@ -496,9 +496,8 @@ if (!obj_input.pause){
 
 draw_self();
 
-/*
-draw_text(x,y,key_A);
-draw_text(x,y+20,A_off);
+
+draw_text(x,y-60,instance_number(obj_arc));
 
 </string>
           </argument>
