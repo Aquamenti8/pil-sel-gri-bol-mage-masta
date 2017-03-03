@@ -15,6 +15,9 @@ for(i=0; i<array_height_2d(inventory_item); i+=1){
 for(i=0; i<array_length_1d(equipment); i+=1){
     equipment[i]=0 
 }
+for(i=0; i<array_length_1d(eq_item); i+=1){
+    eq_item[i]=0 
+}
     n=0
     m=0
     o=0
@@ -57,6 +60,7 @@ for (i=0; i<array_height_2d(inv_all);i+=1){
 // MET A JOUR LES EQUIPEMENTS
 for (i=0; i<array_height_2d(inv_all);i+=1){ 
     if(inv_all[i,5]){
+        e=-1
         switch (inv_all[i,2]){
         case "helmet" : e=0;break;
         case "weapon1" :e=1;break;
@@ -66,8 +70,26 @@ for (i=0; i<array_height_2d(inv_all);i+=1){
         case "boots" :e=5;break;
         case "gloves" :e=6;break;
         case "acc" :e=7;break;
+        case "food":e=8;break;
         }
-        equipment[e]=inv_all[i,0] //store le nom de l'objet equipé
+        if (e<=7) { //si l'objet equipé n'est pas un item consommable
+        equipment[e]=inv_all[i,0]//store le nom de l'objet equipé dans equipment
+        } 
+        
+        else { //si l'objet equipé est un item consommable
+                        done=false
+            for (j=0; j< array_length_1d(eq_item);j+=1){ // empeche d'equiper plusieurs fois le meme consommable
+                if(eq_item[j] = inv_all[i,0]){
+                    done=true
+                }
+            } 
+            for (j=0; j< array_length_1d(eq_item);j+=1){        //parcours equip_item et cherche un slot libre
+                if (eq_item[j]=0 && done=false) {
+                    eq_item[j] = inv_all[i,0]
+                    done=true
+                }
+            }
+        }
     }
 }
 

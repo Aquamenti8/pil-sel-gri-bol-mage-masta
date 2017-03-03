@@ -150,6 +150,58 @@ if(gamepad &amp;&amp; pause_menu_on){ //gamepad entries
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// item equipment input
+
+if(gamepad){
+    pressed1 = gamepad_button_check_pressed(0,gp_padu)
+    pressed2 = gamepad_button_check_pressed(0,gp_padr)
+    pressed3 = gamepad_button_check_pressed(0,gp_padd)
+    pressed4 = gamepad_button_check_pressed(0,gp_padl)
+}
+else{
+    pressed1 = keyboard_check_pressed(ord('1'))
+    pressed2 = keyboard_check_pressed(ord('2'))
+    pressed3 = keyboard_check_pressed(ord('3'))
+    pressed4 = keyboard_check_pressed(ord('4'))
+}
+
+if (pressed1){
+    //check quel objet est dans eq_item[0], puis item_drop
+    scr_itemdrop(obj_menu.eq_item[0])
+    scr_item_use (obj_menu.eq_item[0])
+}
+if (pressed2){
+    //check quel objet est dans eq_item[1], puis item_drop
+    scr_itemdrop(obj_menu.eq_item[1])
+}
+if (pressed3){
+    //check quel objet est dans eq_item[2], puis item_drop
+    scr_itemdrop(obj_menu.eq_item[2])
+}
+if (pressed4){
+    //check quel objet est dans eq_item[3], puis item_drop
+    scr_itemdrop(obj_menu.eq_item[3])
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="8" enumb="0">
       <action>
@@ -213,7 +265,7 @@ else draw_text(x,y+20,"Play")
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>scr_pickitem(3);
+            <string>scr_pickitem(350);
 </string>
           </argument>
         </arguments>
