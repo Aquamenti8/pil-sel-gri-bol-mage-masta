@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>-101</depth>
+  <depth>0</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -25,8 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Initialise variables
-
+            <string>///Set array
 current_page=-1
 inventory_type=0
 maxItem=100
@@ -613,6 +612,9 @@ for (i=0; i&lt;array_height_2d(inv_all);i+=1){
     }
 }
 
+var push;
+push = max(keyboard_check_released(vk_enter),mouse_check_button_released(mb_left),0);
+if (push == 1) scr_menu_pause();
 </string>
           </argument>
         </arguments>

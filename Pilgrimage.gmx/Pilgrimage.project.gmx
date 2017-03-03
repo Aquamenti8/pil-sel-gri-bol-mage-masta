@@ -12,7 +12,7 @@
     <sprite>sprites\sp_arc</sprite>
     <sprite>sprites\sp_fleche</sprite>
     <sprite>sprites\sp_enemy</sprite>
-    <sprite>sprites\sp_bread</sprite>
+	<sprite>sprites\sp_bread</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
