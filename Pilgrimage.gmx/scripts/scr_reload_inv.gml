@@ -15,6 +15,9 @@ for(i=0; i<array_height_2d(inventory_item); i+=1){
 for(i=0; i<array_length_1d(equipment); i+=1){
     equipment[i]=0 
 }
+for(i=0; i<array_length_1d(eq_item); i+=1){
+    eq_item[i]=0 
+}
     n=0
     m=0
     o=0
@@ -27,7 +30,7 @@ for (i=0; i<array_height_2d(inv_all);i+=1){
         }  
         n+=1    
     }
-    if(inv_all[i,1]="ARMORS & CLOTHS"){ //si la class de l'objet est weapons
+    if(inv_all[i,1]="ARMORS & CLOTHS"){ //si la class de l'objet est armor
         for(j=0; j<array_length_2d(inv_all,i);j+=1){ //on parcours l'index de l'objet et on copi tout dans inv_weapon
         inventory_armor[m,j]= inv_all[i,j]          
         }
@@ -54,14 +57,49 @@ for (i=0; i<array_height_2d(inv_all);i+=1){
 }
 
 
-//parcours inv_all a la recherche d'objets equipés
-e =0
-for (i=0; i<array_height_2d(inv_all);i+=1){
+// MET A JOUR LES EQUIPEMENTS
+for (i=0; i<array_height_2d(inv_all);i+=1){ 
     if(inv_all[i,5]){
-        equipment[e]=inv_all[i,0] //store le nom de l'objet equipé
-        e+=1
+        e=-1
+        switch (inv_all[i,2]){
+        case "helmet" : e=0;break;
+        case "weapon1" :e=1;break;
+        case "weapon2" :e=2;break;
+        case "top" :e=3;break;
+        case "pants":e=4;break;
+        case "boots" :e=5;break;
+        case "gloves" :e=6;break;
+        case "acc" :e=7;break;
+        case "food":e=8;break;
+        }
+        if (e<=7) { //si l'objet equipé n'est pas un item consommable
+        equipment[e]=inv_all[i,0]//store le nom de l'objet equipé dans equipment
+        } 
+        
+        else { //si l'objet equipé est un item consommable
+                        done=false
+            for (j=0; j< array_length_1d(eq_item);j+=1){ // empeche d'equiper plusieurs fois le meme consommable
+                if(eq_item[j] = inv_all[i,0]){
+                    done=true
+                }
+            } 
+            for (j=0; j< array_length_1d(eq_item);j+=1){        //parcours equip_item et cherche un slot libre
+                if (eq_item[j]=0 && done=false) {
+                    eq_item[j] = inv_all[i,0]
+                    done=true
+                }
+            }
+        }
     }
 }
+
+//MET A JOUR LES CARACTERISTIQUES DU PERSO
+obj_player.HP_equip=0
+for (i=0; i<array_length_1d(equipment);i+=1){ 
+    scr_apply_equip(equipment[i])
+}
+
+
 
 with (obj_menu_button)
                 {

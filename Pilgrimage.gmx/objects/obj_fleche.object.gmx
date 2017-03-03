@@ -3,7 +3,7 @@
   <spriteName>sp_fleche</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>-2</depth>
+  <depth>0</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -53,6 +53,7 @@ stop_arrow_obj[1]=obj_enemy;
             <kind>1</kind>
             <string>///Initialisation variables
 
+save_speed=-1
 damage_done=false
 </string>
           </argument>
@@ -77,72 +78,114 @@ damage_done=false
           <argument>
             <kind>1</kind>
             <string>///Collision
-            hsp=hspeed
+    hsp=hspeed
     vsp=vspeed
 
-// Recuperer l'id de l'ennemi pour faire mal que a lui 
-    
-for (i = 0; i &lt; array_length_1d(stop_arrow_obj); i += 1){
-  if (place_meeting(x+hsp, y+vsp, stop_arrow_obj[i])){
-        obj_id= instance_place(x+hsp,y+vsp,stop_arrow_obj[i])
-        min_spd=min(abs(hsp),abs(vsp));
-        max_spd=max(abs(hsp),abs(vsp))
-        if(hsp!=0 &amp;&amp; vsp!=0){
-            ratio = min_spd/max_spd
-            
-            if(min_spd=abs(hsp)){
-                while(!place_meeting(x+ratio*sign(hsp),y+sign(vsp),stop_arrow_obj[i])){
-                    x+= ratio*sign(hsp)
-                    y+= sign(vsp)  
+if (obj_input.pause){
+    if(save_speed=-1){
+    save_speed=speed
+    }
+    speed=0
+}
+else{    
+    if (save_speed!=-1) speed=save_speed; save_speed=-1
+        
+    // Recuperer l'id de l'ennemi pour faire mal que a lui 
+    for (i = 0; i &lt; array_length_1d(stop_arrow_obj); i += 1){
+      if (place_meeting(x+hsp, y+vsp, stop_arrow_obj[i])){
+            obj_id= instance_place(x+hsp,y+vsp,stop_arrow_obj[i])
+            min_spd=min(abs(hsp),abs(vsp));
+            max_spd=max(abs(hsp),abs(vsp))
+            if(hsp!=0 &amp;&amp; vsp!=0){
+                ratio = min_spd/max_spd
+                
+                if(min_spd=abs(hsp)){
+                    while(!place_meeting(x+ratio*sign(hsp),y+sign(vsp),stop_arrow_obj[i])){
+                        x+= ratio*sign(hsp)
+                        y+= sign(vsp)  
+                    }
+                        speed=0
+                        // Si la fleche se plante sur un ennemi il aura mal
+                        if(stop_arrow_obj[i]= obj_enemy &amp;&amp; damage_done=false &amp;&amp; shooted) {
+                            obj_id.HP -= obj_player.s[2]
+                            damage_done=true
+                            stopped_by=obj_id
+                        }                
                 }
+                if(min_spd=abs(vsp)){
+                    while(!place_meeting(x+sign(hsp),y+ratio*sign(vsp),stop_arrow_obj[i])){
+                        x+= sign(hsp)
+                        y+= ratio*sign(vsp)  
+                    }
+                        speed=0
+                        // Si la fleche se plante sur un ennemi il aura mal
+                        if(stop_arrow_obj[i]= obj_enemy &amp;&amp; damage_done=false &amp;&amp; shooted) {
+                            obj_id.HP -= obj_player.s[2]
+                            damage_done=true
+                            stopped_by=obj_id
+                        }   
+                }
+            }
+            else if (hsp=0){
+                    while(!place_meeting(x,y+sign(vsp),stop_arrow_obj[i])){
+                    y += sign(vsp);
+                    }
+                    speed=0 
+                                        // Si la fleche se plante sur un ennemi il aura mal
+                        if(stop_arrow_obj[i]= obj_enemy &amp;&amp; damage_done=false &amp;&amp; shooted) {
+                            obj_id.HP -= obj_player.s[2]
+                            damage_done=true
+                            stopped_by=obj_id
+                        }   
+                }
+                if (vsp=0){
+                    while(!place_meeting(x+sign(hsp),y,stop_arrow_obj[i])){
+                    x += sign(hsp);
+                    }
                     speed=0
-                    // Si la fleche se plante sur un ennemi il aura mal
-                    if(stop_arrow_obj[i]= obj_enemy &amp;&amp; damage_done=false) {
-                        obj_id.HP -= 1
-                        damage_done=true
-                    }                
-            }
-            if(min_spd=abs(vsp)){
-                while(!place_meeting(x+sign(hsp),y+ratio*sign(vsp),stop_arrow_obj[i])){
-                    x+= sign(hsp)
-                    y+= ratio*sign(vsp)  
+                                        // Si la fleche se plante sur un ennemi il aura mal
+                        if(stop_arrow_obj[i]= obj_enemy &amp;&amp; damage_done=false &amp;&amp; shooted) {
+                            obj_id.HP -= obj_player.s[2]
+                            damage_done=true
+                            stopped_by=obj_id
+                        }   
                 }
-                    speed=0
-                    // Si la fleche se plante sur un ennemi il aura mal
-                    if(stop_arrow_obj[i]= obj_enemy &amp;&amp; damage_done=false) {
-                        obj_id.HP -= 1
-                        damage_done=true
-                    }   
-            }
-        }
-        else if (hsp=0){
-                while(!place_meeting(x,y+sign(vsp),stop_arrow_obj[i])){
-                y += sign(vsp);
-                }
-                speed=0 
-                                    // Si la fleche se plante sur un ennemi il aura mal
-                    if(stop_arrow_obj[i]= obj_enemy &amp;&amp; damage_done=false) {
-                        obj_id.HP -= 1
-                        damage_done=true
-                    }   
-            }
-            if (vsp=0){
-                while(!place_meeting(x+sign(hsp),y,stop_arrow_obj[i])){
-                x += sign(hsp);
-                }
-                speed=0
-                                    // Si la fleche se plante sur un ennemi il aura mal
-                    if(stop_arrow_obj[i]= obj_enemy &amp;&amp; damage_done=false) {
-                        obj_id.HP -= 1
-                        damage_done=true
-                    }   
-            }
-    }  
+        }  
+    }   
 }
 
-    
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Destruction
 
+//si l'instance qui nous a stoppé n'existe pas: autodestruction
+if !instance_exists(stopped_by){
+    instance_destroy()
+}
 
+//sinon, on la suit comme un chien chien
+else if stopped_by!=0{
+    x+= stopped_by.hsp
+    y+= stopped_by.vsp
+}
 </string>
           </argument>
         </arguments>

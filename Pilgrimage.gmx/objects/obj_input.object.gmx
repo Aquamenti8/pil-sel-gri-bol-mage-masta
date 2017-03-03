@@ -32,6 +32,7 @@ pause=false;
 button_create=false;
 pause_x=100;
 pause_y=200;
+pause_menu_on=false;
 </string>
           </argument>
         </arguments>
@@ -112,24 +113,24 @@ if (keyboard_check_pressed(vk_enter)){
             <string>///Pause menu
 
 if(pause &amp;&amp; button_create=true){
-    button_0 = instance_create(pause_x+space,pause_y,obj_menu_button);
-    button_0.index= 0;
-    button_1 = instance_create(pause_x+space,pause_y+space,obj_menu_button);
-    button_1.index = 1;
     button_create=false;
+    scr_create_menu_button(pause_x+space,pause_y,200,20,0,"pause")
+    scr_create_menu_button(pause_x+space,pause_y+space,200,20,1,"pause")
 }
 
-if (keyboard_check_pressed(vk_escape) || gamepad_button_check_pressed(0,gp_start)){
+if (keyboard_check_pressed(vk_escape) || gamepad_button_check_pressed(0,gp_select)){
     if (!pause){
      pause=true;
      button_create =true;
+     pause_menu_on=true
      }
     else{
         pause=false;
+        pause_menu_on=false;
     }
 }
 
-if(gamepad){ //gamepad entries
+if(gamepad &amp;&amp; pause_menu_on){ //gamepad entries
     var move = 0; // Mouvement
     move -= gamepad_button_check_pressed(0,gp_padu)
     move += gamepad_button_check_pressed(0,gp_padd)
@@ -144,6 +145,58 @@ if(gamepad){ //gamepad entries
     var push; // OK
     push = gamepad_button_check_pressed(0,gp_face1)
     if (push == 1) scr_menu_pause();
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// item equipment input
+
+if(gamepad){
+    pressed1 = gamepad_button_check_pressed(0,gp_padu)
+    pressed2 = gamepad_button_check_pressed(0,gp_padr)
+    pressed3 = gamepad_button_check_pressed(0,gp_padd)
+    pressed4 = gamepad_button_check_pressed(0,gp_padl)
+}
+else{
+    pressed1 = keyboard_check_pressed(ord('1'))
+    pressed2 = keyboard_check_pressed(ord('2'))
+    pressed3 = keyboard_check_pressed(ord('3'))
+    pressed4 = keyboard_check_pressed(ord('4'))
+}
+
+if (pressed1){
+    //check quel objet est dans eq_item[0], puis item_drop
+    scr_itemdrop(obj_menu.eq_item[0])
+    scr_item_use (obj_menu.eq_item[0])
+}
+if (pressed2){
+    //check quel objet est dans eq_item[1], puis item_drop
+    scr_itemdrop(obj_menu.eq_item[1])
+}
+if (pressed3){
+    //check quel objet est dans eq_item[2], puis item_drop
+    scr_itemdrop(obj_menu.eq_item[2])
+}
+if (pressed4){
+    //check quel objet est dans eq_item[3], puis item_drop
+    scr_itemdrop(obj_menu.eq_item[3])
 }
 </string>
           </argument>
@@ -174,6 +227,8 @@ else draw_text(x,y,"Keyboard")
 
 if (pause){
      draw_text(x,y+20,"Pause")
+}
+if(pause_menu_on){
      draw_set_alpha(0.9)
      draw_rectangle(view_xview,view_yview,view_xview+view_wview,view_yview+view_hview,false)
      draw_set_alpha(1)
@@ -188,6 +243,52 @@ if (pause){
     
     }
 else draw_text(x,y+20,"Play")
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="88">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>scr_pickitem(350);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="86">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>scr_itemdrop("Travel boots")
 </string>
           </argument>
         </arguments>
