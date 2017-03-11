@@ -27,8 +27,8 @@
             <kind>1</kind>
             <string>///Initialisation vartiables
 mode=0
-HP = 3
-HP_max=3
+HP = 8
+HP_max=8
 mirored = false // Si l'objet est retourné ou pas
 
 // définition des champs de vues
@@ -174,7 +174,7 @@ if(mode=2){hsp=1}
             <string>///collisions et gravité
 if (!obj_input.pause){
 
-    if (vsp &lt; 10) vsp += global.grav;
+    if (vsp &lt; 10) vsp += GRAV;
     //Horizontal Collision
     if (place_meeting(x+hsp,y,obj_plateforme))
     {
@@ -223,6 +223,7 @@ draw_self()
 if(HP!=HP_max){
     draw_rectangle(x-16,y-35,x-16+40,y-35-10,true)
     draw_rectangle(x-16,y-35,x-16+HP/HP_max*40,y-35-10,false)
+    draw_text(x-16,y-70,HP)
 }
 
 </string>

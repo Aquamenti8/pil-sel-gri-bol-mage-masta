@@ -9,7 +9,10 @@ with(obj_menu){
                 inv_all[i,3]-=1
             }
         //else set le nom sur 0
-            else {inv_all[i,0]=0}
+            else {
+                inv_all[i,0]=0;
+                inv_all[i,5]=false;
+            }
         }
     }
 }

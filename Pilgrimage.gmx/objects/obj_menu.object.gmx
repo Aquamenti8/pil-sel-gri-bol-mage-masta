@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>-3</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -474,11 +474,11 @@ if((mpos_saved != mpos || inventory_type_saved != inventory_type) &amp;&amp; cur
     for(i=0;i&lt;array_length_1d(obj_player.s_eq);i+=1){
         obj_player.s_eq[i]=0
     }
-    //calcule les HP_equip en fonction des objets equipés
+    //calcule les s_eq en fonction des objets equipés
     for (i=0; i&lt;array_length_1d(equipment);i+=1){ 
         scr_apply_equip(equipment[i])
     }
-    //sauvegarde les HP_equip 
+    //sauvegarde les s_eq
     for(i=0; i&lt;array_length_1d(obj_player.s_eq);i+=1){
         s_eq_save[i]=obj_player.s_eq[i]
     }
@@ -529,15 +529,6 @@ if((mpos_saved != mpos || inventory_type_saved != inventory_type) &amp;&amp; cur
     }
 }
 
-else if (current_page="Equipment"){
-    for(i=0;i&lt;array_length_1d(obj_player.s_eq);i+=1){
-        obj_player.s_eq[i]=0
-    }
-    //calcule les HP_equip en fonction des objets equipés
-    for (i=0; i&lt;array_length_1d(equipment);i+=1){ 
-        scr_apply_equip(equipment[i])
-    }
-}
 </string>
           </argument>
         </arguments>

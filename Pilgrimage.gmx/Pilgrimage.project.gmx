@@ -7,12 +7,15 @@
   <sounds name="sound"/>
   <sprites name="sprites">
     <sprite>sprites\sp_plateforme</sprite>
-    <sprite>sprites\sp_player</sprite>
     <sprite>sprites\sp_chara</sprite>
     <sprite>sprites\sp_arc</sprite>
     <sprite>sprites\sp_fleche</sprite>
     <sprite>sprites\sp_enemy</sprite>
-	<sprite>sprites\sp_bread</sprite>
+    <sprite>sprites\sp_bread</sprite>
+    <sprites name="PLAYER">
+      <sprite>sprites\sp_player_R</sprite>
+      <sprite>sprites\sp_player_L</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -26,9 +29,14 @@
     <script>scripts\scr_pickitem.gml</script>
     <script>scripts\scr_itemdrop.gml</script>
     <script>scripts\scr_item_use.gml</script>
+    <script>scripts\scr_reset_preview.gml</script>
   </scripts>
   <objects name="objects">
-    <object>objects\obj_player</object>
+    <objects name="PLAYER">
+      <object>objects\obj_player</object>
+      <object>objects\obj_player_jump</object>
+      <object>objects\obj_player_walk</object>
+    </objects>
     <object>objects\obj_plateforme</object>
     <object>objects\obj_inventaire</object>
     <object>objects\obj_arc</object>
@@ -46,6 +54,13 @@
     <room>rooms\rm_setup</room>
     <room>rooms\room2</room>
   </rooms>
+  <constants number="5">
+    <constant name="GRAV">0.3</constant>
+    <constant name="P_JUMP_POWER">6</constant>
+    <constant name="P_SPEED">3</constant>
+    <constant name="FACE_LEFT">-1</constant>
+    <constant name="FACE_RIGHT">1</constant>
+  </constants>
   <help>
     <rtf>help.rtf</rtf>
   </help>
