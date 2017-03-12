@@ -71,8 +71,8 @@ if(menu="equip"){       //Passe de equipé a non equipé
         if (obj_menu.inv_all[i,0]=name){    //lorsqu'il le trouve
         
             if (obj_menu.inv_all[i,5]) obj_menu.inv_all[i,5]=false; // toggle equiped
-            else obj_menu.inv_all[i,5]=true;         
-            scr_reload_inv()
+            else obj_menu.inv_all[i,5]=true;  
+            scr_reload_inv()       
          }        
     }
     }
@@ -86,8 +86,8 @@ if (menu="equip_item"){
         if (obj_menu.inv_all[i,0]=name){    //lorsqu'il le trouve
         
             if (obj_menu.inv_all[i,5]) obj_menu.inv_all[i,5]=false; // toggle equiped
-            else obj_menu.inv_all[i,5]=true;         
-            scr_reload_inv()
+            else obj_menu.inv_all[i,5]=true; 
+            scr_reload_inv()       
          }        
     }
     }

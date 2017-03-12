@@ -34,8 +34,10 @@
   <objects name="objects">
     <objects name="PLAYER">
       <object>objects\obj_player</object>
-      <object>objects\obj_player_jump</object>
-      <object>objects\obj_player_walk</object>
+      <object>objects\obj_player_land</object>
+      <object>objects\obj_player_air</object>
+      <object>objects\obj_player_wall</object>
+      <object>objects\obj_player_dash</object>
     </objects>
     <object>objects\obj_plateforme</object>
     <object>objects\obj_inventaire</object>

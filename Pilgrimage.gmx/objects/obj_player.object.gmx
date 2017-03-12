@@ -49,7 +49,6 @@ key_down = 0;
 key_A = 0;
 dash = 0;
 
-dash_duration=5;
 
 up_off=false
 A_off=false
@@ -113,8 +112,8 @@ stamina_max=150
 
 sprint_spd_bonus=4
 dash_spd_bonus=50
-
 dash_cost=50
+dash_duration=5
 sprint_cost=1
 arrow_cost=20
 stamina_recover=1
