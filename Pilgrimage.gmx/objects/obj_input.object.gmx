@@ -198,6 +198,10 @@ if (pressed4){
     //check quel objet est dans eq_item[3], puis item_drop
     scr_itemdrop(obj_menu.eq_item[3])
 }
+
+if (pressed1 || pressed2 || pressed3 || pressed4){
+    scr_reload_inv()
+}
 </string>
           </argument>
         </arguments>

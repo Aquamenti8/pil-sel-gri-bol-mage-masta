@@ -107,3 +107,5 @@ with (obj_menu_button)
                 }
             create_butt=true
 }
+
+scr_reset_preview()
