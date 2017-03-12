@@ -98,58 +98,42 @@ else{
             max_spd=max(abs(hsp),abs(vsp))
             if(hsp!=0 &amp;&amp; vsp!=0){
                 ratio = min_spd/max_spd
+            
                 
                 if(min_spd=abs(hsp)){
                     while(!place_meeting(x+ratio*sign(hsp),y+sign(vsp),stop_arrow_obj[i])){
                         x+= ratio*sign(hsp)
                         y+= sign(vsp)  
                     }
-                        speed=0
-                        // Si la fleche se plante sur un ennemi il aura mal
-                        if(stop_arrow_obj[i]= obj_enemy &amp;&amp; damage_done=false &amp;&amp; shooted) {
-                            obj_id.HP -= obj_player.s[2]
-                            damage_done=true
-                            stopped_by=obj_id
-                        }                
+               
                 }
                 if(min_spd=abs(vsp)){
                     while(!place_meeting(x+sign(hsp),y+ratio*sign(vsp),stop_arrow_obj[i])){
                         x+= sign(hsp)
                         y+= ratio*sign(vsp)  
-                    }
-                        speed=0
-                        // Si la fleche se plante sur un ennemi il aura mal
-                        if(stop_arrow_obj[i]= obj_enemy &amp;&amp; damage_done=false &amp;&amp; shooted) {
-                            obj_id.HP -= obj_player.s[2]
-                            damage_done=true
-                            stopped_by=obj_id
-                        }   
+                    } 
                 }
             }
             else if (hsp=0){
                     while(!place_meeting(x,y+sign(vsp),stop_arrow_obj[i])){
                     y += sign(vsp);
-                    }
-                    speed=0 
-                                        // Si la fleche se plante sur un ennemi il aura mal
-                        if(stop_arrow_obj[i]= obj_enemy &amp;&amp; damage_done=false &amp;&amp; shooted) {
-                            obj_id.HP -= obj_player.s[2]
-                            damage_done=true
-                            stopped_by=obj_id
-                        }   
+                    } 
                 }
                 if (vsp=0){
                     while(!place_meeting(x+sign(hsp),y,stop_arrow_obj[i])){
                     x += sign(hsp);
-                    }
-                    speed=0
-                                        // Si la fleche se plante sur un ennemi il aura mal
-                        if(stop_arrow_obj[i]= obj_enemy &amp;&amp; damage_done=false &amp;&amp; shooted) {
-                            obj_id.HP -= obj_player.s[2]
-                            damage_done=true
-                            stopped_by=obj_id
-                        }   
+                    } 
                 }
+            speed=0
+            // Si la fleche se plante sur un ennemi il aura mal
+            if(stop_arrow_obj[i]= obj_enemy &amp;&amp; damage_done=false &amp;&amp; shooted) {
+                obj_id.HP -= obj_player.s[2]
+                damage_done=true
+                stopped_by=obj_id
+            } 
+            else if (damage_done =false &amp;&amp; shooted) { // Si la fleche se plante sur autre chose
+                damage_done=true
+            }   
         }  
     }   
 }

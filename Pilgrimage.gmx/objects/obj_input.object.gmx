@@ -222,12 +222,17 @@ if (pressed4){
             <kind>1</kind>
             <string>///Draw gamepad, pause menu
 
+draw_set_colour(c_black);
 if (gamepad) draw_text(x,y,"Gamepad")
 else draw_text(x,y,"Keyboard")
 
+/*
 if (pause){
      draw_text(x,y+20,"Pause")
 }
+else { draw_text(x,y+20,"Play")}
+*/
+
 if(pause_menu_on){
      draw_set_alpha(0.9)
      draw_rectangle(view_xview,view_yview,view_xview+view_wview,view_yview+view_hview,false)
@@ -242,7 +247,7 @@ if(pause_menu_on){
     draw_set_colour(c_black);
     
     }
-else draw_text(x,y+20,"Play")
+
 </string>
           </argument>
         </arguments>

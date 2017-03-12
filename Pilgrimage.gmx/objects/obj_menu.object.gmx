@@ -974,15 +974,19 @@ if(current_page!=-1&amp;&amp; menu_on){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Fin de code
+            <string>///Fin de code + debug
 if( menu_on){
 create_butt=false;
+draw_set_colour(c_black);
+    //Debug
+/*
 draw_text(view_xview+10,view_yview+10,current_page)
 draw_text(view_xview+10,view_yview+10+20,inventory_type)
 draw_text(view_xview+10,view_yview+10+40,mpos)
 if(position_meeting(mouse_x, mouse_y, obj_menu_button)){
 draw_text(view_xview+10,view_yview+10+60,"mouse collision")
 }
+*/
 }
 </string>
           </argument>

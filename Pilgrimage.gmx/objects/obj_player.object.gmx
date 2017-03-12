@@ -545,10 +545,11 @@ for(i=0;i&lt;array_length_1d(s_base);i+=1){
             <string>///debug
 
 draw_self();
-
+draw_set_colour(c_black);
+/*
 draw_text(x,y-100,instance_count);
 draw_text(x,y-115,instance_number(obj_arc));
-draw_text(x,y-130,instance_number(obj_fleche));
+*/
 </string>
           </argument>
         </arguments>
@@ -571,6 +572,7 @@ draw_text(x,y-130,instance_number(obj_fleche));
             <kind>1</kind>
             <string>///Draw hp bar, stamina_bar,... (UI)
 
+draw_set_colour(c_black);
 draw_text(0.1*view_wview,0.1*view_hview-20,"HP")
 draw_text(0.2*view_wview,0.1*view_hview-20,string(actual_hp)+'/'+string(s[0]))
 draw_rectangle(0.1*view_wview,0.1*view_hview,0.1*view_wview+100,0.1*view_hview+10,true)
