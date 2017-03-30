@@ -49,11 +49,14 @@ if(menu="item"){
             if (obj_menu.inv_all[i,5]) obj_menu.inv_all[i,5]=false
             else obj_menu.inv_all[i,5]=true;         // toggle equiped
             index_toggled=i
-            for (j=0; j<array_height_2d(obj_menu.inv_all); j+=1){
-            //parcours inv_all de nouveau, cherche des objet equippés et du meme type que index_toggled ([ i,2] )
-                toggled_type= obj_menu.inv_all[index_toggled,2]
-                if ((obj_menu.inv_all[j,2]=toggled_type) && (j!=index_toggled) && (obj_menu.inv_all[j,5]=true)){ //si l'objet i est de meme type que indextoggeled, si il est equipé et si ce n'est pas indextoggled
-                    obj_menu.inv_all[j,5]=false; // toggle equiped 
+            
+            if(obj_menu.inventory_type != 4){
+                for (j=0; j<array_height_2d(obj_menu.inv_all); j+=1){
+                //parcours inv_all de nouveau, cherche des objet equippés et du meme type que index_toggled ([ i,2] )
+                    toggled_type= obj_menu.inv_all[index_toggled,2]
+                    if ((obj_menu.inv_all[j,2]=toggled_type) && (j!=index_toggled) && (obj_menu.inv_all[j,5]=true)){ //si l'objet i est de meme type que indextoggeled, si il est equipé et si ce n'est pas indextoggled
+                        obj_menu.inv_all[j,5]=false; // toggle equiped 
+                    }
                 }
             }
             scr_reload_inv()

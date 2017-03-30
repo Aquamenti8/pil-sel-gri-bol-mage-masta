@@ -13,4 +13,7 @@ switch (argument0){
         }
         break;
      }
+     case "Stamina Potion" :{
+        obj_player.actual_stam = obj_player.s[1]
+     }
 }

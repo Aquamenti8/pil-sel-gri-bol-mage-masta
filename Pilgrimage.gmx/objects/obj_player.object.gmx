@@ -101,15 +101,13 @@ s_eq[4]=0
 s_eq[5]=0
 s_eq[6]=0
 
+
 for(i=0;i&lt;array_length_1d(s_base);i+=1){
     s[i]=s_base[i]+s_eq[i]
 }
 
 actual_hp=5
-
-
-
-stamina_max=150
+actual_stam =10
 
 sprint_spd_bonus=4
 dash_spd_bonus=50
@@ -275,7 +273,7 @@ if (!obj_input.pause){
         if (key_A_p &amp;&amp; sol ) key_A=1;
         if (A_off) key_A=0;
         
-        if (s[1]-sprint_cost&lt;0) key_A =0
+        if (actual_stam-sprint_cost&lt;0) key_A =0
         
         if (key_A&gt;10 &amp;&amp; sol){spd_bonus=sprint_spd_bonus;jump_bonus=sprint_spd_bonus}
         if (key_A&gt;10 &amp;&amp; !sol){spd_bonus=sprint_spd_bonus;jump_bonus=sprint_spd_bonus}
@@ -283,7 +281,7 @@ if (!obj_input.pause){
         
         //si on relache A:
         if(keyboard_check_released(vk_lshift) || (gamepad_button_check_released(0,gp_face2))){
-            if(key_A&lt;10 &amp;&amp; key_A!=0 &amp;&amp; (s[1]-dash_cost&gt;0)){ //Dash
+            if(key_A&lt;10 &amp;&amp; key_A!=0 &amp;&amp; (actual_stam-dash_cost&gt;0)){ //Dash
             dash=1
             key_A =0;
             }
@@ -431,20 +429,20 @@ if (!obj_input.pause){
             <string>///Stamina control
 if (!obj_input.pause){
     if(spd_bonus=sprint_spd_bonus  &amp;&amp; hsp!=0){
-        s_base[1]-=sprint_cost
+        actual_stam-=sprint_cost
     }
     if(spd_bonus=dash_spd_bonus){
-        s_base[1]-=dash_cost/dash_duration
+        actual_stam-=dash_cost/dash_duration
     }
     
-    if( spd_bonus=0 &amp;&amp; s_base[1]&lt;stamina_max &amp;&amp; stam_regen){
-        s_base[1]+=stamina_recover
+    if( spd_bonus=0 &amp;&amp; actual_stam&lt;s[1] &amp;&amp; stam_regen){
+        actual_stam+=stamina_recover
     }
-    else if (hsp=0 &amp;&amp; stam_regen &amp;&amp; s_base[1]&lt;stamina_max){
-        s_base[1]+=stamina_recover
+    else if (hsp=0 &amp;&amp; stam_regen &amp;&amp; actual_stam&lt;s[1]){
+        actual_stam+=stamina_recover
     }
     
-    if(s_base[1]&lt;0) s_base[1]=0
+    if(actual_stam&lt;0) actual_stam=0
 }
 </string>
           </argument>
@@ -580,7 +578,7 @@ draw_rectangle(0.1*view_wview,0.1*view_hview,0.1*view_wview+ actual_hp / s[0] *1
 
 draw_text(0.1*view_wview,0.2*view_hview-20,"Stamina")
 draw_rectangle(0.1*view_wview,0.2*view_hview,0.1*view_wview+100,0.2*view_hview+10,true)
-draw_rectangle(0.1*view_wview,0.2*view_hview,0.1*view_wview+(s[1]/stamina_max)*100,0.2*view_hview+10,false)
+draw_rectangle(0.1*view_wview,0.2*view_hview,0.1*view_wview+(actual_stam/s[1])*100,0.2*view_hview+10,false)
 
 //draw 4slot pour les objets , leur position change si on est en keyboard ou en gamepad
 
@@ -597,9 +595,9 @@ if(obj_input.gamepad=false){ //pour keyboard
         name = obj_menu.eq_item[i] //recup le nom de l'objet
         if(name !=0 ) for ( j=0; j&lt; array_height_2d(obj_menu.inv_all); j+=1){   //parcours inv_all, trouve le meme nom, recupere le nom du sprite [i,4]
             if(obj_menu.inv_all[j,0]=name){
-                draw_sprite(obj_menu.inv_all[j,4],0,xslot,yslot)
+                draw_sprite(obj_menu.inv_all[j,4], 0, xslot+hslot*i, yslot+hslot*i)
                 //draw le nombre d'objets dans le slot
-                draw_text(xslot,yslot,obj_menu.inv_all[j,3])
+                draw_text(xslot+hslot*i, yslot+hslot*i ,obj_menu.inv_all[j,3])
             }
         }  
     }
