@@ -136,11 +136,11 @@ item_all[350,3]=1;
 item_all[350,4]=sp_bread;
 item_all[350,5]=false;
 
-item_all[351,0]="Donut";
+item_all[351,0]="Stamina Potion";
 item_all[351,1]="ITEM";
 item_all[351,2]="food";
 item_all[351,3]=1;
-item_all[351,4]=sp_bread;
+item_all[351,4]=sp_stam_potion;
 item_all[351,5]=false;
 </string>
           </argument>
@@ -244,6 +244,8 @@ scr_pickitem(150);
 scr_pickitem(200);
 scr_pickitem(250);
 scr_pickitem(300);
+for (i=0; i&lt;20 ;i+=1) scr_pickitem(350);
+for (i=0; i&lt;10 ;i+=1) scr_pickitem(351);
 </string>
           </argument>
         </arguments>

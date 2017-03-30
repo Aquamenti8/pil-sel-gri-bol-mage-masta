@@ -16,6 +16,7 @@
       <sprite>sprites\sp_player_R</sprite>
       <sprite>sprites\sp_player_L</sprite>
     </sprites>
+    <sprite>sprites\sp_stam_potion</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -34,8 +35,6 @@
   <objects name="objects">
     <objects name="PLAYER">
       <object>objects\obj_player</object>
-      <object>objects\obj_player_jump</object>
-      <object>objects\obj_player_walk</object>
     </objects>
     <object>objects\obj_plateforme</object>
     <object>objects\obj_inventaire</object>

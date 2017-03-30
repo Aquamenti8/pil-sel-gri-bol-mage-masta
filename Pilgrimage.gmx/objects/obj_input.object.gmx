@@ -183,19 +183,22 @@ else{
 
 if (pressed1){
     //check quel objet est dans eq_item[0], puis item_drop
-    scr_itemdrop(obj_menu.eq_item[0])
     scr_item_use (obj_menu.eq_item[0])
+    scr_itemdrop(obj_menu.eq_item[0])
 }
 if (pressed2){
     //check quel objet est dans eq_item[1], puis item_drop
+    scr_item_use (obj_menu.eq_item[1])
     scr_itemdrop(obj_menu.eq_item[1])
 }
 if (pressed3){
     //check quel objet est dans eq_item[2], puis item_drop
+    scr_item_use (obj_menu.eq_item[2])
     scr_itemdrop(obj_menu.eq_item[2])
 }
 if (pressed4){
     //check quel objet est dans eq_item[3], puis item_drop
+    scr_item_use (obj_menu.eq_item[3])
     scr_itemdrop(obj_menu.eq_item[3])
 }
 
