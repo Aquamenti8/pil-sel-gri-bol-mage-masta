@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>2</depth>
   <persistent>0</persistent>
-  <parentName>&lt;undefined&gt;</parentName>
+  <parentName>obj_player</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -142,6 +142,7 @@ stamina_recover=1
             <kind>1</kind>
             <string>///Basic movements, collision, gravité
 
+
 if (!obj_input.pause){
 
     if(up_off=true &amp;&amp; keyboard_check_released(ord("Z"))){
@@ -196,6 +197,7 @@ if (!obj_input.pause){
             //JUMP 
             if (!up_off &amp;&amp; key_jump ){
                 instance_change(obj_player_air,true)
+                vsp=-P_JUMP_POWER
             }
         }
             
