@@ -244,8 +244,9 @@ scr_pickitem(150);
 scr_pickitem(200);
 scr_pickitem(250);
 scr_pickitem(300);
-for (i=0; i&lt;20 ;i+=1) scr_pickitem(350);
-for (i=0; i&lt;10 ;i+=1) scr_pickitem(351);
+scr_pickitem(350);
+    
+//for (i=0; i&lt;10 ;i+=1){ scr_pickitem(351);}
 </string>
           </argument>
         </arguments>
