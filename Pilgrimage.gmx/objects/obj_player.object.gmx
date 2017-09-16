@@ -124,6 +124,29 @@ stamina_recover=1
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///player_state
+player_state = 0
+
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="3" enumb="0">
       <action>
@@ -580,66 +603,66 @@ draw_text(0.1*view_wview,0.2*view_hview-20,"Stamina")
 draw_rectangle(0.1*view_wview,0.2*view_hview,0.1*view_wview+100,0.2*view_hview+10,true)
 draw_rectangle(0.1*view_wview,0.2*view_hview,0.1*view_wview+(s[1]/stamina_max)*100,0.2*view_hview+10,false)
 
-//draw 4slot pour les objets , leur position change si on est en keyboard ou en gamepad
+//draw 4 slot for objects, their position change depending if we use keyboard or gamepad
 
-if(obj_input.gamepad=false){ //pour keyboard
+if(obj_input.gamepad=false){ //keyboard
     xslot=view_xview+view_wview/10
     yslot=view_yview+view_hview/4*2.5
     hslot=60
     wslot=60  
-    for (i=0; i&lt;4 ; i+= 1){ //parcours les slots
+    for (i=0; i&lt;4 ; i+= 1){ //check the slots
         draw_rectangle(xslot+hslot*i,yslot+hslot*i,xslot+wslot*(i+1),yslot+hslot*(i+1),true);
         draw_text(xslot+hslot*i,yslot+hslot*i+hslot-15,i+1)
         
-        //draw le sprite de l'objet dans le slot
-        name = obj_menu.eq_item[i] //recup le nom de l'objet
-        if(name !=0 ) for ( j=0; j&lt; array_height_2d(obj_menu.inv_all); j+=1){   //parcours inv_all, trouve le meme nom, recupere le nom du sprite [i,4]
+        //draw the sprite of the object in the slot
+        name = obj_menu.eq_item[i] //return the name object
+        if(name !=0 ) for ( j=0; j&lt; array_height_2d(obj_menu.inv_all); j+=1){   //check inv_all, find the same name, and return the sprite name [i,4]
             if(obj_menu.inv_all[j,0]=name){
                 draw_sprite(obj_menu.inv_all[j,4],0,xslot,yslot)
-                //draw le nombre d'objets dans le slot
+                //draw the number of object in the slot
                 draw_text(xslot,yslot,obj_menu.inv_all[j,3])
             }
         }  
     }
 }
-else{ //pour gamepad
+else{ //gamepad
     xslot=view_xview+view_wview/10
     yslot=view_yview+view_hview/4*2.5
     cslot=60
-    //slot gauche
+    //left slot
     draw_rectangle(xslot,yslot,xslot+cslot,yslot+cslot,true);
     draw_text(xslot,yslot+cslot-15,"gauche")
-    name = obj_menu.eq_item[3] //recup le nom de l'objet
+    name = obj_menu.eq_item[3] //return the name of the object
     if(name !=0 ) for ( j=0; j&lt; array_height_2d(obj_menu.inv_all); j+=1){
         if(obj_menu.inv_all[j,0]=name){
             draw_sprite(obj_menu.inv_all[j,4],0,xslot,yslot)
             draw_text(xslot,yslot,obj_menu.inv_all[j,3])
         }
     }
-    //slot haut
+    //upper slot
     draw_rectangle(xslot+cslot,yslot-cslot,xslot+cslot*2,yslot,true);
     draw_text(xslot+cslot,yslot-cslot+cslot-15,"haut")
-    name = obj_menu.eq_item[0] //recup le nom de l'objet
+    name = obj_menu.eq_item[0] //return the name of the object
     if(name !=0 ) for ( j=0; j&lt; array_height_2d(obj_menu.inv_all); j+=1){
         if(obj_menu.inv_all[j,0]=name){
             draw_sprite(obj_menu.inv_all[j,4],0,xslot+cslot,yslot-cslot)
             draw_text(xslot+cslot,yslot-cslot,obj_menu.inv_all[j,3])
         }
     }
-    //slot droit
+    //right slot
     draw_rectangle(xslot+cslot*2,yslot,xslot+cslot*3,yslot+cslot,true);
     draw_text(xslot+cslot*2,yslot+cslot-15,"droit")
-    name = obj_menu.eq_item[1] //recup le nom de l'objet
+    name = obj_menu.eq_item[1] //return the name of the object
     if(name !=0 ) for ( j=0; j&lt; array_height_2d(obj_menu.inv_all); j+=1){
         if(obj_menu.inv_all[j,0]=name){
             draw_sprite(obj_menu.inv_all[j,4],0,xslot+cslot*2,yslot)
             draw_text(xslot+cslot*2,yslot,obj_menu.inv_all[j,3])
         }
     }
-    //slot bas
+    //lower slot
     draw_rectangle(xslot+cslot,yslot+cslot,xslot+cslot*2,yslot+cslot*2,true);
     draw_text(xslot+cslot,yslot+cslot+cslot-15,"bas")
-        name = obj_menu.eq_item[2] //recup le nom de l'objet
+        name = obj_menu.eq_item[2] //return the name of the object
     if(name !=0 ) for ( j=0; j&lt; array_height_2d(obj_menu.inv_all); j+=1){
         if(obj_menu.inv_all[j,0]=name){
             draw_sprite(obj_menu.inv_all[j,4],0,xslot+cslot,yslot+cslot)

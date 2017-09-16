@@ -7,5 +7,6 @@ this_id = argument1
 if(instance_exists(this_id)){
     dir_to_x = sign(to_x-this_id.x)
     this_id.hsp = dir_to_x*movespeed
+    
 }
 

@@ -107,7 +107,7 @@ else{
                         speed=0
                         // Si la fleche se plante sur un ennemi il aura mal
                         if(stop_arrow_obj[i]= obj_enemy &amp;&amp; damage_done=false &amp;&amp; shooted) {
-                            obj_id.HP -= obj_player.s[2]
+                            obj_id.HP -= 1
                             damage_done=true
                             stopped_by=obj_id
                         }                
@@ -120,7 +120,7 @@ else{
                         speed=0
                         // Si la fleche se plante sur un ennemi il aura mal
                         if(stop_arrow_obj[i]= obj_enemy &amp;&amp; damage_done=false &amp;&amp; shooted) {
-                            obj_id.HP -= obj_player.s[2]
+                            obj_id.HP -= 1
                             damage_done=true
                             stopped_by=obj_id
                         }   
@@ -133,7 +133,7 @@ else{
                     speed=0 
                                         // Si la fleche se plante sur un ennemi il aura mal
                         if(stop_arrow_obj[i]= obj_enemy &amp;&amp; damage_done=false &amp;&amp; shooted) {
-                            obj_id.HP -= obj_player.s[2]
+                            obj_id.HP -= 1
                             damage_done=true
                             stopped_by=obj_id
                         }   
@@ -145,7 +145,7 @@ else{
                     speed=0
                                         // Si la fleche se plante sur un ennemi il aura mal
                         if(stop_arrow_obj[i]= obj_enemy &amp;&amp; damage_done=false &amp;&amp; shooted) {
-                            obj_id.HP -= obj_player.s[2]
+                            obj_id.HP -= 1
                             damage_done=true
                             stopped_by=obj_id
                         }   
@@ -177,7 +177,7 @@ else{
             <string>///Destruction
 
 //si l'instance qui nous a stoppé n'existe pas: autodestruction
-if !instance_exists(stopped_by){
+if (!instance_exists(stopped_by) and stopped_by != 0){
     instance_destroy()
 }
 

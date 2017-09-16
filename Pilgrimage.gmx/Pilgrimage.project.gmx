@@ -11,10 +11,13 @@
     <sprite>sprites\sp_arc</sprite>
     <sprite>sprites\sp_fleche</sprite>
     <sprite>sprites\sp_enemy</sprite>
+    <sprite>sprites\sp_enemy_attack</sprite>
     <sprite>sprites\sp_bread</sprite>
     <sprites name="PLAYER">
       <sprite>sprites\sp_player_R</sprite>
       <sprite>sprites\sp_player_L</sprite>
+      <sprite>sprites\sp_player_WL</sprite>
+      <sprite>sprites\sp_player_WR</sprite>
     </sprites>
   </sprites>
   <backgrounds name="background"/>
@@ -22,31 +25,35 @@
   <scripts name="scripts">
     <script>scripts\scr_menu_pause.gml</script>
     <script>scripts\scr_menu_index_react.gml</script>
-    <script>scripts\scr_pathfinder.gml</script>
     <script>scripts\scr_create_menu_button.gml</script>
     <script>scripts\scr_reload_inv.gml</script>
+    <script>scripts\scr_reset_preview.gml</script>
     <script>scripts\scr_apply_equip.gml</script>
     <script>scripts\scr_pickitem.gml</script>
     <script>scripts\scr_itemdrop.gml</script>
     <script>scripts\scr_item_use.gml</script>
-    <script>scripts\scr_reset_preview.gml</script>
+    <script>scripts\scr_pathfinder.gml</script>
+    <script>scripts\scr_IAmode0.gml</script>
+    <script>scripts\scr_IAmode1.gml</script>
+    <script>scripts\scr_IAmode2.gml</script>
   </scripts>
   <objects name="objects">
-    <objects name="PLAYER">
-      <object>objects\obj_player</object>
-      <object>objects\obj_player_jump</object>
-      <object>objects\obj_player_walk</object>
-    </objects>
-    <object>objects\obj_plateforme</object>
-    <object>objects\obj_inventaire</object>
-    <object>objects\obj_arc</object>
-    <object>objects\obj_fleche</object>
-    <object>objects\obj_input</object>
-    <object>objects\obj_timer</object>
     <objects name="Menu">
+      <object>objects\obj_inventaire</object>
       <object>objects\obj_menu_button</object>
       <object>objects\obj_menu</object>
     </objects>
+    <objects name="PLAYER">
+      <object>objects\obj_player</object>
+      <object>objects\obj_player_WR</object>
+      <object>objects\obj_player_WL</object>
+    </objects>
+    <object>objects\obj_plateforme</object>
+    <object>objects\obj_arc</object>
+    <object>objects\obj_fleche</object>
+    <object>objects\obj_LD_limit</object>
+    <object>objects\obj_input</object>
+    <object>objects\obj_timer</object>
     <object>objects\obj_enemy</object>
   </objects>
   <rooms name="rooms">
