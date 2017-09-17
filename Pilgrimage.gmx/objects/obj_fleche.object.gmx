@@ -182,7 +182,7 @@ if (!instance_exists(stopped_by) and stopped_by != 0){
 }
 
 //sinon, on la suit comme un chien chien
-else if stopped_by!=0{
+else if (stopped_by!=0 &amp;&amp; !obj_input.pause){
     x+= stopped_by.hsp
     y+= stopped_by.vsp
 }
