@@ -74,7 +74,7 @@ combo_attack0[0,6] = 0               //y2 of the hitbox
 // idle = x-400 - sprite_width/2, y-200 - sprite_height/2, x+100 - sprite_width/2, y+100 - sprite_height/2
 // aware = x-600 - sprite_width/2, y-350 - sprite_height/2, x+180 - sprite_width/2, y+180 - sprite_height/2
 
-
+mode0_dir = 1// definit vers quelle direction l'ennemi qui fait sa ronde part en premier 1=droite, -1=gauche
 </string>
           </argument>
         </arguments>
