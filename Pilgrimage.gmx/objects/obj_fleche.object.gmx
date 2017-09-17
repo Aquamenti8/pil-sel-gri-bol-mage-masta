@@ -123,7 +123,8 @@ else{
                             obj_id.HP -= 1
                             damage_done=true
                             stopped_by=obj_id
-                        }   
+                        }
+                        damage_done=true   
                 }
             }
             else if (hsp=0){
@@ -136,7 +137,8 @@ else{
                             obj_id.HP -= 1
                             damage_done=true
                             stopped_by=obj_id
-                        }   
+                        }
+                        damage_done=true   
                 }
                 if (vsp=0){
                     while(!place_meeting(x+sign(hsp),y,stop_arrow_obj[i])){
@@ -148,7 +150,8 @@ else{
                             obj_id.HP -= 1
                             damage_done=true
                             stopped_by=obj_id
-                        }   
+                        }
+                        damage_done=true   
                 }
         }  
     }   
