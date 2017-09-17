@@ -7,6 +7,7 @@
   <sounds name="sound"/>
   <sprites name="sprites">
     <sprite>sprites\sp_plateforme</sprite>
+    <sprite>sprites\sprite11</sprite>
     <sprite>sprites\sp_chara</sprite>
     <sprite>sprites\sp_arc</sprite>
     <sprite>sprites\sp_fleche</sprite>
@@ -52,6 +53,7 @@
     <object>objects\obj_arc</object>
     <object>objects\obj_fleche</object>
     <object>objects\obj_LD_limit</object>
+    <object>objects\obj_ladder</object>
     <object>objects\obj_input</object>
     <object>objects\obj_timer</object>
     <object>objects\obj_enemy</object>
