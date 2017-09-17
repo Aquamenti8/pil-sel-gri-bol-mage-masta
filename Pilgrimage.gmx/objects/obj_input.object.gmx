@@ -119,14 +119,16 @@ if(pause &amp;&amp; button_create=true){
 }
 
 if (keyboard_check_pressed(vk_escape) || gamepad_button_check_pressed(0,gp_select)){
-    if (!pause){
-     pause=true;
-     button_create =true;
-     pause_menu_on=true
-     }
-    else{
-        pause=false;
-        pause_menu_on=false;
+    if(obj_menu.menu_on=false){
+        if (!pause){
+         pause=true;
+         button_create =true;
+         pause_menu_on=true
+         }
+        else{
+            pause=false;
+            pause_menu_on=false;
+        }
     }
 }
 
