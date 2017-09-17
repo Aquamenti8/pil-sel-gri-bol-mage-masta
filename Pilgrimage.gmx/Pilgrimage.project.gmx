@@ -19,6 +19,7 @@
       <sprite>sprites\sp_player_WL</sprite>
       <sprite>sprites\sp_player_WR</sprite>
     </sprites>
+    <sprite>sprites\sp_echelle</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -55,6 +56,7 @@
     <object>objects\obj_input</object>
     <object>objects\obj_timer</object>
     <object>objects\obj_enemy</object>
+    <object>objects\obj_echelle</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_level1</room>
