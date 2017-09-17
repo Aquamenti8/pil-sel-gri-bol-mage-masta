@@ -20,6 +20,7 @@
       <sprite>sprites\sp_player_WR</sprite>
     </sprites>
     <sprite>sprites\sp_echelle</sprite>
+    <sprite>sprites\sp_onewayplatform</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -57,6 +58,7 @@
     <object>objects\obj_timer</object>
     <object>objects\obj_enemy</object>
     <object>objects\obj_echelle</object>
+    <object>objects\obj_onewayplateform</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_level1</room>

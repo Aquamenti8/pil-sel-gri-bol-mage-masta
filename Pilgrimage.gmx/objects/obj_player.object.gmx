@@ -218,7 +218,7 @@ if (!obj_input.pause){//Pas de mouvement si le jeu est en pause
         }
         
         //jump?
-        if (place_meeting(x,y+1,obj_plateforme))
+        if (place_meeting(x,y+1,obj_plateforme) or place_meeting(x,y+1,obj_onewayplateform))
         {  
             if (!up_off &amp;&amp; key_jump ){
             vsp = -(P_JUMP_POWER+jump_bonus);
@@ -242,9 +242,18 @@ if (!obj_input.pause){//Pas de mouvement si le jeu est en pause
         }
         x += hsp;  
         //Vertical Collision
+        
+            //plateforme dures
         if (place_meeting(x,y+vsp,obj_plateforme))
         {
             while(!place_meeting(x,y+sign(vsp),obj_plateforme)){
+                y += sign(vsp);
+            }
+            vsp = 0;
+        }
+            //plateformes traversable par le bas
+        if (vsp&gt;0 &amp;&amp; place_meeting(x,y+vsp,obj_onewayplateform))&amp;&amp;!place_meeting(x,y,obj_onewayplateform){
+            while(!place_meeting(x,y+sign(vsp),obj_onewayplateform)){
                 y += sign(vsp);
             }
             vsp = 0;
