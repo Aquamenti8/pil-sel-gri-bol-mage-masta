@@ -36,44 +36,6 @@ hsp = 0;    // Vitesse horizontale
 vsp = 0;    // Vitesse verticale
 movespeed=2;
 
-//var for combat with sequence of attacks (1*room_speed = 1s)
-delay_attack = 0;                    //set the begining of the timer
-combo_attack0[0,0] = 1  * room_speed //delay of the attack0
-combo_attack0[0,1] = 1               //damage value of the attack0
-combo_attack0[0,2] = 5               //stamina cost of the attack
-// YET TO SET
-/*
-combo_attack0[0,3] = 0               //x1 of the hitbox
-combo_attack0[0,4] = 0               //y1 of the hitbox
-combo_attack0[0,5] = 0               //x2 of the hitbox
-combo_attack0[0,6] = 0               //y2 of the hitbox
-*/
-combo_attack0[1,0] = 0.5* room_speed
-combo_attack0[1,1] = 1
-combo_attack0[1,2] = 3
-// YET TO SET
-/*
-combo_attack0[0,3] = 0               //x1 of the hitbox
-combo_attack0[0,4] = 0               //y1 of the hitbox
-combo_attack0[0,5] = 0               //x2 of the hitbox
-combo_attack0[0,6] = 0               //y2 of the hitbox
-*/
-combo_attack0[2,0] = 2  * room_speed
-combo_attack0[2,1] = 2
-combo_attack0[2,2] = 10
-// YET TO SET
-/*
-combo_attack0[0,3] = 0               //x1 of the hitbox
-combo_attack0[0,4] = 0               //y1 of the hitbox
-combo_attack0[0,5] = 0               //x2 of the hitbox
-combo_attack0[0,6] = 0               //y2 of the hitbox
-*/
-
-
-// définition des champs de vues
-// idle = x-400 - sprite_width/2, y-200 - sprite_height/2, x+100 - sprite_width/2, y+100 - sprite_height/2
-// aware = x-600 - sprite_width/2, y-350 - sprite_height/2, x+180 - sprite_width/2, y+180 - sprite_height/2
-
 mode0_dir = 1// definit vers quelle direction l'ennemi qui fait sa ronde part en premier 1=droite, -1=gauche
 </string>
           </argument>
@@ -120,6 +82,64 @@ mode0_dir = 1// definit vers quelle direction l'ennemi qui fait sa ronde part en
           <argument>
             <kind>4</kind>
             <string>0</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Combo Variables
+
+delay_attack = -1; 
+current_attack = 0;
+
+//var for combat with sequence of attacks (1*room_speed = 1s)
+                   //set the begining of the timer
+combo_attack0[0,0] = 1  * room_speed //delay of the attack0
+combo_attack0[0,1] = 1               //damage value of the attack0
+combo_attack0[0,2] = 5               //stamina cost of the attack
+// YET TO SET
+/*
+combo_attack0[0,3] = 0               //x1 of the hitbox
+combo_attack0[0,4] = 0               //y1 of the hitbox
+combo_attack0[0,5] = 0               //x2 of the hitbox
+combo_attack0[0,6] = 0               //y2 of the hitbox
+*/
+combo_attack0[1,0] = 0.5* room_speed
+combo_attack0[1,1] = 1
+combo_attack0[1,2] = 3
+// YET TO SET
+/*
+combo_attack0[0,3] = 0               //x1 of the hitbox
+combo_attack0[0,4] = 0               //y1 of the hitbox
+combo_attack0[0,5] = 0               //x2 of the hitbox
+combo_attack0[0,6] = 0               //y2 of the hitbox
+*/
+combo_attack0[2,0] = 2  * room_speed
+combo_attack0[2,1] = 2
+combo_attack0[2,2] = 10
+// YET TO SET
+/*
+combo_attack0[0,3] = 0               //x1 of the hitbox
+combo_attack0[0,4] = 0               //y1 of the hitbox
+combo_attack0[0,5] = 0               //x2 of the hitbox
+combo_attack0[0,6] = 0               //y2 of the hitbox
+*/
+
+</string>
           </argument>
         </arguments>
       </action>
@@ -325,17 +345,31 @@ if(HP&lt;=0)  instance_destroy()
             <kind>1</kind>
             <string>///Step for Delay attack
 
-delay_attack += 1
+if(mode=2 &amp;&amp; delay_attack = -1){     //si enemy est proche du joueur et qu'il n'attque pas deja
+    delay_attack = combo_attack0[0,0] //lance le compteur pour lancer le premier coup du combo
+    sprite_index = sp_enemy_attack   //lance l'animation d'attaque
+}
 
-if (mode == 2){
-    for (i=0; i&lt;array_height_2d(combo_attack0); i+=1)
-        {
-      draw_text(x+32, y+32, "a")             // --&gt; TEST does the event read the For event ?
-//        if (delay_attack == combo_attack0[i,0]) 
- //           {obj_player.actual_hp -= combo_attack0[i,1];sprite_index = sp_enemy_attack}
-        }
+if(delay_attack&gt;0){
+    delay_attack -= 1
+}
+
+if(delay_attack=0){ //si le delai est terminé
+    damage = combo_attack0[current_attack,1]
+    if (mode=2){
+        obj_player.actual_hp -= damage      //retire des pdv au joueur
     }
-
+    sprite_index = sp_enemy                 //rezet l'animation
+    current_attack += 1                     //passe a l'attaque suivante dans le combp
+    if(current_attack&lt;array_height_2d(combo_attack0)) { //si il reste des attaques au combo
+        delay_attack = combo_attack0[current_attack,0]   //relance le delay
+        sprite_index = sp_enemy_attack                   //relance l'animation
+    }
+    else{//si il n'y a plus d'attaques dans le combo
+        delay_attack = -1 //rezet delay attaque, l'enemy attendra d'etre a nouveau a portée du joueur pour relancer l'enchainement
+        current_attack = 0 //rezet current_attack, on est plus dans le combo
+    }
+}
 </string>
           </argument>
         </arguments>
