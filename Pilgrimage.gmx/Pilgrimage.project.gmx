@@ -60,9 +60,9 @@
     <object>objects\obj_onewayplateform</object>
   </objects>
   <rooms name="rooms">
-    <room>rooms\rm_setup</room>
     <room>rooms\rm_level1</room>
-    <room>rooms\room2</room>
+    <room>rooms\rm_level2</room>
+    <room>rooms\rm_setup</room>
   </rooms>
   <constants number="5">
     <constant name="GRAV">0.3</constant>
