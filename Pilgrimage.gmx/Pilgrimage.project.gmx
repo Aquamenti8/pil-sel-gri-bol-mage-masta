@@ -41,7 +41,6 @@
   </scripts>
   <objects name="objects">
     <objects name="Menu">
-      <object>objects\obj_inventaire</object>
       <object>objects\obj_menu_button</object>
       <object>objects\obj_menu</object>
     </objects>
@@ -61,8 +60,8 @@
     <object>objects\obj_onewayplateform</object>
   </objects>
   <rooms name="rooms">
-    <room>rooms\rm_level1</room>
     <room>rooms\rm_setup</room>
+    <room>rooms\rm_level1</room>
     <room>rooms\room2</room>
   </rooms>
   <constants number="5">

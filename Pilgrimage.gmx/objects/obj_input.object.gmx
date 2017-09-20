@@ -30,8 +30,8 @@
 gamepad=false;
 pause=false;
 button_create=false;
-pause_x=100;
-pause_y=200;
+pause_x = view_xview +100;
+pause_y = view_yview + 200;
 pause_menu_on=false;
 </string>
           </argument>
@@ -244,7 +244,10 @@ if(pause_menu_on){
     draw_set_colour(c_black);
     
     }
-else draw_text(x,y+20,"Play")
+else{
+draw_text(x,y+20,"Play")
+    draw_set_colour(c_black);
+}
 </string>
           </argument>
         </arguments>

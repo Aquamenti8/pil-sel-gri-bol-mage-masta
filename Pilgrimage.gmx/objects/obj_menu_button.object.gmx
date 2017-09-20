@@ -52,9 +52,10 @@ image_yscale=height/sprite_height
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (!obj_input.gamepad){
+            <string>//si on est en mode keyboard
+if (!obj_input.gamepad){
     var click = mouse_check_button_pressed(mb_left);
-   
+    //si la souris est sur ce bouton
     if (x&lt;mouse_x and mouse_x&lt; x+width) &amp;&amp; (y&lt;mouse_y and mouse_y&lt;y+height)
     {   
         obj_input.mpos = index;
