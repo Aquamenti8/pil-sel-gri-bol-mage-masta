@@ -6,7 +6,7 @@
   <vsnap>32</vsnap>
   <hsnap>32</hsnap>
   <isometric>0</isometric>
-  <speed>30</speed>
+  <speed>60</speed>
   <persistent>0</persistent>
   <colour>12632256</colour>
   <showcolour>-1</showcolour>
@@ -60,6 +60,10 @@
     <instance objName="obj_onewayplateform" x="288" y="256" name="inst_9DBAC7A6" locked="0" code="" scaleX="7" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_echelle" x="320" y="192" name="inst_6AC8B1F6" locked="0" code="" scaleX="1.5" scaleY="12" colour="4294967295" rotation="0"/>
     <instance objName="obj_echelle" x="864" y="256" name="inst_46A4F484" locked="0" code="" scaleX="1.80645155906677" scaleY="10" colour="4294967295" rotation="0"/>
+    <instance objName="obj_room_warp" x="0" y="64" name="inst_EACC4FA0" locked="0" code="" scaleX="2" scaleY="4.09677410125732" colour="4294967295" rotation="0"/>
+    <instance objName="obj_plateforme" x="1024" y="96" name="inst_84242A21" locked="0" code="" scaleX="0.159999996423721" scaleY="15.4516124725342" colour="4294967295" rotation="0"/>
+    <instance objName="obj_player" x="96" y="192" name="inst_51DE01B1" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_arc" x="128" y="64" name="inst_2F27493C" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>

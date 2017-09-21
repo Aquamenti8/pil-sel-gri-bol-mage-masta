@@ -21,6 +21,7 @@
     </sprites>
     <sprite>sprites\sp_echelle</sprite>
     <sprite>sprites\sp_onewayplatform</sprite>
+    <sprite>sprites\sp_room_warp</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -59,6 +60,7 @@
     <object>objects\obj_enemy</object>
     <object>objects\obj_echelle</object>
     <object>objects\obj_onewayplateform</object>
+    <object>objects\obj_room_warp</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_setup</room>
