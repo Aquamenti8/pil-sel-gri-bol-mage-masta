@@ -271,7 +271,10 @@ if (!obj_input.pause &amp;&amp; !onladder){
         }
         accrochage=false;
         nicolnigrav=false;
-        up_off=false;   
+        if(obj_input.gamepad=false){//sur keyboard
+            up_off=false;  
+        } 
+        else up_off=true;
     }
     //DECCROCHAGE
     if ( !up_off &amp;&amp; accrochage &amp;&amp; fall_key){
