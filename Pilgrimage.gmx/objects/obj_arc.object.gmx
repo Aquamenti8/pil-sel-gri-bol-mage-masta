@@ -59,7 +59,7 @@ cooldown_arrow=0
             <kind>1</kind>
             <string>///position et angle
 
-if (!obj_input.pause){
+if (!obj_input.pause &amp;&amp; instance_exists(obj_player)){
     gamepad_set_axis_deadzone(0, 0.05)
     x=obj_player.x
     y=obj_player.y-32
@@ -106,7 +106,7 @@ if (!obj_input.pause){
           <argument>
             <kind>1</kind>
             <string>///shoot
-if (!obj_input.pause){
+if (!obj_input.pause &amp;&amp; instance_exists(obj_player)){
     press = mouse_check_button_pressed(mb_left);
     press2 = gamepad_button_check_pressed(0,gp_shoulderr);
     released = mouse_check_button_released(mb_left);
