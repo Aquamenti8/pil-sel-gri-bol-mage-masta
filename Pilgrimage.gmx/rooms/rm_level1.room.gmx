@@ -75,9 +75,8 @@
     <instance objName="obj_LD_limit" x="0" y="608" name="inst_540E764D" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_echelle" x="472" y="160" name="inst_DF45BABF" locked="0" code="" scaleX="1" scaleY="14" colour="4294967295" rotation="0"/>
     <instance objName="obj_onewayplateform" x="448" y="160" name="inst_C8BE1755" locked="0" code="" scaleX="1.5" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_input" x="32" y="144" name="inst_F35B94D9" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_player" x="112" y="576" name="inst_E750BCD6" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_menu" x="32" y="176" name="inst_7EDA3178" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_player" x="80" y="592" name="inst_CCC32572" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_plateforme" x="1024" y="304" name="inst_5C1B9D84" locked="0" code="" scaleX="0.959999978542328" scaleY="11.5" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>

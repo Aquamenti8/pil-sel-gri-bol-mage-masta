@@ -357,7 +357,7 @@ if(delay_attack&gt;0){
 if(delay_attack=0){ //si le delai est terminé
     damage = combo_attack0[current_attack,1]
     if (mode=2){
-        obj_player.actual_hp -= damage      //retire des pdv au joueur
+        obj_player_stat.actual_hp -= damage      //retire des pdv au joueur
     }
     sprite_index = sp_enemy                 //rezet l'animation
     current_attack += 1                     //passe a l'attaque suivante dans le combp

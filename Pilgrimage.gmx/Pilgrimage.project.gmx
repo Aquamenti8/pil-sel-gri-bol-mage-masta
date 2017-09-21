@@ -48,6 +48,7 @@
       <object>objects\obj_player</object>
       <object>objects\obj_player_WR</object>
       <object>objects\obj_player_WL</object>
+      <object>objects\obj_player_stat</object>
     </objects>
     <object>objects\obj_plateforme</object>
     <object>objects\obj_arc</object>
@@ -60,9 +61,9 @@
     <object>objects\obj_onewayplateform</object>
   </objects>
   <rooms name="rooms">
+    <room>rooms\rm_setup</room>
     <room>rooms\rm_level1</room>
     <room>rooms\rm_level2</room>
-    <room>rooms\rm_setup</room>
   </rooms>
   <constants number="5">
     <constant name="GRAV">0.3</constant>
