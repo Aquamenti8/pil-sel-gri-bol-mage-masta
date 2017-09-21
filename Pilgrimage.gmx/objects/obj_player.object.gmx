@@ -271,7 +271,7 @@ if (!obj_input.pause &amp;&amp; !onladder){
         }
         accrochage=false;
         nicolnigrav=false;
-        up_off=true;   
+        up_off=false;   
     }
     //DECCROCHAGE
     if ( !up_off &amp;&amp; accrochage &amp;&amp; fall_key){
