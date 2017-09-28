@@ -3,6 +3,7 @@ menu=argument0
 index=argument1
 
 if(menu="tab"){
+    scr_reset_preview()
   switch (index)
     {
         case 0:obj_menu.current_page="Status";break;
@@ -24,6 +25,7 @@ if(menu="pause"){
     }
 }
 if(menu="type"){
+    scr_reset_preview()
     obj_menu.inventory_type=index
 }
 
@@ -61,6 +63,7 @@ if(menu="item"){
 }
 
 if(menu="equip"){       //Passe de equipé a non equipé
+    scr_reset_preview()
     name = obj_menu.equipment[index]
     if name!=0{
     for (i=0; i<array_height_2d(obj_menu.inv_all); i+=1){ //parcours inv_all a la recherche d'un objet du meme nom que celui clické

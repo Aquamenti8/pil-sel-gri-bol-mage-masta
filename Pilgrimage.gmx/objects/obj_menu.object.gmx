@@ -3,8 +3,8 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
-  <persistent>0</persistent>
+  <depth>-3</depth>
+  <persistent>-1</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
@@ -33,8 +33,8 @@ mpos=0;
 mpos_saved=0;
 inventory_type_saved=0
 
-for(i=0;i&lt;array_length_1d(obj_player.s_eq);i+=1){
-    s_eq_save[i]=obj_player.s_eq[i]
+for(i=0;i&lt;array_length_1d(obj_player_stat.s_eq);i+=1){
+    s_eq_save[i]=obj_player_stat.s_eq[i]
 }
 for(i=0;i&lt;array_length_1d(s_eq_save);i+=1){
     c_eq[i]=c_black //couleur de la preview
@@ -288,19 +288,21 @@ scr_reload_inv()
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///input
+            <string>///input, ouverture du menu
 
 if (keyboard_check_pressed(ord("I")) || gamepad_button_check_pressed(0,gp_start)){
-    if(current_page=-1){
-    obj_input.pause=true;
-    current_page="Inventory";
-    create_butt=true
-    menu_on=true
-    }
-    else if(current_page!=-1){
-    obj_input.pause=false;
-    current_page=-1
-    menu_on=false;
+    if(obj_input.pause_menu_on=false){
+        if(current_page=-1){
+        obj_input.pause=true;
+        current_page="Inventory";
+        create_butt=true
+        menu_on=true
+        }
+        else if(current_page!=-1){
+        obj_input.pause=false;
+        current_page=-1
+        menu_on=false;
+        }
     }
 }
 </string>
@@ -380,6 +382,7 @@ if(obj_input.gamepad){
             else current_page=tab[array_length_1d(tab)-1]
         }
         scr_reload_inv()
+        scr_reset_preview()
         mpos=0
     }
     
@@ -419,6 +422,7 @@ if(obj_input.gamepad){
     if (X == 1 &amp;&amp; current_page="Inventory" &amp;&amp; mpos!= -1){
          scr_menu_index_react("item",mpos);
          scr_reload_inv()
+         scr_reset_preview()
     }
 
         //EQUIPMENT
@@ -435,6 +439,7 @@ if(obj_input.gamepad){
 
         }
         scr_reload_inv()
+        scr_reset_preview()
     }
     if (X == 1 &amp;&amp; current_page="Equipment"){
          scr_menu_index_react("equip",mpos);
@@ -471,16 +476,16 @@ if(obj_input.gamepad){
 //si mpos a changé ou type a changé et si on passe la souri sur un bouton
 if((mpos_saved != mpos || inventory_type_saved != inventory_type) &amp;&amp; current_page="Inventory"){ 
 
-    for(i=0;i&lt;array_length_1d(obj_player.s_eq);i+=1){
-        obj_player.s_eq[i]=0
+    for(i=0;i&lt;array_length_1d(obj_player_stat.s_eq);i+=1){
+        obj_player_stat.s_eq[i]=0
     }
-    //calcule les HP_equip en fonction des objets equipés
+    //calcule les s_eq en fonction des objets equipés
     for (i=0; i&lt;array_length_1d(equipment);i+=1){ 
         scr_apply_equip(equipment[i])
     }
-    //sauvegarde les HP_equip 
-    for(i=0; i&lt;array_length_1d(obj_player.s_eq);i+=1){
-        s_eq_save[i]=obj_player.s_eq[i]
+    //sauvegarde les s_eq
+    for(i=0; i&lt;array_length_1d(obj_player_stat.s_eq);i+=1){
+        s_eq_save[i]=obj_player_stat.s_eq[i]
     }
        
     //copie equipment[] dans equipment_preview[]
@@ -511,33 +516,24 @@ if((mpos_saved != mpos || inventory_type_saved != inventory_type) &amp;&amp; cur
     }
     
     //applique les "faux" equipment sur les caractéristiques du perso HP_equip
-    for(i=0;i&lt;array_length_1d(obj_player.s_eq);i+=1){
-        obj_player.s_eq[i]=0
+    for(i=0;i&lt;array_length_1d(obj_player_stat.s_eq);i+=1){
+        obj_player_stat.s_eq[i]=0
     }
     for (i=0; i&lt;array_length_1d(equipment_preview);i+=1){ 
         scr_apply_equip(equipment_preview[i])
     }
-    for(i=0; i&lt;array_length_1d(obj_player.s_eq);i+=1){
-        s_eq[i]=obj_player.s_eq[i]
+    for(i=0; i&lt;array_length_1d(obj_player_stat.s_eq);i+=1){
+        s_eq[i]=obj_player_stat.s_eq[i]
     }
     mpos_saved = mpos
     inventory_type_saved = inventory_type
-    for(i=0;i&lt;array_length_1d(obj_player.s_eq);i+=1){
-        if(obj_player.s_eq[i] &lt; s_eq_save[i]){c_eq[i]=c_red;}
-        if(obj_player.s_eq[i] &gt; s_eq_save[i]){c_eq[i]=c_green;}
-        if (obj_player.s_eq[i] = s_eq_save[i]){c_eq[i]=c_black;}
+    for(i=0;i&lt;array_length_1d(obj_player_stat.s_eq);i+=1){
+        if(obj_player_stat.s_eq[i] &lt; s_eq_save[i]){c_eq[i]=c_red;}
+        if(obj_player_stat.s_eq[i] &gt; s_eq_save[i]){c_eq[i]=c_green;}
+        if (obj_player_stat.s_eq[i] = s_eq_save[i]){c_eq[i]=c_black;}
     }
 }
 
-else if (current_page="Equipment"){
-    for(i=0;i&lt;array_length_1d(obj_player.s_eq);i+=1){
-        obj_player.s_eq[i]=0
-    }
-    //calcule les HP_equip en fonction des objets equipés
-    for (i=0; i&lt;array_length_1d(equipment);i+=1){ 
-        scr_apply_equip(equipment[i])
-    }
-}
 </string>
           </argument>
         </arguments>
@@ -645,16 +641,16 @@ if (push == 1) scr_menu_pause();
 //si mpos a changé ou type a changé et si on passe la souri sur un bouton
 if( current_page="Inventory"){ 
 
-    for(i=0;i&lt;array_length_1d(obj_player.s_eq);i+=1){
-        obj_player.s_eq[i]=0
+    for(i=0;i&lt;array_length_1d(obj_player_stat.s_eq);i+=1){
+        obj_player_stat.s_eq[i]=0
     }
     //calcule les HP_equip en fonction des objets equipés
     for (i=0; i&lt;array_length_1d(equipment);i+=1){ 
         scr_apply_equip(equipment[i])
     }
     //sauvegarde les HP_equip 
-    for(i=0; i&lt;array_length_1d(obj_player.s_eq);i+=1){
-        s_eq_save[i]=obj_player.s_eq[i]
+    for(i=0; i&lt;array_length_1d(obj_player_stat.s_eq);i+=1){
+        s_eq_save[i]=obj_player_stat.s_eq[i]
     }
        
     //copie equipment[] dans equipment_preview[]
@@ -685,27 +681,27 @@ if( current_page="Inventory"){
     }
     
     //applique les "faux" equipment sur les caractéristiques du perso HP_equip
-    for(i=0;i&lt;array_length_1d(obj_player.s_eq);i+=1){
-        obj_player.s_eq[i]=0
+    for(i=0;i&lt;array_length_1d(obj_player_stat.s_eq);i+=1){
+        obj_player_stat.s_eq[i]=0
     }
     for (i=0; i&lt;array_length_1d(equipment_preview);i+=1){ 
         scr_apply_equip(equipment_preview[i])
     }
-    for(i=0; i&lt;array_length_1d(obj_player.s_eq);i+=1){
-        s_eq[i]=obj_player.s_eq[i]
+    for(i=0; i&lt;array_length_1d(obj_player_stat.s_eq);i+=1){
+        s_eq[i]=obj_player_stat.s_eq[i]
     }
     mpos_saved = mpos
     inventory_type_saved = inventory_type
-    for(i=0;i&lt;array_length_1d(obj_player.s_eq);i+=1){
-        if(obj_player.s_eq[i] &lt; s_eq_save[i]){c_eq[i]=c_red;}
-        if(obj_player.s_eq[i] &gt; s_eq_save[i]){c_eq[i]=c_green;}
-        if (obj_player.s_eq[i] = s_eq_save[i]){c_eq[i]=c_black;}
+    for(i=0;i&lt;array_length_1d(obj_player_stat.s_eq);i+=1){
+        if(obj_player_stat.s_eq[i] &lt; s_eq_save[i]){c_eq[i]=c_red;}
+        if(obj_player_stat.s_eq[i] &gt; s_eq_save[i]){c_eq[i]=c_green;}
+        if (obj_player_stat.s_eq[i] = s_eq_save[i]){c_eq[i]=c_black;}
     }
 }
 
 else if (current_page="Equipment"){
-    for(i=0;i&lt;array_length_1d(obj_player.s_eq);i+=1){
-        obj_player.s_eq[i]=0
+    for(i=0;i&lt;array_length_1d(obj_player_stat.s_eq);i+=1){
+        obj_player_stat.s_eq[i]=0
     }
     //calcule les HP_equip en fonction des objets equipés
     for (i=0; i&lt;array_length_1d(equipment);i+=1){ 
@@ -752,7 +748,7 @@ if(current_page!=-1 &amp;&amp; menu_on){
     draw_set_colour(c_black);
     draw_text(statu_x+60,statu_y+10, "STATUS")
         //all
-    for(i=0;i&lt;array_length_1d(obj_player.s_eq);i+=1){
+    for(i=0;i&lt;array_length_1d(obj_player_stat.s_eq);i+=1){
         switch i{
             case 0:text= "HP ";break;
             case 1:text= "STA ";break;
@@ -763,11 +759,11 @@ if(current_page!=-1 &amp;&amp; menu_on){
             case 6:text= "SPD ";break;
         }
         draw_text(statu_x+margin,statu_y+30+20*i, text)
-        draw_text(statu_x+margin+100,statu_y+30+20*i, string(obj_player.s_base[i]) + " + ")
+        draw_text(statu_x+margin+100,statu_y+30+20*i, string(obj_player_stat.s_base[i]) + " + ")
         draw_set_colour(c_eq[i])
-        draw_text(statu_x+margin+140,statu_y+30+20*i, string(obj_player.s_eq[i]))
+        draw_text(statu_x+margin+140,statu_y+30+20*i, string(obj_player_stat.s_eq[i]))
         draw_set_colour(c_black)
-        draw_text(statu_x+margin+150,statu_y+30+20*i, " : " + string(obj_player.s[i]))
+        draw_text(statu_x+margin+150,statu_y+30+20*i, " : " + string(obj_player_stat.s[i]))
     }
 
     

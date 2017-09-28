@@ -94,7 +94,6 @@ for (i=0; i<array_height_2d(inv_all);i+=1){
 }
 
 //MET A JOUR LES CARACTERISTIQUES DU PERSO
-obj_player.HP_equip=0
 for (i=0; i<array_length_1d(equipment);i+=1){ 
     scr_apply_equip(equipment[i])
 }

@@ -26,25 +26,284 @@
           <argument>
             <kind>1</kind>
             <string>///Initialisation vartiables
-mode=0
-HP = 3
-HP_max=3
-mirored = false // Si l'objet est retourné ou pas
+mode=0;
+HP = 8;
+HP_max=8;
+mirored = false; // if the object is fliped or not
 
-// définition des champs de vues
-// idle = x-400 - sprite_width/2, y-200 - sprite_height/2, x+100 - sprite_width/2, y+100 - sprite_height/2
-// aware = x-600 - sprite_width/2, y-350 - sprite_height/2, x+180 - sprite_width/2, y+180 - sprite_height/2
-
-
+//Reference of the speed of the entity
 hsp = 0;    // Vitesse horizontale
 vsp = 0;    // Vitesse verticale
 movespeed=2;
+
+mode0_dir = 1// definit vers quelle direction l'ennemi qui fait sa ronde part en premier 1=droite, -1=gauche
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>304</id>
+        <kind>0</kind>
+        <userelative>-1</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_set_timeline_position</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>0</kind>
+            <string>0</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>301</id>
+        <kind>0</kind>
+        <userelative>-1</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_set_alarm</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>0</kind>
+            <string>0</string>
+          </argument>
+          <argument>
+            <kind>4</kind>
+            <string>0</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Combo Variables
+
+delay_attack = -1; 
+current_attack = 0;
+
+//var for combat with sequence of attacks (1*room_speed = 1s)
+                   //set the begining of the timer
+combo_attack0[0,0] = 1  * room_speed //delay of the attack0
+combo_attack0[0,1] = 1               //damage value of the attack0
+combo_attack0[0,2] = 5               //stamina cost of the attack
+// YET TO SET
+/*
+combo_attack0[0,3] = 0               //x1 of the hitbox
+combo_attack0[0,4] = 0               //y1 of the hitbox
+combo_attack0[0,5] = 0               //x2 of the hitbox
+combo_attack0[0,6] = 0               //y2 of the hitbox
+*/
+combo_attack0[1,0] = 0.5* room_speed
+combo_attack0[1,1] = 1
+combo_attack0[1,2] = 3
+// YET TO SET
+/*
+combo_attack0[0,3] = 0               //x1 of the hitbox
+combo_attack0[0,4] = 0               //y1 of the hitbox
+combo_attack0[0,5] = 0               //x2 of the hitbox
+combo_attack0[0,6] = 0               //y2 of the hitbox
+*/
+combo_attack0[2,0] = 2  * room_speed
+combo_attack0[2,1] = 2
+combo_attack0[2,2] = 10
+// YET TO SET
+/*
+combo_attack0[0,3] = 0               //x1 of the hitbox
+combo_attack0[0,4] = 0               //y1 of the hitbox
+combo_attack0[0,5] = 0               //x2 of the hitbox
+combo_attack0[0,6] = 0               //y2 of the hitbox
+*/
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Attack Cooldown
+
+//obj_player.actual_hp -= 1
 </string>
           </argument>
         </arguments>
       </action>
     </event>
     <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// IA condition &amp; priority
+
+//mode0: IDLE, si joueur non détecté
+//mode1: Aware, pathfinder(joueur), si joueur détecté
+//mode2: Aggressive, si joueur à portée
+
+// teste les condition et choisit le mode en fonction d'une liste de priorités
+
+
+// Retourne l'entité suivant si elle est à gauche ou à droite du joueur
+if (mirored = true){
+idlx1 = x-400 - sprite_width/2 
+idlx2 = x+100 - sprite_width/2}
+else {
+idlx1 = x+400 - sprite_width/2 
+idlx2 = x-100 - sprite_width/2}
+
+// Choix du mode 0,1,2
+
+mode =0
+
+if (collision_ellipse( idlx1, y-200 - sprite_height/2, idlx2, y+100 - sprite_height/2, obj_player, true, true ))
+    {mode = 1}
+
+if (mode=1 &amp;&amp; (place_meeting(x+10,y,obj_player) || place_meeting(x-10,y,obj_player)))
+    {mode = 2}
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// IA modes
+
+//mode0: fait une ronde de 200px, condition: default
+//mode1: va vers le joueur, condition: joueur a moins de 300px de enemy
+//mode2: attaque le joueur, condition: joueur a moins de 10px de enemy
+//mode3: fuit joueur until dist PJ/self = X px, condition : pv &lt;= 2
+
+//Reagit au mode qui a eté choisit
+
+
+switch(mode)
+{
+case(0) :           //MakeRound
+    scr_IAmode0()
+    break
+case(1) :           //Alert
+    scr_IAmode1()
+    break
+case(2) :           //Attack
+    scr_IAmode2()
+    break
+   
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///collisions et gravité
+if (!obj_input.pause){
+
+    if (vsp &lt; 10) vsp += GRAV;
+    //Horizontal Collision
+    if (place_meeting(x+hsp,y,obj_plateforme))
+    {
+        while(!place_meeting(x+sign(hsp),y,obj_plateforme)){
+            x += sign(hsp);
+        }
+        hsp = 0;
+    }
+    x += hsp;  
+    //Vertical Collision
+    if (place_meeting(x,y+vsp,obj_plateforme))
+    {
+        while(!place_meeting(x,y+sign(vsp),obj_plateforme)){
+            y += sign(vsp);
+        }
+        vsp = 0;
+    }
+    y += vsp;
+
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -84,116 +343,32 @@ if(HP&lt;=0)  instance_destroy()
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// IA condition &amp; priority
+            <string>///Step for Delay attack
 
-//mode0: IDLE, si joueur non détecté
-//mode1: Aware, pathfinder(joueur), si joueur détecté
-//mode2: Aggressive, si joueur à portée
-
-// teste les condition et choisit le mode en fonction d'une liste de priorités
-
-
-// Retourne l'entité suivant si elle est à gauche ou à droite du joueur
-if (mirored = true){
-idlx1 = x-400 - sprite_width/2 
-idlx2 = x+100 - sprite_width/2}
-else {
-idlx1 = x+400 - sprite_width/2 
-idlx2 = x-100 - sprite_width/2}
-
-// Choix du mode 0,1,2
-mode =0
-if (collision_ellipse( idlx1, y-200 - sprite_height/2, idlx2, y+100 - sprite_height/2, obj_player, true, true ))
-    {mode = 1}
-if (mode=1 &amp;&amp; (place_meeting(x+10,y,obj_player) || place_meeting(x-10,y,obj_player)))
-    {mode = 2}
-
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// IA modes
-
-//mode0: fait une ronde de 200px, condition: default
-//mode1: va vers le joueur, condition: joueur a moins de 300px de enemy
-//mode2: attaque le joueur, condition: joueur a moins de 10px de enemy
-
-//Reagit au mode qui a eté choisit
-
-if(mode=1)  
-{  
-    if (x - obj_player.x &gt;= 0) { mirored = true; } // Regarde si le joueur est à gauche ou à droite de l'entité
-    else { mirored = false; } // Si il est à droite, le sprite de l'entité se retournera et vis versa 
-    
-    if (mirored == true) { image_xscale = -1; }
-    if (mirored == false) { image_xscale = 1; }
-
-scr_pathfinder(obj_player.x , id);
+if(mode=2 &amp;&amp; delay_attack = -1){     //si enemy est proche du joueur et qu'il n'attque pas deja
+    delay_attack = combo_attack0[0,0] //lance le compteur pour lancer le premier coup du combo
+    sprite_index = sp_enemy_attack   //lance l'animation d'attaque
 }
 
-if(mode=0){hsp=0}
+if(delay_attack&gt;0){
+    delay_attack -= 1
+}
 
-if(mode=2){hsp=1}
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///collisions et gravité
-if (!obj_input.pause){
-
-    if (vsp &lt; 10) vsp += global.grav;
-    //Horizontal Collision
-    if (place_meeting(x+hsp,y,obj_plateforme))
-    {
-        while(!place_meeting(x+sign(hsp),y,obj_plateforme)){
-            x += sign(hsp);
-        }
-        hsp = 0;
+if(delay_attack=0){ //si le delai est terminé
+    damage = combo_attack0[current_attack,1]
+    if (mode=2){
+        obj_player_stat.actual_hp -= damage      //retire des pdv au joueur
     }
-    x += hsp;  
-    //Vertical Collision
-    if (place_meeting(x,y+vsp,obj_plateforme))
-    {
-        while(!place_meeting(x,y+sign(vsp),obj_plateforme)){
-            y += sign(vsp);
-        }
-        vsp = 0;
+    sprite_index = sp_enemy                 //rezet l'animation
+    current_attack += 1                     //passe a l'attaque suivante dans le combp
+    if(current_attack&lt;array_height_2d(combo_attack0)) { //si il reste des attaques au combo
+        delay_attack = combo_attack0[current_attack,0]   //relance le delay
+        sprite_index = sp_enemy_attack                   //relance l'animation
     }
-    y += vsp;
-
+    else{//si il n'y a plus d'attaques dans le combo
+        delay_attack = -1 //rezet delay attaque, l'enemy attendra d'etre a nouveau a portée du joueur pour relancer l'enchainement
+        current_attack = 0 //rezet current_attack, on est plus dans le combo
+    }
 }
 </string>
           </argument>
@@ -223,6 +398,7 @@ draw_self()
 if(HP!=HP_max){
     draw_rectangle(x-16,y-35,x-16+40,y-35-10,true)
     draw_rectangle(x-16,y-35,x-16+HP/HP_max*40,y-35-10,false)
+    draw_text(x-16,y-70,HP)
 }
 
 </string>
@@ -245,15 +421,26 @@ if(HP!=HP_max){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>// Draw sightfield
+            <string>///Display IA info
 
-if (mirored = true){
-    draw_ellipse( x-400 - sprite_width/2, y-200 - sprite_height/2, x+100 - sprite_width/2, y+100 - sprite_height/2, 3 )}
-if (mirored = false){
-    draw_ellipse( x+400 - sprite_width/2, y-200 - sprite_height/2, x-100 - sprite_width/2, y+100 - sprite_height/2, 3 )}
-    
+
 // Draw IA mode    
 draw_text(x-5, y-50, mode)
+
+
+// Draw sightfield
+if (mirored ==true) {k=-400;l=100}
+if (mirored==false) {k=400;l=-100}
+//**********************************
+if (mode &lt;= 1) {draw_ellipse(x+k-sprite_width/2, y-200-sprite_height/2, x+l-sprite_width/2, y+100-sprite_height/2, 3 )}
+
+
+// Draw Attack Field
+//to target the player depending if he or she is on it's left or right
+if (mirored == true) {m=62; n=30}
+if (mirored == false){m=-62; n=-30}
+// ******************************************************************     
+if (mode == 2) {draw_rectangle(x-m,y-32,x+n,y, 5)}
 </string>
           </argument>
         </arguments>

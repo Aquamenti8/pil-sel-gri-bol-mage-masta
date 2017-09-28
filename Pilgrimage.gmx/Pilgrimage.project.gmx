@@ -7,45 +7,80 @@
   <sounds name="sound"/>
   <sprites name="sprites">
     <sprite>sprites\sp_plateforme</sprite>
-    <sprite>sprites\sp_player</sprite>
     <sprite>sprites\sp_chara</sprite>
     <sprite>sprites\sp_arc</sprite>
     <sprite>sprites\sp_fleche</sprite>
     <sprite>sprites\sp_enemy</sprite>
-	<sprite>sprites\sp_bread</sprite>
+    <sprite>sprites\sp_enemy_attack</sprite>
+    <sprite>sprites\sp_bread</sprite>
+    <sprites name="PLAYER">
+      <sprite>sprites\sp_player_R</sprite>
+      <sprite>sprites\sp_player_L</sprite>
+      <sprite>sprites\sp_player_WL</sprite>
+      <sprite>sprites\sp_player_WR</sprite>
+    </sprites>
+    <sprite>sprites\sp_echelle</sprite>
+    <sprite>sprites\sp_onewayplatform</sprite>
+    <sprite>sprites\sp_room_warp</sprite>
+    <sprite>sprites\sp_grappin</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
     <script>scripts\scr_menu_pause.gml</script>
     <script>scripts\scr_menu_index_react.gml</script>
-    <script>scripts\scr_pathfinder.gml</script>
     <script>scripts\scr_create_menu_button.gml</script>
     <script>scripts\scr_reload_inv.gml</script>
+    <script>scripts\scr_reset_preview.gml</script>
     <script>scripts\scr_apply_equip.gml</script>
     <script>scripts\scr_pickitem.gml</script>
     <script>scripts\scr_itemdrop.gml</script>
     <script>scripts\scr_item_use.gml</script>
+    <script>scripts\scr_pathfinder.gml</script>
+    <script>scripts\scr_IAmode0.gml</script>
+    <script>scripts\scr_IAmode1.gml</script>
+    <script>scripts\scr_IAmode2.gml</script>
   </scripts>
   <objects name="objects">
-    <object>objects\obj_player</object>
-    <object>objects\obj_plateforme</object>
-    <object>objects\obj_inventaire</object>
-    <object>objects\obj_arc</object>
-    <object>objects\obj_fleche</object>
-    <object>objects\obj_input</object>
-    <object>objects\obj_timer</object>
     <objects name="Menu">
       <object>objects\obj_menu_button</object>
       <object>objects\obj_menu</object>
     </objects>
+    <objects name="PLAYER">
+      <object>objects\obj_player</object>
+      <object>objects\obj_player_WR</object>
+      <object>objects\obj_player_WL</object>
+      <object>objects\obj_player_stat</object>
+    </objects>
+    <objects name="WEAPONS">
+      <object>objects\obj_fleche</object>
+      <object>objects\obj_arc</object>
+      <object>objects\obj_grappin</object>
+    </objects>
+    <object>objects\obj_input</object>
+    <object>objects\obj_timer</object>
     <object>objects\obj_enemy</object>
+    <objects name="LD">
+      <object>objects\obj_room_warp</object>
+      <object>objects\obj_onewayplateform</object>
+      <object>objects\obj_echelle</object>
+      <object>objects\obj_plateforme</object>
+      <object>objects\obj_prise</object>
+      <object>objects\obj_LD_limit</object>
+    </objects>
   </objects>
   <rooms name="rooms">
-    <room>rooms\rm_level1</room>
     <room>rooms\rm_setup</room>
-    <room>rooms\room2</room>
+    <room>rooms\rm_level1</room>
+    <room>rooms\rm_level2</room>
   </rooms>
+  <constants number="5">
+    <constant name="GRAV">0.3</constant>
+    <constant name="P_JUMP_POWER">6</constant>
+    <constant name="P_SPEED">3</constant>
+    <constant name="FACE_LEFT">-1</constant>
+    <constant name="FACE_RIGHT">1</constant>
+  </constants>
   <help>
     <rtf>help.rtf</rtf>
   </help>

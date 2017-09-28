@@ -3,14 +3,19 @@
   <caption></caption>
   <width>1024</width>
   <height>768</height>
-  <vsnap>32</vsnap>
-  <hsnap>32</hsnap>
+  <vsnap>16</vsnap>
+  <hsnap>16</hsnap>
   <isometric>0</isometric>
   <speed>60</speed>
   <persistent>0</persistent>
   <colour>12632256</colour>
   <showcolour>-1</showcolour>
-  <code></code>
+  <code>warptosalle2 = instance_create(992,144,obj_room_warp)
+warptosalle2.image_xscale = 1.5
+warptosalle2.image_yscale = 3.5
+warptosalle2.goto = rm_level2
+warptosalle2.spawn_x = 96
+warptosalle2.spawn_y = 192</code>
   <enableViews>0</enableViews>
   <clearViewBackground>-1</clearViewBackground>
   <clearDisplayBuffer>-1</clearDisplayBuffer>
@@ -52,25 +57,29 @@
   </views>
   <instances>
     <instance objName="obj_plateforme" x="192" y="608" name="inst_0E71161A" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_player" x="192" y="480" name="inst_13050BC5" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_plateforme" x="384" y="608" name="inst_461F79E4" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_plateforme" x="0" y="608" name="inst_C233CB9E" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_plateforme" x="576" y="608" name="inst_93585C15" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_plateforme" x="768" y="608" name="inst_3BE098CF" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_plateforme" x="960" y="608" name="inst_722EA29F" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_plateforme" x="-32" y="256" name="inst_52291A3E" locked="0" code="" scaleX="0.159999996423721" scaleY="12" colour="4294967295" rotation="0"/>
-    <instance objName="obj_plateforme" x="1024" y="640" name="inst_DD7049FB" locked="0" code="" scaleX="0.200000002980232" scaleY="-12" colour="4294967295" rotation="0"/>
     <instance objName="obj_plateforme" x="256" y="384" name="inst_D27704AB" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_plateforme" x="544" y="480" name="inst_56A1B0AE" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_plateforme" x="544" y="256" name="inst_DEFAD1FF" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_plateforme" x="544" y="256" name="inst_DEFAD1FF" locked="0" code="" scaleX="2.48000001907349" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_plateforme" x="256" y="160" name="inst_2D7381CC" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_arc" x="64" y="96" name="inst_4AF4EEE2" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_input" x="0" y="0" name="inst_26177845" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_enemy" x="608" y="480" name="inst_52825926" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_enemy" x="320" y="384" name="inst_CA566A91" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_enemy" x="864" y="192" name="inst_4E424515" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_enemy" x="928" y="192" name="inst_29A99964" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_enemy" x="96" y="96" name="inst_38BF4061" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_enemy" x="864" y="608" name="inst_4E424515" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_enemy" x="288" y="160" name="inst_38BF4061" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_LD_limit" x="448" y="384" name="inst_FEF53936" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_LD_limit" x="256" y="384" name="inst_16D561BC" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_LD_limit" x="736" y="480" name="inst_8B4CF23D" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_LD_limit" x="544" y="480" name="inst_016724E9" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_LD_limit" x="1024" y="608" name="inst_48928FE2" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_LD_limit" x="0" y="608" name="inst_540E764D" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_echelle" x="472" y="160" name="inst_DF45BABF" locked="0" code="" scaleX="1" scaleY="14" colour="4294967295" rotation="0"/>
+    <instance objName="obj_onewayplateform" x="448" y="160" name="inst_C8BE1755" locked="0" code="" scaleX="1.5" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_plateforme" x="1024" y="304" name="inst_5C1B9D84" locked="0" code="" scaleX="0.959999978542328" scaleY="11.5" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>
