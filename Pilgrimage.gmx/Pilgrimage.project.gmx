@@ -61,6 +61,7 @@
     <object>objects\obj_echelle</object>
     <object>objects\obj_onewayplateform</object>
     <object>objects\obj_room_warp</object>
+    <object>objects\obj_grappin</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_setup</room>
