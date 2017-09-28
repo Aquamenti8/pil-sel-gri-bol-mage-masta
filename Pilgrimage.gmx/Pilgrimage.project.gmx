@@ -22,6 +22,7 @@
     <sprite>sprites\sp_echelle</sprite>
     <sprite>sprites\sp_onewayplatform</sprite>
     <sprite>sprites\sp_room_warp</sprite>
+    <sprite>sprites\sp_grappin</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -51,17 +52,22 @@
       <object>objects\obj_player_WL</object>
       <object>objects\obj_player_stat</object>
     </objects>
-    <object>objects\obj_plateforme</object>
-    <object>objects\obj_arc</object>
-    <object>objects\obj_fleche</object>
-    <object>objects\obj_LD_limit</object>
+    <objects name="WEAPONS">
+      <object>objects\obj_fleche</object>
+      <object>objects\obj_arc</object>
+      <object>objects\obj_grappin</object>
+    </objects>
     <object>objects\obj_input</object>
     <object>objects\obj_timer</object>
     <object>objects\obj_enemy</object>
-    <object>objects\obj_echelle</object>
-    <object>objects\obj_onewayplateform</object>
-    <object>objects\obj_room_warp</object>
-    <object>objects\obj_grappin</object>
+    <objects name="LD">
+      <object>objects\obj_room_warp</object>
+      <object>objects\obj_onewayplateform</object>
+      <object>objects\obj_echelle</object>
+      <object>objects\obj_plateforme</object>
+      <object>objects\obj_prise</object>
+      <object>objects\obj_LD_limit</object>
+    </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_setup</room>
